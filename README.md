@@ -15,3 +15,17 @@ In questo repository sono presenti i sorgenti del progetto di Tecnologie Web ASD
 - comando: `git push`. Per aggiungere i file qui su github.
 
 - comando: `git pull`. Per aggiornare le modifiche fatte del repository anche nel nostro pc
+
+# Istruzioni per l'esecuzione
+
+Una volta clonato il repository, prima di avviare l'applicazione seguire i seguenti steps:
+- Configurare il file .env
+- Entrare nella repository del progetto ed eseguire:
+	composer install
+	php artisan key:generate
+	php artisan config:cache
+	php artisan migrate
+	php artisan db:seed
+- Avviare poi l'applicazione con
+	php artisan serve
+
