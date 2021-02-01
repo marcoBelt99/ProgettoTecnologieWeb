@@ -21,12 +21,24 @@ In questo repository sono presenti i sorgenti del progetto di Tecnologie Web ASD
 Una volta clonato il repository, prima di avviare l'applicazione seguire i seguenti steps:
 - Configurare il file .env
 - Entrare nella repository del progetto ed eseguire:
-	cp .env.example .env
-	composer install
-	php artisan key:generate
-	php artisan config:cache
-	php artisan migrate
-	php artisan db:seed
-- Avviare poi l'applicazione con
-	php artisan serve
+
+	-	`cp .env.example .env`
+
+	-	`composer install`
+
+	-	`php artisan key:generate`
+
+	-	`php artisan config:cache`
+
+	-	`php artisan migrate`
+
+	-	`php artisan db:seed`
+
+- Avviare poi l'applicazione con:
+
+	-	`php artisan serve`
+
+Ho provato (Marco ad automatizzare questo insieme di comandi nel file [script.sh]())
+
+Provare quindi ad eseguire, nella cartella ProgettoTecnologieWeb: `chmod +rwx` e successivamente: `./script.sh`
 
