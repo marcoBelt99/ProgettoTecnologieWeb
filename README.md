@@ -21,6 +21,7 @@ In questo repository sono presenti i sorgenti del progetto di Tecnologie Web ASD
 Una volta clonato il repository, prima di avviare l'applicazione seguire i seguenti steps:
 - Configurare il file .env
 - Entrare nella repository del progetto ed eseguire:
+	cp .env.example .env
 	composer install
 	php artisan key:generate
 	php artisan config:cache
