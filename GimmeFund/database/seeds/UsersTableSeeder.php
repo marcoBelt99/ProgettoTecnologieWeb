@@ -14,6 +14,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        
+        User::truncate();
+
         DB::table('users')->truncate();
         // Creazione dell'utente admin
         User::create([
@@ -26,7 +29,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Davide', // (Ingegner)
+            'first_name' => 'Davide', 
             'last_name' => 'Zanellato',
             'email' => 'davide@gimmefund.com',
             'password' => Hash::make('password'),
@@ -40,7 +43,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Marco', // (Prof. Marco Alberti)
+            'first_name' => 'Marco', 
             'last_name' => 'Beltrame',
             'email' => 'marco@gimmefund.com',
             'password' => Hash::make('password'),
@@ -54,7 +57,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Francesco', // (Ingegner)
+            'first_name' => 'Francesco', 
             'last_name' => 'Sindaco',
             'email' => 'francesco@gimmefund.com',
             'password' => Hash::make('password'),
@@ -68,7 +71,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'Enrico', // (Imbecille)
+            'first_name' => 'Enrico',
             'last_name' => 'Bregoli',
             'email' => 'enrico@gimmefund.com',
             'password' => Hash::make('password'),
