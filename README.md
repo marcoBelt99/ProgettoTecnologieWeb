@@ -31,7 +31,7 @@ Una volta clonato il repository, prima di avviare l'applicazione seguire i segue
 
 	-	`php artisan config:cache`
 
-	-	`php artisan migrate`
+	-	`php artisan migrate:fresh`
 
 	-	`php artisan db:seed`
 
