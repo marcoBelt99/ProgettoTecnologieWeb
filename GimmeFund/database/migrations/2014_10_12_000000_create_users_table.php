@@ -11,14 +11,21 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() // ENRICA BREGOLA IMBECILLE CESCO TESTA DI CAXXO
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id(); // Chiave primaria
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('birthday')->nullable();
+            $table->string('address')->nullable();
+            $table->string('CAP')->nullable();
+            $table->string('city')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,5 +39,5 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-    }
+    } 
 }
