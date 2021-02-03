@@ -38,6 +38,7 @@ class UsersTableSeeder extends Seeder
             'CAP' => '45019',
             'phone_number' => '3472460103',
             'birthday' => '1999-11-29',
+            'points' => 1000,
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s')
         ]);
