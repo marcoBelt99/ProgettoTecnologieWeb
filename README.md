@@ -43,3 +43,11 @@ Una volta clonato il repository, prima di avviare l'applicazione seguire i segue
 - Avviare poi l'applicazione con:
 
 	-	`php artisan serve`
+	
+	```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
