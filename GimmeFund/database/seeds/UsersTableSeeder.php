@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; // Serve per avere le password cifrate
 use App\User;
+use App\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,10 +17,16 @@ class UsersTableSeeder extends Seeder
     {
         
         User::truncate();
+        /* Creo le 2 tabelle: una per i ruoli degli utenti (admin o utente generico), l'altra per gli utenti  */
+        DB::table('role_user')->truncate();
+        /* Dichiaro ed inizializzo 2 variabili: una per l'admin, l'altra per lo user */
+        $adminRole = Role::where('name', 'Admin')->first();
+        $userRole = Role::where('name', 'User')->first();
+        
 
         DB::table('users')->truncate();
         // Creazione dell'utente admin
-        User::create([
+        $admin = User::create([
             'first_name' => 'Admin',
             'last_name' => 'User',
             'email' => 'admin@gimmefund.com',
@@ -28,7 +35,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => date('Y-m-d h:i:s')
         ]);
 
-        User::create([
+        $user1 = User::create([
             'first_name' => 'Davide', 
             'last_name' => 'Zanellato',
             'email' => 'davide@gimmefund.com',
@@ -43,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => date('Y-m-d h:i:s')
         ]);
 
-        User::create([
+        $user2 = User::create([
             'first_name' => 'Marco', 
             'last_name' => 'Beltrame',
             'email' => 'marco@gimmefund.com',
@@ -57,7 +64,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => date('Y-m-d h:i:s')
         ]);
 
-        User::create([
+        $user3 = User::create([
             'first_name' => 'Francesco', 
             'last_name' => 'Sindaco',
             'email' => 'francesco@gimmefund.com',
@@ -71,7 +78,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => date('Y-m-d h:i:s')
         ]);
 
-        User::create([
+        $user4 = User::create([
             'first_name' => 'Enrico',
             'last_name' => 'Bregoli',
             'email' => 'enrico@gimmefund.com',
@@ -84,5 +91,12 @@ class UsersTableSeeder extends Seeder
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s')
         ]);
+        
+        /* Gestione delle chiavi esterne: chiamo il metodo attach() per attaccare la chiave esterna */
+        $admin->roles()->attach($adminRole);
+        $user1->roles()->attach($userRole);
+        $user2->roles()->attach($userRole);
+        $user3->roles()->attach($userRole);
+        $user4->roles()->attach($userRole);
     }
 }

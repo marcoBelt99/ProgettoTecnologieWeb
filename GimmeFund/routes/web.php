@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Raggruppo le rotte per l'utente all'interno del gruppo admin. Admin gestisce gli utenti 
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+    // Creo le rotte per il controller degli utenti. Tranne per i metodi che non servono in questo caso
+    Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+});

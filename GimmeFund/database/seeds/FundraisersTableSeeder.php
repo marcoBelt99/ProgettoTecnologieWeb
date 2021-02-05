@@ -11,6 +11,6 @@ class FundraisersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Fundraiser::truncate();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFundraisersTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateFundraisersTable extends Migration
      */
     public function up()
     {
-        Schema::create('fundraisers', function (Blueprint $table) {
+        /* Creo una tabel a per i ruoli (l'ho fatto con: php artisan make:migration create_roles_users_table)*/
+        Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->date('starting_date');
-            $table->date('ending_date');
-            $table->string('media_url');
+            $table->integer('role_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -31,7 +29,6 @@ class CreateFundraisersTable extends Migration
      */
     public function down()
     {
-        // Elimina la tabella se esiste
-        Schema::dropIfExists('fundraisers');
+        Schema::dropIfExists('role_user');
     }
 }
