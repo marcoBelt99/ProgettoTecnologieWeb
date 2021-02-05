@@ -18,10 +18,15 @@ In questo repository sono presenti i sorgenti del progetto di Tecnologie Web ASD
 
 # Istruzioni per l'esecuzione
 
-Una volta clonato il repository, prima di avviare l'applicazione seguire i seguenti steps:
-- Configurare il file .env
-- Entrare nella repository del progetto ed eseguire:
+Ho provato (Marco) ad automatizzare l' insieme di comandi da fare ogni volta che si vuole fare un pull nel file: [script.sh](https://github.com/marcoBelt99/ProgettoTecnologieWeb/blob/main/script.sh)
 
+Nella cartella: ProgettoTecnologieWeb, eseguire il comando: `./script.sh` 
+
+(Se da problemi legati ai perfmessi fare:`chmod +rwx` e successivamente: `./script.sh`)
+
+Se il problema persiste, eseguire i comandi nell'ordine:
+Una volta clonato il repository, prima di avviare l'applicazione seguire i seguenti steps:
+- Entrare nella repository del progetto ed eseguire:
 
 	-	`composer install`
 
@@ -38,18 +43,3 @@ Una volta clonato il repository, prima di avviare l'applicazione seguire i segue
 - Avviare poi l'applicazione con:
 
 	-	`php artisan serve`
-
-Ho provato (Marco ad automatizzare questo insieme di comandi nel file [script.sh]())
-
-Provare quindi ad eseguire, nella cartella ProgettoTecnologieWeb: `chmod +rwx` e successivamente: `./script.sh`
-=======
-	cp .env.example .env (se non è già presente) 
-	composer install
-	php artisan key:generate
-	php artisan config:cache
-	php artisan migrate
-	php artisan db:seed
-- Avviare poi l'applicazione con
-	php artisan serve
-
-
