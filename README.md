@@ -20,7 +20,7 @@ In questo repository sono presenti i sorgenti del progetto di Tecnologie Web ASD
 
 Ho provato (Marco) ad automatizzare l' insieme di comandi da fare ogni volta che si vuole fare un pull nel file: [script.sh](https://github.com/marcoBelt99/ProgettoTecnologieWeb/blob/main/script.sh)
 
-Nella cartella: - ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `ProgettoTecnologieWeb`, eseguire il comando: `./script.sh` 
+Nella cartella: ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `ProgettoTecnologieWeb`, eseguire il comando: `./script.sh` 
 
 (Se da problemi legati ai perfmessi fare:`chmod +rwx` e successivamente: `./script.sh`)
 
@@ -43,11 +43,3 @@ Una volta clonato il repository, prima di avviare l'applicazione seguire i segue
 - Avviare poi l'applicazione con:
 
 	-	`php artisan serve`
-	
-	```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
