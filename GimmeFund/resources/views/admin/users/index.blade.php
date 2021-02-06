@@ -16,8 +16,7 @@ Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Cognome</th>
+                            <th scope="col">Nominativo</th>
                             <th scope="col">Email</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Ruolo</th>
@@ -29,8 +28,7 @@ Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
                             @foreach ($users as $u)
                             <tr>
                                 <th scope="row">{{ $u->id }}</th>
-                                <td>{{ $u->first_name }}</td>
-                                <td>{{ $u->last_name }}</td>
+                                <td>{{ $u->first_name }} {{ $u->last_name }}</td>
                                 <td>{{ $u->email }}</td>
                                 <td>{{ $u->phone_number }}</td>
                                 {{-- Separo i ruoli degli utenti, che sono restituiti dalla catena di chiamate di funzioni, sulla base del separatore ',' --}}
@@ -49,7 +47,7 @@ Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
                               </tr>
                             @endforeach
                         </tbody>
-                      </table>
+                    </table>
                 </div>
             </div>
         </div>

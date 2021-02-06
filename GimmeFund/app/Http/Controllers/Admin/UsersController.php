@@ -59,9 +59,15 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //dd($request);
+
+        // Applico le modifiche 
         /* ??? Mi salvo il ruolo dello user ???? . (Guardare in "User.php") */
-        // Sync accetta un array come parametro, attach solo uno. Sostanzialmente uguali
-        $user->roles()->sync($request->roles);
+        $user->roles()->sync($request->roles); // Sync accetta un array come parametro, attach solo uno. Sostanzialmente uguali 
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        // Salvo le modifiche
+        $user->save();
         
         /* Ritorno la view dopo la modifica */
         return redirect()->route('admin.users.index');

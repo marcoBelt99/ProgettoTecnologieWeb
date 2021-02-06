@@ -15,16 +15,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
-        User::truncate();
         /* Creo le 2 tabelle: una per i ruoli degli utenti (admin o utente generico), l'altra per gli utenti  */
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('role_user')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
         /* Dichiaro ed inizializzo 2 variabili: una per l'admin, l'altra per lo user */
         $adminRole = Role::where('name', 'Admin')->first();
         $userRole = Role::where('name', 'User')->first();
         
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        DB::table('users')->truncate();
         // Creazione dell'utente admin
         $admin = User::create([
             'first_name' => 'Admin',

@@ -11,10 +11,10 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up() // ENRICA BREGOLA IMBECILLE CESCO TESTA DI CAXXO
+    public function up() 
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Chiave primaria
+            $table->id(); // Chiave primaria: metto bigIncremets altrimenti mi da errori nella FK
             $table->string('first_name');
             $table->string('last_name');
             $table->date('birthday')->nullable();
@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->bigInteger('points')->nullable();
-            // $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,11 +13,11 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
-        /* Creo una tabel a per i ruoli (l'ho fatto con: php artisan make:migration create_roles_users_table)*/
+        /* Creo una tabella per i ruoli (l'ho fatto con: php artisan make:migration create_roles_users_table)*/
         Schema::create('role_user', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned()->index();
+            $table->bigInteger('user_id')->unsigned()->index();
             $table->timestamps();
         });
     }
