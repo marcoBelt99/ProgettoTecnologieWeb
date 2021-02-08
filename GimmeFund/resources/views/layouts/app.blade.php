@@ -34,7 +34,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li>
+                            <a href="{{ URL::action('FundraiserController@index') }}" class="nav-link">
+                                Raccolte fondi
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

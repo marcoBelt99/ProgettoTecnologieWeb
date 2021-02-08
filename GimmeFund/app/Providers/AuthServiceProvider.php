@@ -44,5 +44,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('destroy-user', function($user){
             return $user->hasRole('admin');
         });
+        /* Creo un Gate per permettere di effettuare la donazione solo agli utenti ordinari (l'admin non le può fare, non ha senso)  */
+        Gate::define('make-fundraiser', function($user) {
+            return $user->hasRole('user');
+        }); 
     }
 }

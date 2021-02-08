@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <a href="{{ URL::action('FundraiserController@create') }}"><button type="button" class="btn btn-success">
+                        Crea la tua campagna ora!
+                    </button></a>
                 </div>
             </div>
         </div>

@@ -20,6 +20,9 @@ class CreateFundraisersTable extends Migration
             $table->date('starting_date');
             $table->date('ending_date');
             $table->string('media_url');
+            $table->float('goal', 10, 2);
+            $table->integer('user_id')->foreign()->references('id')->on('users')->contrained()->onDelete('cascade');
+            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

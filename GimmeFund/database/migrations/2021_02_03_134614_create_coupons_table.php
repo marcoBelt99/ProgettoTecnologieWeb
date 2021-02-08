@@ -16,6 +16,7 @@ class CreateCouponsTable extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->integer('user_id')->foreign()->references('id')->on('users')->constraiened()->onDelete('cascade');
             $table->timestamps();
         });
     }
