@@ -79,6 +79,11 @@
         </nav>
 
         <main class="py-4">
+            {{-- Includo la cartella creata con il file degli alerts --}}
+            <div class="container">
+                @include('partials.alerts')
+            </div>
+            
             @yield('content')
         </main>
     </div>

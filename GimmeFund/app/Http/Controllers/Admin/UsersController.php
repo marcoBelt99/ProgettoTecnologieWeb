@@ -66,9 +66,14 @@ class UsersController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        // Salvo le modifiche
-        $user->save();
         
+        // Salvo le modifiche
+        if($user->save()){
+            $request->session()->flash('success', 'Utente ' . $user->first_name . ' '. $user->last_name . ' aggiornato con successo');
+        } else {
+            $request->session()->flash('error', 'Qualcosa è andato storto durante la modifica dell\'utente');
+        }
+
         /* Ritorno la view dopo la modifica */
         return redirect()->route('admin.users.index');
     }
