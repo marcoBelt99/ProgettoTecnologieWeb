@@ -16,7 +16,16 @@ class FundraiserController extends Controller
     public function index()
     {
         $fundraisers = Fundraiser::all();
-        return view('fundraiser.index')->with('fundraisers', $fundraisers);
+        $donations = array(); // Definisco la variabile donations come un array (associativo) da passare alla view fundraisers.index
+        foreach($fundraisers as $fundraiser) {
+            // Ogni entry rappresenta la somma delle donazione per quella data raccolta fondi
+            $donations += [
+                $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')
+            ];
+        }
+        return view('fundraiser.index')->with([
+            'fundraisers' => $fundraisers, 
+            'donations' => $donations]);
     }
 
     /**

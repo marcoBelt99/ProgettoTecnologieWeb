@@ -1,8 +1,3 @@
-<?php
-/* Importo la classe per le donazioni */
-use App\Donation;
-?>
-
 @extends('layouts.app')
 
 @section('content')
@@ -15,7 +10,7 @@ use App\Donation;
                     <hr class="my-4">
                 {{-- Faccio alcune queries con eloquent  --}}
                 <p>Termina il {{ date('d/m/Y', strtotime($fundraiser->ending_date)) }}</p>
-                <p>Raccolti: {{ number_format(Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount'), 2, '.', ',') }}</p>
+                <p>Raccolti: {{ number_format($donations[$fundraiser->id], 2, '.', ',') }}</p>
                 <p>Obiettivo: {{ number_format($fundraiser->goal, 2, ',', '.') }}</p>
                 <p class="lead">
                     {{-- Sistemo il bottone, il quale linka ad una pagina di informazioni --}}
