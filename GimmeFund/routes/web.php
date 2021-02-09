@@ -26,5 +26,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     // Creo le rotte per il controller degli utenti. Tranne per i metodi che non servono in questo caso
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
 });
+
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
-Route::resource('/fundaiser', 'FundraiserController')->middleware('can:make-fundraiser');
+Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
+
+Route::resource('/donation', 'DonationController');

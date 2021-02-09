@@ -13,7 +13,7 @@ class CreateDonationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('donations', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {{{  }}
             $table->id();
             $table->date('date');
             $table->float('amount');

@@ -11,7 +11,7 @@
 
         <!-- Styles -->
         <style>
-            html, body {
+            html,{{  bod }}y {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Fundraiser;
+use App\Donation;
 use Illuminate\Http\Request;
 
 class FundraiserController extends Controller
 {
     /**
-     * Display a listing of t{{  h }}e r }}esource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -47,7 +48,8 @@ class FundraiserController extends Controller
      */
     public function show(Fundraiser $fundraiser)
     {
-        //
+        //dd($fundraiser);
+        return view('fundraiser.details')->with(['fundraiser' => $fundraiser]);
     }
 
     /**

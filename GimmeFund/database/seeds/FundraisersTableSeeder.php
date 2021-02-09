@@ -23,7 +23,7 @@ class FundraisersTableSeeder extends Seeder
             È un momento difficile per tutti, mai come oggi l’unione deve fare la forza. Amo Bologna, la mia Città, e vorrei dare il mio contributo come penso anche tutti voi. Sono stato contattato da Fondazione Sant’Orsola e Policlinico di Sant’Orsola che ieri hanno lanciato la campagna “più forti INSIEME” e ho deciso di devolvere a loro tutto quello che insieme riusciremo a raccogliere per sostenere gli ospedali e il personale in prima linea nell’emergenza Coronavirus. Sarà mia premura tenervi informati sull’esito della donazione e condividere con voi la Lettera che invierò alla Fondazione al momento della donazione.',
             'starting_date' => '2020-01-30',
             'ending_date' => '2022-01-30',
-            'media_url' => 'https://images.gofundme.com/iUAI5wfF6U96vfdxTetXqlDgo9o=/720x405/https://d2g8igdw686xgo.cloudfront.net/46044960_1583830987419996_r.jpg',
+            'media_url' => 'https://www.info-cooperazione.it/wp-content/uploads/2018/10/crowdfunding-678698108-5a7a3af3875db90037cf5315-730x310.jpg',
             'goal' => 2000000.00,
             'user_id' => 2,
             'category_id' => 13,
@@ -129,7 +129,7 @@ class FundraisersTableSeeder extends Seeder
             La famiglia e gli amici hanno nel cuore un figlio di cui essere orgogliosi,  un fratello amorevole, un padre attento e presente, un amico onesto e sincero.
             Desideriamo che tutti possano partecipare con un gesto concreto  ad aiutare la sua famiglia in questo momento di dolore.',
             'starting_date' => '2021-01-22',
-            'ending_date' => '2021-01-22',
+            'ending_date' => '2021-08-22',
             'media_url' => 'https://images.gofundme.com/Nb1qKehMBgvG-B6EQsmqfv52-0g=/720x405/https://d2g8igdw686xgo.cloudfront.net/47637480_1587758046795533_r.jpeg',
             'goal' => 150000.00,
             'user_id' => 4,
