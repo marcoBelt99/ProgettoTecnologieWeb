@@ -50,6 +50,7 @@ class FundraiserController extends Controller
      */
     public function store(Request $request)
     {
+        /* Manca la validazione dei dati inseriti nel form!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
         Fundraiser::create([
             'name' => $request->name,
             'media_url' => $request->media_url,
