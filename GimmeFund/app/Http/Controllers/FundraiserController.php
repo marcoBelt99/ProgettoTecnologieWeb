@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Fundraiser;
 use App\Donation;
+use App\Category;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class FundraiserController extends Controller
@@ -35,7 +38,8 @@ class FundraiserController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('fundraiser.create')->with(['categories' => $categories]);
     }
 
     /**
@@ -46,7 +50,18 @@ class FundraiserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Fundraiser::create([
+            'name' => $request->name,
+            'media_url' => $request->media_url,
+            'description' => $request->description,
+            'goal' => $request->goal,
+            'starting_date' => date('Y-m-d'),
+            'ending_date' => $request->ending_date,
+            'category_id' => $request->category,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return $this->index();
     }
 
     /**
@@ -58,7 +73,10 @@ class FundraiserController extends Controller
     public function show(Fundraiser $fundraiser)
     {
         //dd($fundraiser);
-        return view('fundraiser.details')->with(['fundraiser' => $fundraiser]);
+        $author = User::where('id', $fundraiser->user_id)->first();
+        return view('fundraiser.details')->with([
+            'fundraiser' => $fundraiser,
+            'author' => $author]);
     }
 
     /**
