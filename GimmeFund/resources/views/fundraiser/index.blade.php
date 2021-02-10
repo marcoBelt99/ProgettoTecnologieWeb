@@ -10,8 +10,8 @@
                     <hr class="my-4">
                 {{-- Faccio alcune queries con eloquent  --}}
                 <p>Termina il {{ date('d/m/Y', strtotime($fundraiser->ending_date)) }}</p>
-                <p>Raccolti: {{ number_format($donations[$fundraiser->id], 2, '.', ',') }}</p>
-                <p>Obiettivo: {{ number_format($fundraiser->goal, 2, ',', '.') }}</p>
+                <p>Raccolti: {{ number_format($donations[$fundraiser->id], 2, ',', '.') }}</p>
+                <p>Obiettivo: {{ number_format($fundraiser->goal, 2, '.', ',') }}</p>
                 <p class="lead">
                     {{-- Sistemo il bottone, il quale linka ad una pagina di informazioni --}}
                     <a href="{{ URL::action('FundraiserController@show', $fundraiser->id) }}"><button type="button" class="btn btn-primary btn-lg">Altre informazioni</button></a>
