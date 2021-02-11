@@ -15,14 +15,14 @@ class CreateFundraisersTable extends Migration
     {
         Schema::create('fundraisers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->date('starting_date');
-            $table->date('ending_date');
-            $table->string('media_url');
-            $table->float('goal', 10, 2);
-            $table->integer('user_id')->foreign()->references('id')->on('users')->contrained()->onDelete('cascade');
-            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained()->onDelete('cascade');
+            $table->string('name'); // nome della raccolta fondi
+            $table->longText('description'); // descrizione
+            $table->date('starting_date'); // data di inizio
+            $table->date('ending_date'); // data di fine
+            $table->string('media_url'); // foto (presa tramite l'url)
+            $table->float('goal', 10, 2); // obbiettivo --> lo uso per fare la navbar
+            $table->integer('user_id')->foreign()->references('id')->on('users')->contrained()->onDelete('cascade'); // chiave esterna dell'utente che ha aperto la raccolta fondi
+            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained()->onDelete('cascade'); // chiave esterna della categoria
             $table->timestamps();
         });
     }

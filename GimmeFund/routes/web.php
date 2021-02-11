@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 /*
-|--------------------------------------------------------------------------
+{{-- |- --}} }}-----------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FundraiserController@index')->name('welcome');
 
 Auth::routes();
 
@@ -29,5 +27,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
 Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
+/* Creo la rotta per la pagina fundraiser */
+Route::get('/donation/{id}', 'DonationController@create')->name('donation.create');
+Route::resource('/donation', 'DonationController', ['except' => ['create']]);
 
-Route::resource('/donation', 'DonationController');
+Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'store', 'show']]);

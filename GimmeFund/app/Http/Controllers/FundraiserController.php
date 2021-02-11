@@ -8,7 +8,9 @@ use App\Category;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
+/* In questo file posso mettere tutte le funzioni che voglio, e richiamarle dove voglio :) */
 class FundraiserController extends Controller
 {
     /**
@@ -50,24 +52,41 @@ class FundraiserController extends Controller
      */
     public function store(Request $request)
     {
-        /* Manca la validazione dei dati inseriti nel form!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-        Fundraiser::create([
-            'name' => $request->name,
-            'media_url' => $request->media_url,
-            'description' => $request->description,
-            'goal' => $request->goal,
-            'starting_date' => date('Y-m-d'),
-            'ending_date' => $request->ending_date,
-            'category_id' => $request->category,
-            'user_id' => Auth::user()->id,
+
+        $input = $request->all();{{  }}{{  }}
+
+        $validator = Validator::make($input, [
+            // Regole di validazione
+            'name' => 'required|max:255',
+            'category_id' => 'required',
+            'goal' => 'required|numeric',
+            'ending_date' => 'required',
+            'description' => 'required',
+            'media_url' => 'required',
+        ], 
+        [
+            // Messaggi di errore 
+            'name.required' => 'Dai un titolo alla tua campagna',
+            'name.max' => 'Lunghezza massima del titolo consentita di 255 caratteri',
+            'category_id.required' => 'Manca la categoria!',
+            'goal.required' => 'Manca l\'importo che vuoi raccogliere',
+            'goal.numeric' => 'L\'obiettivo deve essere un numero',
+            'ending_date.required' => 'Manca la data di scandenza della campagna',
+            'description.required' => 'Manca la descrizione della campagna',
+            'media_url.required' => 'Manca il link per foto',
         ]);
 
-        return $this->index();
+        if ($validator->fails()) {
+            return redirect('/fundraiser/create')->withErrors($validator)->withInput();
+        }
+        
+        Fundraiser::create($input);
+
+        return redirect('/fundraiser');
     }
 
     /**
      * Display the specified resource.
-     *
      * @param  \App\Fundraiser  $fundraiser
      * @return \Illuminate\Http\Response
      */
@@ -113,4 +132,16 @@ class FundraiserController extends Controller
     {
         //
     }
+
+
+    /**
+     * Estrae il goal (l'obbiettivo) di una determinata raccolta fondi
+     * @author Marco
+     * @return n 
+     
+        public function extractGoal( Fundraiser $fundraiser)
+        {
+            return Fundraiser::
+        }
+    */
 }

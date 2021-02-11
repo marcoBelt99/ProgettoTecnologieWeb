@@ -20,7 +20,7 @@
                             <div class="col-md-6 float-left">
                                 <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
-                                @error('name')
+                                @error('first_name')
                                     {{-- <span class="invalid-feedback" role="alert"> --}}
                                         <div class="alert alert-danger" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $message }}</{{ stro }}ng>
                                     </span>
                                 @enderror
                             </div>

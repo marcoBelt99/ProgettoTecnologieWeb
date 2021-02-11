@@ -1,9 +1,9 @@
+{{-- A cosa serve questa pagina? ... Quando si vede? .....  --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -43,6 +43,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @if (Auth::user())
+                            <li class="nav-item">
+                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-success">
+                                    Inizia la tua campagna ora!
+                                </a>
+                            </li>                            
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -71,6 +78,11 @@
                                             Gestione utenti
                                         </a>    
                                     @endcan
+                                    @if (Auth::user()->hasRole('user'))
+                                        <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item">
+                                            I miei dati
+                                        </a>
+                                    @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -91,5 +103,6 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>

@@ -12,7 +12,6 @@
               {{ $fundraiser->description }}
             </div>
           </div>
-        <a href="{{ URL::action('DonationController@create') }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
+        <a href="{{ URL::action('DonationController@create', $fundraiser->id) }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
     </div>
-    
 @endsection

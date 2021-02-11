@@ -1,3 +1,4 @@
+{{-- Questa pagina non si vede più nel sito!!! --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
