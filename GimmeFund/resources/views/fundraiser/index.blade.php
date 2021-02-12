@@ -19,24 +19,23 @@
                     
                     {{-- (Marco)Provo ad inserire la progressbar --}}
                     {{-- $contatore = DB::table('') --}}
-                      {{-- Fine prova progress bar --}}
+                    {{-- Fine prova progress bar --}}
 
 
         </div>
     </div>
-  @endforeach
-
-  {{-- Primo componente di prova di Vue.js  --}}
-  <div class="content" id="app">
-    <div class="title m-b-md">
-        Laravel
-    </div>
-
-    <example-component></example-component>
-
-    ...
-</div>
-{{-- Includo il file script di prova di Vue.js --}}
-<script src="js/app.js"></script>
+    @endforeach
 @endsection
-                    
+            
+@section('script')
+    {{-- Primo componente di prova di Vue.js  --}}
+    <div class="content" id="app">
+        <div class="title m-b-md">
+            Laravel
+        </div>
+        {{-- Richiamo il componente di prova definito nella pagina del template --}}
+        <example-component></example-component>
+    </div>
+    {{-- Includo il file script di prova di Vue.js --}}
+    <script src="js/app.js"></script>
+@endsection

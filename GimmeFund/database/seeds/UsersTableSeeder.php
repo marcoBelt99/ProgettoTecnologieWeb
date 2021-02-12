@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
             'CAP' => '45019',
             'phone_number' => '3472460103',
             'birthday' => '1999-11-29',
-            'points' => 1000,
+            'points' => 0,
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s')
         ]);
@@ -61,6 +61,7 @@ class UsersTableSeeder extends Seeder
             'address' => 'Via Domenico Sampieri, 74',
             'city' => 'Adria',
             'CAP' => '45011',
+            'points' => 0,
             'phone_number' => '3403183848',
             'birthday' => '1999-08-30',
             'updated_at' => date('Y-m-d h:i:s'),
@@ -77,6 +78,7 @@ class UsersTableSeeder extends Seeder
             'CAP' => '45011',
             'phone_number' => '3206479281',
             'birthday' => '1999-04-28',
+            'points' => 0,
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s')
         ]);
@@ -91,6 +93,7 @@ class UsersTableSeeder extends Seeder
             'CAP' => '45019',
             'phone_number' => '3338087889',
             'birthday' => '1999-06-18',
+            'points' => 0,
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s')
         ]);

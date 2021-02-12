@@ -53,9 +53,9 @@ class FundraiserController extends Controller
     public function store(Request $request)
     {
 
-        $input = $request->all();{{  }}{{  }}
-
-        $validator = Validator::make($input, [
+        $input = $request->all();
+        // Uso sempre il metodo di Piva per la validazione
+        $validator =$request->validate([
             // Regole di validazione
             'name' => 'required|max:255',
             'category_id' => 'required',
@@ -75,10 +75,6 @@ class FundraiserController extends Controller
             'description.required' => 'Manca la descrizione della campagna',
             'media_url.required' => 'Manca il link per foto',
         ]);
-
-        if ($validator->fails()) {
-            return redirect('/fundraiser/create')->withErrors($validator)->withInput();
-        }
         
         Fundraiser::create($input);
 
@@ -132,16 +128,4 @@ class FundraiserController extends Controller
     {
         //
     }
-
-
-    /**
-     * Estrae il goal (l'obbiettivo) di una determinata raccolta fondi
-     * @author Marco
-     * @return n 
-     
-        public function extractGoal( Fundraiser $fundraiser)
-        {
-            return Fundraiser::
-        }
-    */
 }

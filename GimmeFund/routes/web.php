@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 /*
-{{-- |- --}} }}-----------------------------------------------------------------------
+----- -----------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -27,8 +27,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
 Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
+
 /* Creo la rotta per la pagina fundraiser */
 Route::get('/donation/{id}', 'DonationController@create')->name('donation.create');
+
+/* Creo la rotta per la pagina delle donazioni */
 Route::resource('/donation', 'DonationController', ['except' => ['create']]);
 
+/* Creo la rotta per ... */
 Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'store', 'show']]);
+
+/* Creo la rotta per la gestione dei coupon */
+Route::prefix('user')->name('user.')->group(function() {
+    Route::resource('/coupon', 'CouponController');
+});
+

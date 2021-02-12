@@ -39,9 +39,12 @@ class DonationController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $fundraiser_id = $request->fundraiser_id;
+        // Prova utilizzo metodo di Piva per validazione con validate() --> ok problema (donazioni)risolto
+        $validator = $request->validate([
             // Regole di validazione
             'amount' => 'required|numeric|min:1|max:200',
         ],    
@@ -53,12 +56,16 @@ class DonationController extends Controller
             'amount.max' => 'L\'importo massimo della donazione è: 200.00 €'
         ]);
 
-        if ($validator->fails()) {
-            return redirect('/donation/create')->withErrors($validator)->withInput();
-        }
-
         Donation::create($input);
         
+        // Analizzo 'amount' per ottenere, un determinato punteggio
+        $amount = intval($request->amount);
+        // Chiamo la procedura che calcola i punti in base all'import della donazione
+        $gainedPoints = $this->computeGainedPoints($amount);
+        // Invio i punti generati con la donazione all'UserController
+        $userController = new UserController();
+        $userController->addPoints($gainedPoints);
+
         return redirect('/fundraiser');
     }
 
@@ -105,5 +112,36 @@ class DonationController extends Controller
     public function destroy(Donation $donation)
     {
         //
+    }
+    
+    /**
+     * Calcola i punti ottenuti da un utente sulla base dell'importo della donazione da lui effettuata.
+     * Scaglioni:
+     * Se               amount == ... allora gainedPoints = ...
+     * Altrimensi se    amount == ... allora gainedPoints = ...
+     * @param  amount importo della donazione
+     * @return 
+     */
+    public function computeGainedPoints($amount) {
+    
+        if ($amount >= 5 && $amount <= 50) {
+            
+            $gainedPoints = (int)($amount/2 + 10);
+        
+        } else if ($amount > 50 && $amount <= 100) {
+        
+            $gainedPoints = (int)($amount/2 + 15);
+        
+        } else if ($amount > 100 && $amount <= 150) {
+        
+            $gainedPoints = (int)($amount/2 + 25);
+        
+        } else if ($amount > 150 && $amount <= 200) {
+        
+            $gainedPoints = (int)($amount/2 + 40);
+        
+        }
+
+        return $gainedPoints;
     }
 }

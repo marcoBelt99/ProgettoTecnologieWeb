@@ -93,4 +93,19 @@ class UserController extends Controller
     {
         //
     }
+
+
+     /**
+     * Aggiunge punti sulla base dell'importo ('amount') della Donazione.
+     *
+     * @param  gainedPoints punt ddell'utente
+     * @return 
+     */
+    public function addPoints($gainedPoints) {
+        
+        $user = Auth::user(); // Mi salvo l'utente correntemente loggato
+
+        $user->points += $gainedPoints;
+        $user->save();
+    }
 }

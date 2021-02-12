@@ -48,7 +48,8 @@
                                 <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-success">
                                     Inizia la tua campagna ora!
                                 </a>
-                            </li>                            
+                            </li>
+    
                         @endif
                         <!-- Authentication Links -->
                         @guest
@@ -72,7 +73,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    {{-- Direttiva blade @can: serve per ... --}}
+                                    {{-- Direttiva blade @can: serve per l'admin --}}
                                     @can('manage-users')
                                         <a class="dropdown-item" href="{{ URL::action('Admin\UsersController@index') }}">
                                             Gestione utenti
@@ -80,7 +81,10 @@
                                     @endcan
                                     @if (Auth::user()->hasRole('user'))
                                         <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item">
-                                            I miei dati
+                                            Anagrafiche 
+                                        </a>
+                                        <a href="{{ URL::action('CouponController@index') }}" class="dropdown-item">
+                                            Saldo punti donazioni
                                         </a>
                                     @endif
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

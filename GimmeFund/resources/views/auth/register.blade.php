@@ -87,7 +87,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</{{ stro }}ng>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>

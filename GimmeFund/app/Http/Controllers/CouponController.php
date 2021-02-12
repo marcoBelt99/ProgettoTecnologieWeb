@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Coupon;
 use Illuminate\Http\Request;
+use App\Donation;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
@@ -14,7 +17,12 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user()->select('first_name', 'last_name', 'points')->where('id', Auth::user()->id)->first();
+        $n_donations = Donation::all()->where('user_id', Auth::user()->id)->count();
+        return view('user.coupon.index')->with([
+            'user' => $user,
+            'n_donations' => $n_donations,
+            ]);
     }
 
     /**
