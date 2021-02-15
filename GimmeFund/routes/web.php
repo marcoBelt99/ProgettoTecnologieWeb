@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'FundraiserController@index')->name('welcome');
+Route::get('/', 'HomeController@index')->name('welcome');
 
 Auth::routes();
 
@@ -28,8 +28,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
 Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
 
-/* Creo la rotta per la pagina fundraiser */
-Route::get('/donation/{id}', 'DonationController@create')->name('donation.create');
+/* Creo la rotta per la pagina fundraiser ed il middleware per differenziare sempre le azioni per utente ordinario e admin */
+Route::get('/donation/{id}', 'DonationController@create')->name('donation.create')->middleware(['auth', 'can:make-donation']);
 
 /* Creo la rotta per la pagina delle donazioni */
 Route::resource('/donation', 'DonationController', ['except' => ['create']]);
@@ -39,6 +39,9 @@ Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'sto
 
 /* Creo la rotta per la gestione dei coupon */
 Route::prefix('user')->name('user.')->group(function() {
-    Route::resource('/coupon', 'CouponController');
+    Route::get('/coupon', 'CouponController@index');
+    Route::resource('/coupon', 'CouponController', ['except' =>  ['index']])->middleware('can:create-coupon');
 });
+
+Route::get('/coupon', 'CouponController@create')->name('coupon.create');
 

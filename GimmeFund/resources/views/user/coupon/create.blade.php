@@ -25,7 +25,7 @@
 
 
             <div class=" form-group">
-                <label for="amount">Importo</label>
+                <label for="points">Punti</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="amount">€</span>
@@ -53,14 +53,12 @@
 
             {{-- hidden fields --}}
             
-            {{-- fundraiser id --}}
-            <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser_id }}"/>
+            
             
             {{-- user id --}}
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
             
-            {{-- date --}}
-            <input type="hidden" name="date" id="date" value="{{ date('Y-m-d') }}">
+           
 
             <div class="col-md-6" style="margin-top: 10px">
                 <button type="submit" class="btn btn-outline-primary">

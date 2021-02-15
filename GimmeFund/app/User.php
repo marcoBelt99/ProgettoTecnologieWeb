@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -63,5 +64,20 @@ class User extends Authenticatable
 
         return false;
     }
+
+    /** 
+     * Funzione 'getter' che ritorna true se l'utente ha un numero di punti > 0, altrimenti ritorna false
+     */
+    public function hasPoints() {
+        $ob = DB::table('users')->select('points')->where('id', $this->id)->first();
+            
+        if ($ob->points > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }

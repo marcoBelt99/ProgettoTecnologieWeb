@@ -32,7 +32,7 @@ class CouponController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.coupon.create');
     }
 
     /**

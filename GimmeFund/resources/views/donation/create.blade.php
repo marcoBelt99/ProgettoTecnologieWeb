@@ -4,7 +4,7 @@
 
 <div class="container card col-md-6">
     <div class="card-header">
-        <h1>Dona</h1>
+        <p class="card-title"><h1>Dona</h1></p>
     </div>
     <div class="card-body">
         @if ($errors->any())
