@@ -40,21 +40,21 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block img-fluid" src="crowdfunding1.jpg" alt="Slide1" width="100%">
+            <img class="d-block img-fluid" src="{{asset("storage/images/crowdfunding1.jpg")}}" alt="Slide1" width="100%">
             <div class="carousel-caption d-none d-md-block">
             <h3>Caption per la slide 1</h3>
             <p>Descrizione slide 1</p>
         </div>
     </div>
     <div class="carousel-item">
-        <img class="d-block img-fluid" src="crowdfunding2.jpg" alt="Slide2" width="100%">
+        <img class="d-block img-fluid" src="../images/crowdfunding2.jpg" alt="Slide2" width="100%">
         <div class="carousel-caption d-none d-md-block">
           <h3>Caption per la slide 2</h3>
           <p>Descrizione slide 2</p>
         </div>
     </div>
     <div class="carousel-item">
-        <img class="d-block img-fluid" src="crowdfunding3.png" alt="Slide3" width="100%">
+        <img class="d-block img-fluid" src="../images/crowdfunding3.png" alt="Slide3" width="100%">
         <div class="carousel-caption d-none d-md-block">
           <h3>Caption per la slide 3</h3>
           <p>Descrizione slide 3</p>
@@ -151,5 +151,5 @@
     src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-    
+
 @endsection
