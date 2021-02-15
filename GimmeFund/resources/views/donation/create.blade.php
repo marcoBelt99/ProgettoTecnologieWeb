@@ -18,8 +18,6 @@
         @endif
 
         <form action="{{ URL::action('DonationController@store') }}" method="POST">
-            {{-- Token per Laravel --}}
-            @csrf
             {{ method_field('POST') }}
 
 
@@ -36,22 +34,24 @@
             <p>Seleziona il metodo di pagamento</p>
             <div class="form-check">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="payment_method" checked>
+                    <input class="form-check-input" type="radio" id="radio-bank-transfer" name="payment_method">
                     <label class="form-check-label">
                         Bonifico bancario
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="payment_method">
+                    <input class="form-check-input" type="radio" id="radio-credit-card" name="payment_method">
                     <label class="form-check-label">
                         Carta di credito
                     </label>
                 </div>
-                
+                <div id="payment-method-form"> </div>
             </div>
 
             {{-- hidden fields --}}
             
+            {{-- _token --}}
+            <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
             {{-- fundraiser id --}}
             <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser_id }}"/>
             
@@ -62,7 +62,7 @@
             <input type="hidden" name="date" id="date" value="{{ date('Y-m-d') }}">
 
             <div class="col-md-6" style="margin-top: 10px">
-                <button type="submit" class="btn btn-outline-primary">
+                <button type="submit" class="btn btn-outline-primary" id="submit-btn">
                     Dona
                 </button>
                 <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-outline-secondary">Indietro</a>
