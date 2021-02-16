@@ -11,7 +11,7 @@ Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
                 <div class="card-header">Utenti</div>
 
                 <div class="card-body">
-                    <table class="table table-responsive table-striped table-bordered table-hover">
+                    <table class="table table-responsive table-striped table-bordered table-hover table-bordered">
                         {{-- Intestazionetabella --}}
                         <thead class="thead-dark">
                           <tr>

@@ -28,7 +28,20 @@ class DonationController extends Controller
      */
     public function create($fundraiser_id)
     {
-        return view('donation.create')->with('fundraiser_id', $fundraiser_id);
+        /* Notare l'uso del metodo sortByDesc(), per ordinare le donazioni in ordine di data decrescenti*/
+        $donations = Donation::all()->where('fundraiser_id', $fundraiser_id)->sortByDesc('date');
+        $donators = array();
+    
+        foreach($donations as $donation) {
+            $donators += [
+                $donation->id => User::select('first_name', 'last_name')->where('id', $donation->user_id)->first()
+            ];  
+        }
+
+        return view('donation.create')->with([
+            'fundraiser_id' => $fundraiser_id, 
+            'donations' => $donations,
+            'donators' => $donators]);
     }
 
     /**
@@ -42,7 +55,7 @@ class DonationController extends Controller
         
         $input = $request->all();
 
-        $fundraiser_id = $request->fundraiser_id;
+        //$fundraiser_id = $request->fundraiser_id;
         // Prova utilizzo metodo di Piva per validazione con validate() --> ok problema (donazioni)risolto
         $validator = $request->validate([
             // Regole di validazione
@@ -56,7 +69,7 @@ class DonationController extends Controller
             'amount.max' => 'L\'importo massimo della donazione è: 200.00 €'
         ]);
 
-        Donation::create($input);
+        $donation = Donation::create($input);
         
         // Analizzo 'amount' per ottenere, un determinato punteggio
         $amount = intval($request->amount);
@@ -65,8 +78,20 @@ class DonationController extends Controller
         // Invio i punti generati con la donazione all'UserController
         $userController = new UserController();
         $userController->addPoints($gainedPoints);
-
-        return redirect('/fundraiser');
+        
+        // Seleziono il donatore
+        $donator = User::select('first_name', 'last_name')->where('id', $donation->user_id)->first();
+        
+        // Questi sono gli stessi dati che sono presenti nella funzione di J-Query Ajax nel file: create.blade.php di donation
+        return json_encode([
+            'status' => 'success', 
+            'donation' => $donation,
+            'date' => date('d/m/Y', strtotime($donation->date)), 
+            'donator_first_name' => $donator->first_name, 
+            'donator_last_name' => $donator->last_name
+            ]);
+        
+        //return redirect('/fundraiser');
     }
 
     /**

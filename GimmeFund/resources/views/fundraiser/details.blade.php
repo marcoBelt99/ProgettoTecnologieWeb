@@ -21,6 +21,7 @@
         </div>
         
         <div style="margin-top: 20px">
+            {{-- ERRORE da controllare --}}
             @if (Auth::user()->hasRole('user'))
                 <a href="{{ URL::action('DonationController@create', $fundraiser->id) }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
             @else
