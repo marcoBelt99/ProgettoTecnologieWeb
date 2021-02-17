@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class=" form-group">
+            <div class="form-group">
                 <label for="amount">Importo</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -38,13 +38,13 @@
             <p>Seleziona il metodo di pagamento</p>
             <div class="form-check">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="radio-bank-transfer" name="payment_method">
+                    <input class="form-check-input" type="radio" id="radio-bank-transfer" name="payment-method">
                     <label class="form-check-label">
                         Bonifico bancario
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="radio-credit-card" name="payment_method">
+                    <input class="form-check-input" type="radio" id="radio-credit-card" name="payment-method">
                     <label class="form-check-label">
                         Carta di credito
                     </label>
@@ -123,13 +123,14 @@
 
 <script type="text/javascript">
 
+    // Messaggi inizialmente nascosti
     $('#warning-message').hide();
 
-    $(document).ready(function() {
+    $('input[type=radio]').on('click', function() {
+        $('#unchosen-payment-method-mess').hide();
+    });
 
-        $('input[type=radio]').on('click', function() {
-            $('#unchosen-payment-method-mess').hide();
-        });
+    $(document).ready(function() {
 
         /* All'evento "click sul pulsante": 'Dona', aggiungi nella tabella di id #donations-table i dati */
         /* Per questo stesso evento, avviene la validazioni dei dati inseriti  */
@@ -188,6 +189,41 @@
                 }
             });
         }); // fine evento: "click sul pulsante 'Dona' "
+
+        // Quanto l'utente sceglie il metodo di pagamento compare il form per quel dato metodo
+        var html = "\
+        <div class='container card col-md-10'>\
+            <div class='card-header bg-transparent'>\
+                <p class='card-title'><h5>Pagamento con Bonifico Bancario</h5></p>\
+            </div>\
+            <div class='card-body'>\
+                <div class='form-group'>\
+                    <label for='holder'>Titolare del conto</label>\
+                    <input type='text' id='holder' name='holder' class='form-control'>\
+                </div>\
+                <div class='form-group'>\
+                    <label for='bank-account-id'>IBAN</label>\
+                    <input type='text' id='bank-account-id' name='bank-account-id' class='form-control'>\
+                </div>\
+                <div class='form-group'>\
+                    <label for='beneficiary-name'>Casuale</label>\
+                    <input type='text' id='casual' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser_title->name }}' readonly>\
+                </div>\
+                <div class='form-group'>\
+                    <label for='beneficiary-name'>Beneficiario</label>\
+                    <input type='text' id='beneficiary-name' name='beneficiary-name' class='form-control' value='GimmeFund-Italy' readonly>\
+                </div>\
+                <div class='form-group'>\
+                    <label for='beneficiary-ba-id'>IBAN Beneficiario</label>\
+                    <input type='text' id='beneficiary-ba-id' name='beneficiary-ba-id' class='form-control' value='IT66C010050338 2000000218020' readonly>\
+                </div>\
+            </div>\
+        </div>";
+
+        $('input[type=radio][name=payment-method][id=radio-bank-transfer]').on('click', function() {
+            $('#payment-method-form').html(html);
+        });
+
 
     }); // fine document ready function
 
