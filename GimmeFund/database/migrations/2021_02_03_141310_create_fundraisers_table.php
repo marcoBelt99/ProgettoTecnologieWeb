@@ -16,6 +16,7 @@ class CreateFundraisersTable extends Migration
         Schema::create('fundraisers', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // nome della raccolta fondi
+            $table->string('summary');
             $table->longText('description'); // descrizione
             $table->date('starting_date'); // data di inizio
             $table->date('ending_date'); // data di fine

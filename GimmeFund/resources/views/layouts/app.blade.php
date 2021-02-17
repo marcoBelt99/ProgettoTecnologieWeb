@@ -18,15 +18,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href={{ URL::asset('css/stili.css') }}>
+
     @yield('style')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand navbar-a" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -37,7 +38,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a href="{{ URL::action('FundraiserController@index') }}" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ URL::action('FundraiserController@index') }}" class="nav-link">
                                 Raccolte fondi
                             </a>
                         </li>
@@ -47,7 +48,7 @@
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::user())
                             <li class="nav-item">
-                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-success">
+                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-campagna">
                                     Inizia la tua campagna ora!
                                 </a>
                             </li>
@@ -56,36 +57,36 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link navbar-a" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link navbar-a" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle navbar-a" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->first_name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="dropdown-menu dropdown-menu-right navbar-li" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item navbar-a" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
                                     {{-- Direttiva blade @can: serve per l'admin --}}
                                     @can('manage-users')
-                                        <a class="dropdown-item" href="{{ URL::action('Admin\UsersController@index') }}">
+                                        <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\UsersController@index') }}">
                                             Gestione utenti
                                         </a>    
                                     @endcan
                                     @if (Auth::user()->hasRole('user'))
-                                        <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item">
+                                        <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item navbar-a">
                                             Anagrafiche 
                                         </a>
-                                        <a href="{{ URL::action('CouponController@index') }}" class="dropdown-item">
+                                        <a href="{{ URL::action('CouponController@index') }}" class="dropdown-item navbar-a">
                                             Saldo punti donazioni
                                         </a>
                                     @endif
@@ -108,6 +109,17 @@
             {{-- Inclusione del contenuto di una view nel layout --}}
             @yield('content')
         </main>
+        <div class="jumbotron-fluid">
+            <div class="container">
+                <h2>
+                    <a class="footer-logo" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}</a>
+                </h2>
+                {{-- INSERIRE I LOGHI NEL FOOTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--}}
+                <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
+            </div>
+        </div>
+        @yield('footer')
     </div>
     {{-- Inclusione della sezione script della view --}}
     @yield('script')

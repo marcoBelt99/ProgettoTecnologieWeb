@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+/* Colore di sfondo della barra di navigazione */
+.navbar1 {
+    background: #0D4EFA !important;
+    text-decoration: none !important;
+    font-family: "Nunito";
+  }
+
+.navbar-a { 
+    color: white !important;
+    text-decoration: none !important;
+    font-family: "Nunito";
+}
+
+.navbar-a:hover {
+    background: #0ac6f577;
+}
+
+
+.navbar-li {
+    background: #0B7CDE;
+    font-family: "Nunito";
+}
+
+.btn-campagna {
+    background: #0BDED0;
+}
+
+
+ /* Colori e allineamento del testo */
+.jumbotron-home {
+    color: #868E96;
+    background: #CBDFDF;
+    text-align: center;
+    margin-bottom: -20px;
+}
+
+.jumbotron-fluid {
+    background: #336699;
+    text-align: center;
+    padding: 50px;
+}
+
+.jumbotron-fundraiser {
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef;
+    border-radius: 0.3rem;
+    text-align: justify;
+  }
+
+.footer-logo {
+    color: white !important;
+    font-size: 44px;
+    text-decoration: none !important;
+    font-family: "Nunito";
+}
+
+.footer-logo:hover {
+    font-size: 48px;
+}
+
+.footer-privacy { 
+    color: white !important;
+    font-family: "Nunito";
+}

@@ -45,3 +45,10 @@ Route::prefix('user')->name('user.')->group(function() {
 
 Route::get('/coupon', 'CouponController@create')->name('coupon.create');
 
+
+/** @author Marco
+ *  Creo la rotta per poter gestire le immagini nei tag <img src="" ...>
+ */
+/* use App\Http\Controllers\StorageFileController;
+Route::get('image/{filename}', [StorageFileController::class,'getPubliclyStorgeFile'])->name('image.displayImage'); */
+Route::get('image/{filename}', 'StorageFileController@displayImage')->name('image.displayImage');

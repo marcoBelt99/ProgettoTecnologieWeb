@@ -20,9 +20,9 @@
     
       {{--  --}}
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron-fundraiser">
             <h1 class="display-4">{{ $fundraiser->name }}</h1>
-            <p class="lead">{{ $fundraiser->description }}</p>
+            <p class="lead">{{ $fundraiser->summary }}</p>
                 <hr class="my-4">
             {{-- Faccio alcune queries con eloquent  --}}
             <p>Termina il {{ date('d/m/Y', strtotime($fundraiser->ending_date)) }}</p>
@@ -37,4 +37,3 @@
     @endforeach
     
 @endsection
-

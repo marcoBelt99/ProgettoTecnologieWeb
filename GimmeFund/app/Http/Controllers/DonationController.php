@@ -115,7 +115,7 @@ class DonationController extends Controller
      */
     public function edit(Donation $donation)
     {
-        
+        //
     }
 
     /**
