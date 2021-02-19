@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,7 +37,6 @@ class UserController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -69,18 +78,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-    {
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->birthday = $request->birthday;
-        $user->address = $request->address;
-        $user->city = $request->city;
-        $user->CAP = $request->CAP;
-        $user->phone_number = $request->phone_number;
-
-        $user->save();
-
-        return $this->edit(Auth::user());
+    {   
+        $input = $request->all();
+        Auth::user()->update($input);
+        
+        return json_encode([
+            'status' => 'success',
+            'user' => $user,
+        ]);
     }
 
     /**
