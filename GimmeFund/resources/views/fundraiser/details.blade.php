@@ -23,13 +23,25 @@
         </div>
         
         <div style="margin-top: 20px">
-            {{-- ERRORE da controllare --}}
-            @if (Auth::user()->hasRole('user'))
+
+            {{-- Controllo login utente/ruolo utente --}}
+            @if (Auth::check() && Auth::user()->hasRole('user'))
                 <a href="{{ URL::action('DonationController@create', $fundraiser->id) }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
             @else
-                <div class="text text-center">
-                    <p>Azione non autorizzata</p>
-                </div>
+                {{-- Se l'utente è loggato ed è admin --}}
+                @if (Auth::check() && Auth::user()->hasRole('admin'))
+                    <div class="text-center">
+                        <p class="">Donazione non autorizzata per l'utente Admin</p>
+                    </div>
+                @endif
+
+                {{-- Se l'utente non è loggato nel sito --}}
+                @if(!Auth::check())
+                    <div class="text text-center">
+                        <a href="{{ route('login') }}" class=""><p>Accedi o registrati per iniziare a donare!</p></a>
+                    </div>
+                @endif
+            
             @endif
         </div>
     </div>

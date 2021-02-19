@@ -42,6 +42,21 @@
                                 Raccolte fondi
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link navbar-a" href="#" class="nav-link">
+                                Chi siamo
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link navbar-a" href="#" class="nav-link">
+                                Come funzionano le donazioni
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link navbar-a" href="#" class="nav-link">
+                                Sostienici
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -57,11 +72,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link navbar-a" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link navbar-a" href="{{ route('login') }}">Accedi</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link navbar-a" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link navbar-a" href="{{ route('register') }}">Registrati</a>
                                 </li>
                             @endif
                         @else
@@ -74,7 +89,7 @@
                                     <a class="dropdown-item navbar-a" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Logout
                                     </a>
                                     {{-- Direttiva blade @can: serve per l'admin --}}
                                     @can('manage-users')
