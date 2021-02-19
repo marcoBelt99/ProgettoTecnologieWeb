@@ -7,7 +7,9 @@
         
         <div class="text text-center"><h1>{{ $fundraiser->name }}</h1></div>        
         <div class="card col-12" style="padding: 0px">
-            <div class="card-img-top text-center" style="padding: 10px"><img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image"></div>
+            <div class="card-img-top text-center" style="padding: 10px">
+                <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image">
+            </div>
             <div class="card-header" style="height : 62px">
                 <p class="card-title" style="font-size: 25px; text-align: center">Descrizione</p>
             </div>

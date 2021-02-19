@@ -305,7 +305,7 @@
                     }
                 }, 
                 // In caso di errore
-                // xhr è .....
+                // xhr è l'errore ritornato (XHR => XmlHttpRequest)
                 error: function(xhr) {
                     // 
                     if (xhr.status == 422) {

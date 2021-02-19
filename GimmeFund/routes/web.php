@@ -35,7 +35,8 @@ Route::get('/donation/{id}', 'DonationController@create')->name('donation.create
 Route::resource('/donation', 'DonationController', ['except' => ['create']]);
 
 /* Creo la rotta per ... */
-Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'store', 'show']]);
+Route::put('/user/{user}', 'UserController@update')->name('user.update');
+Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'show', 'update']]);
 
 /* Creo la rotta per la gestione dei coupon */
 Route::prefix('user')->name('user.')->group(function() {

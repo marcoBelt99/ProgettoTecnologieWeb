@@ -119,7 +119,6 @@
                 <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
             </div>
         </div>
-        @yield('footer')
     </div>
     {{-- Inclusione della sezione script della view --}}
     @yield('script')
