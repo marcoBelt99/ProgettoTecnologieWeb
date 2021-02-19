@@ -88,6 +88,8 @@
 
         {{-- FORM MODIFICA PASSWORD --}}
         {{-- DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE --}}
+
+        {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
         <form action="" method="POST">
             
             {{ method_field('PUT') }}
@@ -101,66 +103,31 @@
                 </div>
                 <div class="card-body" id="user-pass-infos-cont">
 
-                    <p>Modifica e salva i tuoi dati</p>
+                    <p>Modifica la tua password</p>
                     
                     <hr>
 
-                    {{-- Nome - Cognome --}}
+                    {{-- Old Password --}}
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <label for="old-password" class="form-check-label">Vecchia password</label>
+                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                        </div>
+                    </div>
+
+                    {{-- New password - Confirm password --}}
                     <div class="form-group row">
 
                         <div class="col-md-6">
-                            <label for="first_name" class="form-check-label">Nome</label>
-                            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ Auth::user()->first_name }}">
+                            <label for="new-password" class="form-check-label">Nuova Password</label>
+                            <input type="text" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
                         </div>
                         
                         <div class="col-6">
-                            <label for="last_name" class="form-check-label">Cognome</label>
-                            <input type="text" class="form-control" name="last_name" id="last_name" value="{{ Auth::user()->last_name }}">
+                            <label for="confirm-password" class="form-check-label">Conferma Nuova Password</label>
+                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Conferma Nuova Password">
                         </div>
 
-                    </div>
-
-                    {{-- Email - Phone Number --}}
-                    <div class="form-group row">
-                        <label for="email" class="col-form-label col-md-2">Email</label>
-                        <div class="col-md-10">
-                            <input type="email" name="email" id="email" class="form-control-plaintext col-md-6" value="{{ Auth::user()->email }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="phone_number" class="col-form-label col-md-2">Numero di telefono</label>
-                        <input type="text" class="form-control col-md-3" name="phone_number" id="phone_number" value="{{ Auth::user()->phone_number }}">
-                    </div>
-                    
-                    {{-- Data di Nascita --}}
-                    <div class="form-group row">
-                        <label for="birthday" class="col-form-label col-md-2">Data di nascita</label>
-                        <input type="date" class="form-control col-md-4" name="birthday" id="birthday" value="{{ Auth::user()->birthday }}">
-                    </div>
-
-                    {{-- Indirizzo - Città - CAP --}}
-                    <div class="form-group row">
-                        <div class="col-md-4">
-                            <label for="address" class="form-check-label">Indirizzo</label>
-                            <input type="text" class="form-control" name="address" id="address" value="{{ Auth::user()->address }}">
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="city" class="form-check-label">Città</label>
-                            <input type="text" class="form-control" name="city" id="city" value="{{ Auth::user()->city }}">
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <label for="CAP" class="form-check-label">CAP</label>
-                            <input type="text" class="form-control" name="CAP" id="CAP" value="{{ Auth::user()->CAP }}">
-                        </div>
-                    </div>
-
-                    {{-- hidden fields --}}
-                    <div id ="hidden-form-fields">
-                        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_user-id" id ="_user_id" value="{{ Auth::user()->id }}">
                     </div>
 
                     <div class="form-group">

@@ -99,7 +99,7 @@
                                     @endcan
                                     @if (Auth::user()->hasRole('user'))
                                         <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item navbar-a">
-                                            Anagrafiche 
+                                            I miei dati 
                                         </a>
                                         <a href="{{ URL::action('CouponController@index') }}" class="dropdown-item navbar-a">
                                             Saldo punti donazioni
