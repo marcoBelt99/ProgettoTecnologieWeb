@@ -2,7 +2,7 @@
 
 {{-- Sezione dello stile: lo stile è stato spostato in .../stili.css --}}
 @section('style')
-
+@endsection
 {{-- Sezione del contenuto --}}
 @section('content')
 
@@ -80,7 +80,9 @@
 
             {{-- <img class="card-img-top img-fluid" src="{{ route('image.displayImage',$test ?? ''->servizio1) }}" > --}}
             {{-- <img src="{{ asset('public/storage/templates/servizio1.png') }}" class="img img-thumbnail"> --}}
-                <img src="{{ asset('public/storage/images/servizio1.png') }}">
+                {{-- <img src="{{ asset('public/storage/images/servizio1.png') }}"> --}}
+                <img src = "{{ asset('/image/servizio1.png') }}" />
+                {{-- <img src="/home/marco/ProgettoTecnologieWeb/GimmeFund/images/servizio1.png"> --}}
                 <div class="card-body">
                     <h4 class="card-title">Cloud</h4>
                     <p class="card-text">Inserisci qui la descrizione del servizio offerto</p>
@@ -120,7 +122,10 @@
 
 @endsection
 
-@section('script')
+
+{{--
+    QUESTO DA PROBLEMI NEL MENU A TENDINA DELL'UTENTE
+    @section('script')
     <!-- Al termine della pagina, prima della chiusura del tag body, si inseriscono i link alle librerie software di:  jQuery, -->
     <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -139,4 +144,4 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-@endsection
+@endsection --}}
