@@ -35,20 +35,26 @@ Route::get('/donation/{id}', 'DonationController@create')->name('donation.create
 Route::resource('/donation', 'DonationController', ['except' => ['create']]);
 
 /* Creo la rotta per ... */
-Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'store', 'show']]);
+Route::put('/user/{user}', 'UserController@update')->name('user.update');
+Route::resource('/user', 'UserController', ['except' => ['index', 'create', 'store', 'show', 'update']]);
 
 /* Creo la rotta per la gestione dei coupon */
-Route::prefix('user')->name('user.')->group(function() {
-    Route::get('/coupon', 'CouponController@index');
+Route::prefix('user')->prefix('user')->name('user.')->group(function() {
+    Route::get('/{user}/coupon', 'CouponController@index')->name('coupon.index');
     Route::resource('/coupon', 'CouponController', ['except' =>  ['index']])->middleware('can:create-coupon');
 });
 
 Route::get('/coupon', 'CouponController@create')->name('coupon.create');
+
+/**  @author Marco Creo la rotta per la pagina di informazioni: chi siamo (whoweare?  */
+Route::get('/whoweare', function () {
+    return view('whoweare');
+});
 
 
 /** @author Marco
  *  Creo la rotta per poter gestire le immagini nei tag <img src="" ...>
  */
 /* use App\Http\Controllers\StorageFileController;
-Route::get('image/{filename}', [StorageFileController::class,'getPubliclyStorgeFile'])->name('image.displayImage'); */
-Route::get('image/{filename}', 'StorageFileController@displayImage')->name('image.displayImage');
+Route::get('image/{filename}', [StorageFileController::class,'getPubliclyStorgeFile'])->name('image.displayImage');
+Route::get('image/{filename}', 'StorageFileController@displayImage')->name('image.displayImage'); */

@@ -23,6 +23,18 @@
     font-family: "Nunito";
 }
 
+.linav {
+    border-right: 1px solid white;
+}
+
+#nome {
+    margin-left: -17px;
+}
+
+li:last-child {
+    border-right: none;
+}
+
 .btn-campagna {
     background: #0BDED0;
 }
@@ -64,4 +76,8 @@
 .footer-privacy { 
     color: white !important;
     font-family: "Nunito";
+}
+
+.card-center {
+    text-align: center;
 }

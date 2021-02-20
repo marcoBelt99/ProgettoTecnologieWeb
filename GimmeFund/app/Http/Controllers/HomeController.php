@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
+    
+     * @return v{{ oid }}
      */
     /* public function __construct()
     {
@@ -26,14 +26,23 @@ class HomeController extends Controller
     {
         $fundraisers = Fundraiser::all();
         $donations = array(); // Definisco la variabile donations come un array (associativo) da passare alla view fundraisers.index
+
         foreach($fundraisers as $fundraiser) {
             // Ogni entry rappresenta la somma delle donazione per quella data raccolta fondi
             $donations += [
                 $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')
             ];
         }
+
+        $visual = Fundraiser::select('id', 'name', 'description', 'media_url', 'starting_date')->orderBy('starting_date', 'desc')->limit(3)->get();
+        //dd($visual);
+
         return view('home')->with([
             'fundraisers' => $fundraisers, 
-            'donations' => $donations]);
+            'donations' => $donations,
+            'visual' => $visual ]);
     }
 }
+
+
+?>

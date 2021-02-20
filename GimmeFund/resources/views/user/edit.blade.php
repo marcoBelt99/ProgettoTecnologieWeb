@@ -4,14 +4,17 @@
 
     <div class="container">
         <form action="{{ URL::action('UserController@update', Auth::user()) }}" method="POST">
-            @csrf
-            {{ method_field('PATCH') }}
+            
+            {{ method_field('PUT') }}
 
             <div class="card">
                 <div class="card-header">
-                    <h3>I miei dati</h3>
+                    <h4>I miei dati personali</h4>
+                    <div class="text-right" id="expand-card-body-btn1">
+                        <a href="#" style="font-size: 16px">Mostra/Nascondi</a>
+                    </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="user-infos-cont">
 
                     <p>Modifica e salva i tuoi dati</p>
                     
@@ -32,7 +35,7 @@
 
                     </div>
 
-                    {{-- Email --}}
+                    {{-- Email - Phone Number --}}
                     <div class="form-group row">
                         <label for="email" class="col-form-label col-md-2">Email</label>
                         <div class="col-md-10">
@@ -69,15 +72,139 @@
                         </div>
                     </div>
 
+                    {{-- hidden fields --}}
+                    <div id ="hidden-form-fields">
+                        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="_user-id" id ="_user_id" value="{{ Auth::user()->id }}">
+                    </div>
+
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary col-md-2">Salva</button>
+                        <a href="#" id="submit-btn" class="btn btn-primary col-md-2">Salva</a>
                     </div>
                     
                 </div>
             </div>
-
         </form>
+
+        {{-- FORM MODIFICA PASSWORD --}}
+        {{-- DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE --}}
+
+        {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
+        <form action="" method="POST">
+            
+            {{ method_field('PUT') }}
+
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    <h4>Cambia password</h4>
+                    <div class="text-right" id="expand-card-body-btn2">
+                        <a href="#" style="font-size: 16px">Mostra/Nascondi</a>
+                    </div>
+                </div>
+                <div class="card-body" id="user-pass-infos-cont">
+
+                    <p>Modifica la tua password</p>
+                    
+                    <hr>
+
+                    {{-- Old Password --}}
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <label for="old-password" class="form-check-label">Vecchia password</label>
+                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                        </div>
+                    </div>
+
+                    {{-- New password - Confirm password --}}
+                    <div class="form-group row">
+
+                        <div class="col-md-6">
+                            <label for="new-password" class="form-check-label">Nuova Password</label>
+                            <input type="text" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
+                        </div>
+                        
+                        <div class="col-6">
+                            <label for="confirm-password" class="form-check-label">Conferma Nuova Password</label>
+                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Conferma Nuova Password">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <a href="#" id="submit-btn" class="btn btn-primary col-md-2">Salva</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </form>
+
+
     </div>
     
 
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+
+        $('#user-infos-cont').toggle(false);
+        $('#user-pass-infos-cont').toggle(false);
+
+
+        $(document).ready(function() { 
+
+            $('#expand-card-body-btn1').on('click', function() {
+                $('#user-infos-cont').slideToggle(300);
+            });
+
+            $('#expand-card-body-btn2').on('click', function() {
+                $('#user-pass-infos-cont').slideToggle(300);
+            });
+
+            $('#submit-btn').on('click', function(e) {
+                e.preventDefault();
+
+                var first_name = $('#first_name').val();
+                var last_name = $('#last_name').val();
+                var email = $('#email').val();
+                var phone_number = $('#phone_number').val();
+                var birthday = $('#birthday').val();
+                var address = $('#address').val();
+                var city = $('#city').val();
+                var cap = $('#CAP').val();
+                var _token = $('#_token').val();
+                var _user_id = $('#_user_id').val();
+
+                $.ajax({
+                    url: "/user/"+_user_id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'email': email,
+                        'phone_number': phone_number,
+                        'birthday': birthday,
+                        'address': address,
+                        'city': city,
+                        'CAP': cap,
+                        '_token': _token,
+                    }, 
+                    // In caso di successo
+                    success: function(data) {
+                        console.log('Modifiche salvate');
+                    },
+                    // In caso di errore
+                    error: function(xhr, status) {
+                        console.log(status);
+                        console.log(xhr.responseJSON.message);
+                        console.log(xhr);
+                    }
+                }); // Fine AJAX
+
+            });
+
+        });
+
+    </script>    
 @endsection

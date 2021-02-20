@@ -15,13 +15,16 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $user = Auth::user()->select('first_name', 'last_name', 'points')->where('id', Auth::user()->id)->first();
+        $userData = $user->select('first_name', 'last_name', 'points')->where('id', $user->id)->first();
         $n_donations = Donation::all()->where('user_id', Auth::user()->id)->count();
+        $userCoupons = Coupon::all()->where('user_id', Auth::user()->id);
+
         return view('user.coupon.index')->with([
-            'user' => $user,
+            'user' => $userData,
             'n_donations' => $n_donations,
+            'usrCoupons' => $userCoupons,
             ]);
     }
 
@@ -42,8 +45,27 @@ class CouponController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // Creo il nuovo codice del coupon creato casualmente
+        $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $coupon_code = "";
+        for ($i = 0; $i < 10; $i++) {
+            $coupon_code .= $chars[mt_rand(0, strlen($chars)-1)];
+        }
+
+        // Creo il nuovo coupon
+        $new_coup = new Coupon();
+        $new_coup->code= $coupon_code;
+        $new_coup->amount = $request->coupon_amount;
+        $new_coup->user_id = $request->user_id;
+        $new_coup->save();
+
+        // Aggiorno i punti a disposizione dell'utente
+        $user = Auth::user();
+        $user->points -= $request->points_amount;
+        $user->save();
+
+        return $this->index();
     }
 
     /**
