@@ -15,16 +15,16 @@
             
             {{-- Criterio per poter accedere alla conversione dei punti in buono sconto --}}
             <div class="row">
-                <div class="col-md-3">
+                <div class="btn-group btn-group-lg" role="group">
                     @if ($user->points > 0)
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-primary">Converti i tuoi punti</button></a>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info">Converti i punti</button></a>
                     @else
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-primary" disabled>Converti i tuoi punti</button></a>
-                        <small style="color: #ff0000; ">Saldo insufficiente per la convesione</small>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info" disabled>Converti i punti</button></a>
+                        {{-- <p style="color: #ff0000;">Saldo insufficiente per la convesione</p> --}}
                     @endif
                 </div>
-                <div class="col-md-3">
-                    <button class="btn btn-primary" id="my-coupon-btn">I miei buoni</button>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-info" id="my-coupon-btn">I miei buoni</button>
                 </div>
             </div>
         </div>

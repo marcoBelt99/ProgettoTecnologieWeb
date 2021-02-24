@@ -33,27 +33,35 @@
             {{-- {{ asset('/crowdfunding1.jpg') }} --}}
             {{-- <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image"> --}}
 
-            <img class="d-block img-fluid" src="{{ asset("images/Fairtrade-banner.jpg") }}" alt="Slide1" width="100%">
+            <img class="d-block img-fluid" src="{{ asset("images/photo-8.jpg") }}" alt="Slide1" width="100%">
             {{-- <img class="d-block img-fluid" src="{{ $visual[0]->media_url }}" alt="Slide1" width="100%">  --}}
             <div class="carousel-caption d-none d-md-block">
-                <h3>Caption per la slide 1</h3>
-                <p>Descrizione slide 1</p>
+                <h2>Solidarietà e unione</h2>
+                <h5>Siamo pronti a collaborare per dare un futuro migliore a tutti!</h5>
             </div>
         </div>
         <div class="carousel-item">
             {{-- <img class="d-block img-fluid" src="{{ }}" alt="Slide2" width="100%"> --}}
-            <img class="d-block img-fluid" src="{{ asset("images/hands-circle.jpeg") }}" alt="Slide2" width="100%">
+            <img class="d-block img-fluid" src="{{ asset("images/photo-7.jpg") }}" alt="Slide2" width="100%">
             <div class="carousel-caption d-none d-md-block">
-                <h3>Caption per la slide 2</h3>
-                <p>Descrizione slide 2</p>
+                <h2>Donare</h2>
+                <h5>Racogliamo fondi per le persone e le cause che ti stanno a cuore</h5>
             </div>
         </div>
         <div class="carousel-item">
             
-            <img class="d-block img-fluid" src="">
+            <img class="d-block img-fluid" src="{{ asset("images/photo-6.jpg") }}">
             <div class="carousel-caption d-none d-md-block">
-                <h3>Caption per la slide 3</h3>
-                <p>Descrizione slide 3</p>
+                <h2>Collaboratori</h2>
+                <h5>Un gruppo di nostri volontari al lavoro per aiutare le persone in difficoltà</h5>
+            </div>
+        </div>
+        <div class="carousel-item">
+            
+            <img class="d-block img-fluid" src="{{ asset("images/photo-9.jpg") }}">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Entra a far parte di GimmeFund!</h2>
+                <h5>Il tuo gesto vale doppio!</h5>
             </div>
         </div>
     </div>
@@ -66,14 +74,49 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-    <!-- Jumbotron -->
-<div class="jumbotron text-center">
-    <h1 class="display-3">GimmeFund</h1>
-    <p class="lead">Il tuo gesto, vale doppio!</p>
-    <hr>
-    {{-- <p>Aggiungi un sottotitolo per spiegare agli utenti cosa offre l'azienda e quali sono i potenziali clienti.</p> --}}
-    <a class="btn btn-primary btn-lg btn-spl" href="#" role="button">Cosa offriamo</a>
+
+
+
+<div class="container mt-3 mb-3 py-5">
+    <h1 class="display-3 titolo-card">GimmeFund</h1>
+    <div class="row">
+        <div class="card-group">
+            <div class="card">
+                
+                <div class="card-body">
+                    <h2 class="card-title card-center">Crea una raccolta fondi</h2>
+                    <p class="card-text">Crea una raccolta fondi in pochi minuti. È una procedura facile e veloce</p>              
+                    <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block" style="background-color: #54be90 !important;">
+                        Inizia la tua campagna ora!
+                    </a>
+                </div>
+                
+            </div>
+            <div class="card">
+                
+                <div class="card-body">
+                    <h2 class="card-title card-center">Effettua donazioni</h2>
+                    <p class="card-text">Dona in modo da dare un futuro a persone che hanno bisogno di un aiuto economico</p>                            
+                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block" style="background-color: #54be90 !important;">
+                        Visulizza le raccolte fondi!
+                    </a>
+                </div>
+                
+            </div>
+            <div class="card">
+                
+                <div class="card-body">
+                    <h2 class="card-title card-center">Ottieni coupons</h2>
+                    <p class="card-text">Trasforma i punti in coupons utilizzabili in molti negozi e supermercati per prodotti Fairtrade</p>                            
+                </div>
+                
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
 
 <!-- Card group -->
 <div class="container text-muted mt-3 mb-3">
@@ -90,7 +133,7 @@
                     <a href="{{ URL::action('FundraiserController@show', $v->id) }}"><button class="btn btn-primary btn-spl" type="button">Scopri di più</button></a>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Creata da</small>
+                    <small>Creata da</small>
                 </div>
             </div>
             @endforeach

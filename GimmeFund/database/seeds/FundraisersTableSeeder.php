@@ -19,7 +19,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser1 = Fundraiser::create([
             'name' => 'Più forti insieme per gli ospedali di Bologna',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'IMPORTANTE: PRIMA DI DONARE LEGGI BENE QUANTO SEGUE E IL PRIMO AGGIORNAMENTO SOTTO!
             È un momento difficile per tutti, mai come oggi l’unione deve fare la forza. Amo Bologna, la mia Città, e vorrei dare il mio contributo come penso anche tutti voi. Sono stato contattato da Fondazione Sant’Orsola e Policlinico di Sant’Orsola che ieri hanno lanciato la campagna “più forti INSIEME” e ho deciso di devolvere a loro tutto quello che insieme riusciremo a raccogliere per sostenere gli ospedali e il personale in prima linea nell’emergenza Coronavirus. Sarà mia premura tenervi informati sull’esito della donazione e condividere con voi la Lettera che invierò alla Fondazione al momento della donazione.',
             'starting_date' => '2020-01-30',
@@ -32,7 +31,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser2 = Fundraiser::create([
             'name' => 'Regaliamo a Martina un futuro',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Un percorso di vita interrotto da un tragico incidente, due vite spezzate all\'improvviso senza un motivo, che lasciano un vuoto incolmabile.
             Fabry e Vale stavano costruendo, programmando e progettando un futuro radioso per la loro famiglia e la loro bambina, Martina.
             Questa raccolta nasce per continuare a perseguire la missione di vita di Fabry e Vale, regalare a Martina un futuro felice esattamente come i due genitori avrebbero voluto fosse.
@@ -48,7 +46,6 @@ class FundraisersTableSeeder extends Seeder
         
         $fundraiser3 = Fundraiser::create([
             'name' => 'Aiutiamo il piccolo Davide',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Salve siamo i genitori di Davide Spinello papà Fabio mamma Veronica
             Davide è un bimbo meraviglioso di 2 anni affetto da SMA 1 atrofia muscolare spinale la forma più grave della malattia
             Questa patologia intacca i motoneuroni e quindi ha difficoltà a respirare a deglutire e ad avere il controllo del capo e del tronco
@@ -68,7 +65,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser4 = Fundraiser::create([
             'name' => 'Una speranza per Stefano',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Ciao a tutti,
             siamo Daniele e Alessia, i genitori di Stefano, un bimbo di quasi 2 anni affetto da una rara malattia genetica: la SMA di Tipo 1, la forma più grave.
             
@@ -95,7 +91,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser5 = Fundraiser::create([
             'name' => 'Sogno a rotelle',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Questa raccolta è dedicata a Antonio Nocitra è stata creata e voluta dai suoi amici d\'infanzia di Pioltello, in collaborazione con Associazione "Diversi DA CHI Appha" (intestataria del conto dove arriveranno le donazioni), che ha sede a Pioltello (MI).
             Chi è Tony? E\'un ragazzo di quarant\'anni che è stato il nostro compagno di giochi e di vita, siamo cresciuti insieme a Pioltello, un paese dell\'hinterland milanese.
             Sono passati trent\'anni da quei momenti adolescenziali e mentre le nostre vite hanno avuto un corso normale, iniziando da un banale dolore alle punte dei piedi, nella vita di Tony è sceso un lungo e freddo inverno. Lenta ed inesorabile è arrivata la malattia: TETRAPARESI CON DEFICIT DI FORZA GRAVE.
@@ -113,7 +108,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser6 = Fundraiser::create([
             'name' => 'In memoria di Marco',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Il dolore della perdita di Marco non spegnerà il ricordo del suo sorriso contagioso, della sua allegria e della sua gentilezza, oltre che della grande professionalità. Un collega e un amico che avrà sempre un posto speciale nel cuore di tutti noi.
 
             Tutti insieme in Lippert Components vogliamo aiutare la famiglia di Marco ad affrontare questo momento difficile stando loro vicino anche se da lontano, come possiamo.
@@ -130,7 +124,6 @@ class FundraisersTableSeeder extends Seeder
 
         $fundraiser7 = Fundraiser::create([
             'name' => 'Raccolta per la famiglia di Fabio',
-            'summary' => 'BREGOLA CRETINA IMBECILLE',
             'description' => 'Non lo so',
             'starting_date' => '2020-03-30',
             'ending_date' => '2022-01-22',
@@ -139,8 +132,17 @@ class FundraisersTableSeeder extends Seeder
             'user_id' => 4,
             'category_id' => 5,
         ]);
-        
 
+        // RACCOLTA FONDI DI PROVA
+        $fundraiser7 = Fundraiser::create([
+            'name' => 'Raccolta Fondi TEST',
+            'description' => 'TEST',
+            'starting_date' => '2020-01-01',
+            'ending_date' => '2021-01-22',
+            'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
+            'goal' => 150000.00,
+            'user_id' => 4,
+            'category_id' => 5,
+        ]);
     }
 }
-

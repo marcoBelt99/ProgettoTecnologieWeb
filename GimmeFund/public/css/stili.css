@@ -81,3 +81,35 @@ li:last-child {
 .card-center {
     text-align: center;
 }
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+  
+.carousel-inner::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.titolo-card {
+    font-family: "MS Serif, New York, sans-serif";
+    color: #0D4EFA;
+    text-align: center;
+}
+
+
+
+
+
+
+
+#cuore {
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+

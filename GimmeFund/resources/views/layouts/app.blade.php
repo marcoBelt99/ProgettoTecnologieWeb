@@ -16,11 +16,15 @@
     <script defer src="{{ asset('js/fonts/all.js') }}"></script>
      {{-- Includo il js per le icone  --}}
      <script defer src="{{ asset('js/fonts/all.js') }}"></script>
-    <!-- Fonts -->
+     {{-- Includo il js per Chart.js --}}
+     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     {{-- Includo il css per le icone  --}}
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+
 
     <!-- Styles -->
     <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -57,7 +61,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a class="nav-link navbar-a" href="#" class="nav-link">
+         t                   <a class="nav-link navbar-a" href="#" class="nav-link">
                                 <i class="fas fa-joint"></i> Sostienici
                             </a>
                         </li>
@@ -150,14 +154,13 @@
             <i class="fas fa-users"></i><p>Chi siamo</p> --}}
         {{-- FINE PROVA ICONE --}}
 
-        <main class="py-4">
+        <main>
             {{-- Includo la cartella creata con il file degli alerts --}}
-            <div class="container">
-                @include('partials.alerts')
-            </div>
+            @include('partials.alerts')
             {{-- Inclusione del contenuto di una view nel layout --}}
             @yield('content')
         </main>
+
         <div class="jumbotron-fluid">
             <div class="container">
                 <h2>
@@ -166,78 +169,33 @@
                 </h2>
                 {{-- INSERIRE I LOGHI NEL FOOTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--}}
 
-               {{-- LOGHIIIII --}}
+                {{-- LOGHIIIII --}}
                 <!-- Facebook -->
-<a class="btn btn-primary" style="background-color: #3b5998" href="#!" role="button"
-><i class="fab fa-facebook-f"></i
-></a>
+                <a class="btn btn-primary" style="background-color: #3b5998" href="#!" role="button">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
 
-<!-- Twitter -->
-<a class="btn btn-primary" style="background-color: #55acee" href="#!" role="button"
-><i class="fab fa-twitter"></i
-></a>
+                <!-- Twitter -->
+                <a class="btn btn-primary" style="background-color: #55acee" href="#!" role="button">
+                    <i class="fab fa-twitter"></i>
+                </a>
 
-<!-- Google -->
-<a class="btn btn-primary" style="background-color: #dd4b39" href="#!" role="button"
-><i class="fab fa-google"></i
-></a>
+                <!-- Instagram -->
+                <a class="btn btn-primary" style="background-color: #ac2bac" href="#!" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
 
-<!-- Instagram -->
-<a class="btn btn-primary" style="background-color: #ac2bac" href="#!" role="button"
-><i class="fab fa-instagram"></i
-></a>
+                <!-- Linkedin -->
+                <a class="btn btn-primary" style="background-color: #0082ca" href="#!" role="button">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
 
-<!-- Linkedin -->
-<a class="btn btn-primary" style="background-color: #0082ca" href="#!" role="button"
-><i class="fab fa-linkedin-in"></i
-></a>
+                <!-- Youtube -->
+                <a class="btn btn-primary" style="background-color: #ed302f" href="#!" role="button">
+                    <i class="fab fa-youtube"></i>
+                </a>
 
-<!-- Pinterest -->
-<a class="btn btn-primary" style="background-color: #c61118" href="#!" role="button"
-><i class="fab fa-pinterest"></i
-></a>
-
-<!-- Vkontakte -->
-<a class="btn btn-primary" style="background-color: #4c75a3" href="#!" role="button"
-><i class="fab fa-vk"></i
-></a>
-
-<!-- Stack overflow -->
-<a class="btn btn-primary" style="background-color: #ffac44" href="#!" role="button"
-><i class="fab fa-stack-overflow"></i
-></a>
-
-<!-- Youtube -->
-<a class="btn btn-primary" style="background-color: #ed302f" href="#!" role="button"
-><i class="fab fa-youtube"></i
-></a>
-
-<!-- Slack -->
-<a class="btn btn-primary" style="background-color: #481449" href="#!" role="button"
-><i class="fab fa-slack-hash"></i
-></a>
-
-<!-- Github -->
-<a class="btn btn-primary" style="background-color: #333333" href="#!" role="button"
-><i class="fab fa-github"></i
-></a>
-
-<!-- Dribbble -->
-<a class="btn btn-primary" style="background-color: #ec4a89" href="#!" role="button"
-><i class="fab fa-dribbble"></i
-></a>
-
-<!-- Reddit -->
-<a class="btn btn-primary" style="background-color: #ff4500" href="#!" role="button"
-><i class="fab fa-reddit-alien"></i
-></a>
-
-<!-- Whatsapp -->
-<a class="btn btn-primary" style="background-color: #25d366" href="#!" role="button"
-><i class="fab fa-whatsapp"></i
-></a>
                {{-- FINE LOGHIIII --}}
-            <i class="fab fa-facebook-f"></i></a>
                 <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
             </div>
         </div>

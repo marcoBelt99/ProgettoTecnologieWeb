@@ -20,7 +20,9 @@ class FundraiserController extends Controller
      */
     public function index()
     {
-        $fundraisers = Fundraiser::all();
+        $today = date('Y-m-d');
+        // Solo raccolte fondi che non hanno raggiunto la data di scadenza
+        $fundraisers = Fundraiser::all()->where('ending_date', '>', $today);
         $donations = array(); // Definisco la variabile donations come un array (associativo) da passare alla view fundraisers.index
         foreach($fundraisers as $fundraiser) {
             // Ogni entry rappresenta la somma delle donazione per quella data raccolta fondi
@@ -58,7 +60,6 @@ class FundraiserController extends Controller
         $validator =$request->validate([
             // Regole di validazione
             'name' => 'required|max:255',
-            'summary' => 'required',
             'category_id' => 'required',
             'goal' => 'required|numeric',
             'ending_date' => 'required',
@@ -69,7 +70,6 @@ class FundraiserController extends Controller
             // Messaggi di errore 
             'name.required' => 'Dai un titolo alla tua campagna',
             'name.max' => 'Lunghezza massima del titolo consentita di 255 caratteri',
-            'summary.required' => 'Scrivi una breve descrizione della campagna',
             'category_id.required' => 'Manca la categoria!',
             'goal.required' => 'Manca l\'importo che vuoi raccogliere',
             'goal.numeric' => 'L\'obiettivo deve essere un numero',
