@@ -90,9 +90,7 @@
         {{-- DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE --}}
 
         {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
-        <form action="" method="POST">
-            
-            {{ method_field('PUT') }}
+        <form action="{{ URL::action('Auth\ChangePasswordController@edit', Auth::user()->id) }}" method="POST">
 
             <div class="card" style="margin-top: 10px;">
                 <div class="card-header">
@@ -111,7 +109,8 @@
                     <div class="form-group row">
                         <div class="col-md-10">
                             <label for="old-password" class="form-check-label">Vecchia password</label>
-                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                            <input type="text" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                            <small id="old-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                     </div>
 
@@ -121,30 +120,36 @@
                         <div class="col-md-6">
                             <label for="new-password" class="form-check-label">Nuova Password</label>
                             <input type="text" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
+                            <small id="new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                         
                         <div class="col-6">
                             <label for="confirm-password" class="form-check-label">Conferma Nuova Password</label>
-                            <input type="text" class="form-control" name="confirm-password" id="confirm-password" placeholder="Conferma Nuova Password">
+                            <input type="text" class="form-control" name="confirm-new-password" id="confirm-new-password" placeholder="Conferma Nuova Password">
+                            <small id="confirm-new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
 
                     </div>
 
+                    {{-- hidden form fields --}}
+                    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_user_id" id="_user_id" value="{{ Auth::user()->id }}">
+
+
                     <div class="form-group">
-                        <a href="#" id="submit-btn" class="btn btn-primary col-md-2">Salva</a>
+                        <a id="pass-submit-btn" type="submit" class="btn btn-primary col-md-2">Salva</a>
                     </div>
                     
                 </div>
             </div>
         </form>
-
-
     </div>
     
 
 @endsection
 
 @section('script')
+    {{-- @author Breg - Change user info ajax script --}}
     <script type="text/javascript">
 
         $('#user-infos-cont').toggle(false);
@@ -161,6 +166,7 @@
                 $('#user-pass-infos-cont').slideToggle(300);
             });
 
+            // Form modifica dei dati inseriti
             $('#submit-btn').on('click', function(e) {
                 e.preventDefault();
 
@@ -201,10 +207,41 @@
                         console.log(xhr);
                     }
                 }); // Fine AJAX
+            });
+        });
+    </script>
+    
+    {{-- @author Breg - Change password ajax script --}}
+    <script type="text/javascript">
+        
+        $(document).ready(function() {
+
+            $('a[id=pass-submit-btn]').on('click', function(e) {
+                e.preventDefault();
+
+                var old_password = $('#old-password').val();
+                var new_password = $('#new-password').val();
+                var confirm_new_password = $('#confirm-new-password').val();
+                var _user_id = $('#_user_id').val();-
+                
+                if (new_password != confirm_new_password) {
+                    console.log("ciao");
+                    $('small#new-pass-error-mess').text("Non coincidono");
+                    $('small#confirm-new-pass-error-mess').text("Non coincidono");
+                    return false;
+                }
+
+                $.ajax({
+                    url: "auth/" + _user_id;
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: {
+                        'old-password': old_password,
+                        'new-password': new_password,
+                    }
+                });
 
             });
-
         });
-
-    </script>    
+    </script>
 @endsection
