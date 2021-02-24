@@ -12,23 +12,15 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<<<<<<< HEAD
     {{-- Includo il js per le icone  --}}
     <script defer src="{{ asset('js/fonts/all.js') }}"></script>
-
-=======
      {{-- Includo il js per le icone  --}}
      <script defer src="{{ asset('js/fonts/all.js') }}"></script>
->>>>>>> 13f2179158d1f8e13f000b7f5b469b7009784ef0
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     {{-- Includo il css per le icone  --}}
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
-<<<<<<< HEAD
-=======
-
->>>>>>> 13f2179158d1f8e13f000b7f5b469b7009784ef0
 
     <!-- Styles -->
     <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -139,24 +131,6 @@
 
         {{-- PRVOA ICONE
             visitare il sito: https://fontawesome.com/icons/sign-out-alt?style=solid
-<<<<<<< HEAD
-            in /public/fonts/ ci metto tutte le svg che voglio usare (specifiche) --}}
-            {{-- Provo ad usare il file css per le icone --}}
-            <p>QUESTE SONO ALCUNE ICONE DI PROVA DA METTERE AD ESEMPIO NEI PULSANTI DELLA NAVBAR O NEI FORM</p>
-            <i class="far fa-angry"></i> <p>faccina arrabbiata</p>
-            {{-- Provo ad usare il file js per le icone --}}
-            <i class="fas fa-home"></i><p>Home</p> {{-- Home --}}
-            <i class="fas fa-user"></i> <p>Utente 1</p><!-- uses solid style -->
-            <i class="far fa-user"></i> <p>Utente 2</p> <!-- uses regular style -->
-            <i class="fal fa-user"></i> <p>Utente 3</p><!-- uses light style -->
-            <i class="fab fa-github-square"></i> <!-- uses brands style -->
-            <i class="fas fa-sign-in-alt"></i> <p>log in</p> {{-- log in --}} 
-            <i class="fas fa-sign-out-alt"></i> <p>log out</p> 
-            <i class="far fa-credit-card"></i> <p>Carta di credito</p>{{-- Carta di credito --}}
-            <i class="fas fa-wallet"></i><p>Portafoglio</p>
-        {{-- FINE PROVA ICONE --}}
-
-=======
             in /public/fonts/ ci metto tutte le svg che voglio usare (specifiche).
             Dal sito devo salvarmi la svg e metterla dentro /public/fonts --}}
             {{-- Provo ad usare il file css per le icone --}}
@@ -176,8 +150,6 @@
             <i class="fas fa-users"></i><p>Chi siamo</p> --}}
         {{-- FINE PROVA ICONE --}}
 
-
->>>>>>> 13f2179158d1f8e13f000b7f5b469b7009784ef0
         <main class="py-4">
             {{-- Includo la cartella creata con il file degli alerts --}}
             <div class="container">
@@ -265,7 +237,7 @@
 ><i class="fab fa-whatsapp"></i
 ></a>
                {{-- FINE LOGHIIII --}}
-             ><i class="fab fa-facebook-f"></i></a>
+            <i class="fab fa-facebook-f"></i></a>
                 <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
             </div>
         </div>

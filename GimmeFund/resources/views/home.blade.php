@@ -75,31 +75,6 @@
     <a class="btn btn-primary btn-lg btn-spl" href="#" role="button">Cosa offriamo</a>
 </div>
 
-
-
-<<<<<<< HEAD
-            {{-- <img class="card-img-top img-fluid" src="{{ route('image.displayImage',$test ?? ''->servizio1) }}" > --}}
-            {{-- <img src="{{ asset('public/storage/templates/servizio1.png') }}" class="img img-thumbnail"> --}}
-                {{-- <img src="{{ asset('public/storage/images/servizio1.png') }}"> --}}
-                <img src = "{{ asset('/image/servizio1.png') }}" />
-                {{-- <img src="/home/marco/ProgettoTecnologieWeb/GimmeFund/images/servizio1.png"> --}}
-                <div class="card-body">
-                    <h4 class="card-title">Cloud</h4>
-                    <p class="card-text">Inserisci qui la descrizione del servizio offerto</p>
-                    <button class="btn btn-primary btn-spl" href="#" role="button">Scopri</button>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">footer della card</small>
-                </div>
-            </div>
-=======
->>>>>>> 13f2179158d1f8e13f000b7f5b469b7009784ef0
-
-
-
-
-
-
 <!-- Card group -->
 <div class="container text-muted mt-3 mb-3">
     <div class="row">
@@ -126,18 +101,8 @@
 @endsection
 
 
-<<<<<<< HEAD
-{{--
-    QUESTO DA PROBLEMI NEL MENU A TENDINA DELL'UTENTE
-    @section('script')
-=======
-
-
-
-
 
 {{-- @section('script')
->>>>>>> 13f2179158d1f8e13f000b7f5b469b7009784ef0
     <!-- Al termine della pagina, prima della chiusura del tag body, si inseriscono i link alle librerie software di:  jQuery, -->
     <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
