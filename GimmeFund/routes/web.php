@@ -52,7 +52,7 @@ Route::get('/whoweare', function () {
 });
 
 /** @author Breg */
-Route::post('/auth/{user}' ,'Auth\ChangePasswordController@edit')->name('user.change.password');
+Route::post('/user/{user}/password/' ,'Auth\ChangePasswordController@update')->name('user.change.password');
 
 /** @author Marco
  *  Creo la rotta per poter gestire le immagini nei tag <img src="" ...>

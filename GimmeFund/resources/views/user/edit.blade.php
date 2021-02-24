@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" style="margin-top: 30px; ">
         <form action="{{ URL::action('UserController@update', Auth::user()) }}" method="POST">
             
             {{ method_field('PUT') }}
@@ -90,16 +90,24 @@
         {{-- DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE --}}
 
         {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
-        <form action="{{ URL::action('Auth\ChangePasswordController@edit', Auth::user()->id) }}" method="POST">
+        <form action="{{ URL::action('Auth\ChangePasswordController@update', Auth::user()) }}" method="POST">
 
-            <div class="card" style="margin-top: 10px;">
+            <div class="card" style="margin-top: 10px; margin-bottom: 30px;">
                 <div class="card-header">
                     <h4>Cambia password</h4>
                     <div class="text-right" id="expand-card-body-btn2">
                         <a href="#" style="font-size: 16px">Mostra/Nascondi</a>
                     </div>
                 </div>
+                
                 <div class="card-body" id="user-pass-infos-cont">
+                    {{-- Div messaggio successo cambio password --}}
+                    <div class="container alert alert-success col-md-10" role="alert" id="pass-change-success"></div>
+
+                    {{-- Div messaggio errore cambio password --}}
+                    <div class="container alert alert-danger col-md-10" role="alert" id="pass-error-message">
+                        Se l'errore persiste contattare l'assistenza di GimmeFund.
+                    </div>
 
                     <p>Modifica la tua password</p>
                     
@@ -109,7 +117,7 @@
                     <div class="form-group row">
                         <div class="col-md-10">
                             <label for="old-password" class="form-check-label">Vecchia password</label>
-                            <input type="text" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
                             <small id="old-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                     </div>
@@ -119,20 +127,20 @@
 
                         <div class="col-md-6">
                             <label for="new-password" class="form-check-label">Nuova Password</label>
-                            <input type="text" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
+                            <input type="password" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
                             <small id="new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                         
                         <div class="col-6">
                             <label for="confirm-password" class="form-check-label">Conferma Nuova Password</label>
-                            <input type="text" class="form-control" name="confirm-new-password" id="confirm-new-password" placeholder="Conferma Nuova Password">
+                            <input type="password" class="form-control" name="confirm-new-password" id="confirm-new-password" placeholder="Conferma Nuova Password">
                             <small id="confirm-new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
 
                     </div>
 
                     {{-- hidden form fields --}}
-                    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_pass_form_token" id="_pass_form_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_user_id" id="_user_id" value="{{ Auth::user()->id }}">
 
 
@@ -214,6 +222,9 @@
     {{-- @author Breg - Change password ajax script --}}
     <script type="text/javascript">
         
+        $('#pass-change-success').hide();
+        $('#pass-error-message').hide();
+
         $(document).ready(function() {
 
             $('a[id=pass-submit-btn]').on('click', function(e) {
@@ -222,25 +233,72 @@
                 var old_password = $('#old-password').val();
                 var new_password = $('#new-password').val();
                 var confirm_new_password = $('#confirm-new-password').val();
-                var _user_id = $('#_user_id').val();-
-                
-                if (new_password != confirm_new_password) {
-                    console.log("ciao");
-                    $('small#new-pass-error-mess').text("Non coincidono");
-                    $('small#confirm-new-pass-error-mess').text("Non coincidono");
+                var _user_id = $('#_user_id').val();
+                var _token = $('#_pass_form_token').val();
+
+                // Controllo che la vecchia password sia inserita
+                if (old_password.length <= 0) {
+                    $('#old-pass-error-mess').text('Inserire la password corrente');
                     return false;
                 }
 
+                //Controllo lunghezza di new_password 
+                if (new_password.length <= 0) {
+                    $('small#new-pass-error-mess').text("Inserire la nuova password");
+                    return false;
+                }
+
+                //Controllo lunghezza di confirm_new_password 
+                if (confirm_new_password.length <= 0) {
+                    $('small#confirm-new-pass-error-mess').text("Ripeti la nuova password");
+                    return false;
+                }
+
+                // Controllo che le password corrispondano
+                if (new_password != confirm_new_password) {
+                    $('small#new-pass-error-mess').text("Non coincidono");
+                    $('small#confirm-new-pass-error-mess').text("Non coincidono");
+                    return false;auth
+                }
+
                 $.ajax({
-                    url: "auth/" + _user_id;
-                    type: 'PUT',
+                    url: '/user/' + _user_id + '/password',
+                    type: 'POST',
                     dataType: 'json',
                     data: {
-                        'old-password': old_password,
-                        'new-password': new_password,
+                        'old_password': old_password,
+                        'new_password': new_password,
+                        '_token': _token
+                    },
+                    // richiesta andata AJAX a buon fine
+                    success: function(data) {
+                        console.log(data);
+
+                        // old_password inserita non corrisponde
+                        if (data.status == 'error') {
+                            $('#pass-change-success').hide();
+                            $('#pass-error-message').text(data.message + "\nSe il problema persiste contatta l'assistenza GimmeFund.\n").show();
+                        }
+
+                        // old_password corrisponde a quella attuale
+                        if (data.status == 'success') {
+                            $('#pass-error-message').hide();
+                            $('#pass-change-success').text(data.message + "\n").show();
+                        }   
+                    },
+                    // Errore richiesta AJAX
+                    error: function(xhr, status) {
+                        console.log(xhr);
+                        console.log(status);
                     }
                 });
 
+                $('#old-password').on('click', function() {
+                    $('#pass-error-message').hide();
+                    $('#pass-change-success').hide();
+                });
+
+                
             });
         });
     </script>
