@@ -79,7 +79,7 @@ class DonationController extends Controller
         $gainedPoints = $this->computeGainedPoints($amount);
         // Invio i punti generati con la donazione all'UserController
         $userController = new UserController();
-        $userController->addPoints($gainedPoints);
+        $userController->addPoints($gainedPoints, Auth::user()->id);
         
         // Seleziono il donatore
         $donator = User::select('first_name', 'last_name')->where('id', $donation->user_id)->first();
@@ -150,7 +150,7 @@ class DonationController extends Controller
      * @return 
      */
     public function computeGainedPoints($amount) {
-    
+
         if ($amount >= 5 && $amount <= 50) {
             
             $gainedPoints = (int)($amount/2 + 10);
@@ -167,6 +167,9 @@ class DonationController extends Controller
         
             $gainedPoints = (int)($amount/2 + 40);
         
+        }
+        else {
+            $gainedPoints = 0;
         }
 
         return $gainedPoints;

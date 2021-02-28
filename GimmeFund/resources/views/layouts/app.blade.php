@@ -17,8 +17,12 @@
      {{-- Includo il js per le icone  --}}
      <script defer src="{{ asset('js/fonts/all.js') }}"></script>
      {{-- Includo il js per Chart.js --}}
-     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> --}}
      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+      
+    <!-- Scripts -->
+     <!-- Fonts -->
+     <!-- Fonts -->
      <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -33,7 +37,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1" >
             <div class="container-fluid">
                 <a class="navbar-brand navbar-a" href="{{ url('/') }}">
                     <i class="fas fa-hand-holding-usd"></i> {{ config('app.name', 'Laravel') }}
@@ -60,9 +64,10 @@
                                 <i class="fas fa-info-circle"></i> Informazioni
                             </a>
                         </li>
-                        <li class="">
-         t                   <a class="nav-link navbar-a" href="#" class="nav-link">
+                       <li class="">
+                            <a class="nav-link navbar-a" href="#" class="nav-link">
                                 <i class="fas fa-joint"></i> Sostienici
+                            </a>
                             </a>
                         </li>
                     </ul>
@@ -70,8 +75,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::user())
-                            <li class="nav-item">
-                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block" style="background-color: #54be90 !important;"{{-- class="btn btn-campagna --}}>
+                            <li class="nav-item" style="margin-top: 10px">
+                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">
                                     Inizia la tua campagna ora!
                                 </a> 
                                 {{-- <a class="btn btn-info btn-sm btn-rounded px-3 my-0 d-none d-lg-inline-block"
@@ -103,11 +108,20 @@
 
                                 <div class="dropdown-menu dropdown-menu-right navbar-li" aria-labelledby="navbarDropdown">
                                     {{-- Direttiva blade @can: serve per l'admin --}}
-                                    @can('manage-users')
+                                    @if (Auth::user()->hasRole('admin'))
+                                    
+                                        <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\ChartController@index') }}">
+                                            <i class="far fa-chart-bar"></i> Analytics
+                                        </a>    
+                                        
+                                        @can('manage-users')
                                         <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\UsersController@index') }}">
                                             <i class="fas fa-users-cog"></i> Gestione utenti
-                                        </a>    
-                                    @endcan
+                                        </a>
+                                        @endcan
+
+                                    @endif
+                                    
                                     @if (Auth::user()->hasRole('user'))
                                         <a href="{{ URL::action('UserController@edit', Auth::user()) }}" class="dropdown-item navbar-a">
                                             <i class="fas fa-user-cog"></i> I miei dati 

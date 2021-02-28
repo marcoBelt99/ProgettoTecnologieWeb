@@ -15,8 +15,9 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
+        $user = Auth::user($this);
         $userData = $user->select('first_name', 'last_name', 'points')->where('id', $user->id)->first();
         $n_donations = Donation::all()->where('user_id', Auth::user()->id)->count();
         $userCoupons = Coupon::all()->where('user_id', Auth::user()->id);

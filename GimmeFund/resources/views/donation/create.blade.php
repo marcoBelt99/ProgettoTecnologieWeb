@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row container-fluid">
+<div class="row container-fluid py-4">
     <div class="card col-md-6">
         <div class="card-header">
             <p class="card-title"><h1>Dona</h1></p>

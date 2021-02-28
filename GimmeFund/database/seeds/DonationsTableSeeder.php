@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Seeder;
 use App\Donation;
+use App\User;
+use Carbon\Carbon;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\UserController;
 
 class DonationsTableSeeder extends Seeder
 {
@@ -16,25 +20,24 @@ class DonationsTableSeeder extends Seeder
         Donation::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        $donation1 = Donation::create([
-            'date' => '2020-01-30',
-            'amount' => 1000.00,
-            'user_id' => 2,
-            'fundraiser_id' => 1,
-        ]);
+        for ($i = 0; $i < 50; $i++) {
+            $amount = rand(1.0, 200.0);
+            $user_id = rand(2, 51);
+            
+            Donation::create([
+                'date' => Carbon::now()->subDays(rand(2,20))->format('Y-m-d'),
+                'amount' => $amount,
+                'user_id' => $user_id,
+                'fundraiser_id' => rand(1,8),
+            ]);
 
-        $donation2 = Donation::create([
-            'date' => '2020-01-30',
-            'amount' => 3000.00,
-            'user_id' => 3,
-            'fundraiser_id' => 2,
-        ]);
+            // Punti utente
+            $donationController = new DonationController();
+            $user = User::find($user_id);
+            $gainedPoints = $donationController->computeGainedPoints($amount);
+            $userController = new UserController();
+            $userController->addPoints($gainedPoints, $user_id);
 
-        $donation3 = Donation::create([
-            'date' => '2020-01-30',
-            'amount' => 4000.00,
-            'user_id' => 3,
-            'fundraiser_id' => 2,
-        ]);
+        }
     }
 }

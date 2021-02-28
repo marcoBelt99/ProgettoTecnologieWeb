@@ -5,7 +5,9 @@
     
     <div class="container col-7">
         
-        <div class="text text-center"><h1>{{ $fundraiser->name }}</h1></div>        
+        <div class="text text-center py-4">
+            <h1>{{ $fundraiser->name }}</h1>
+        </div>        
         <div class="card col-12" style="padding: 0px">
             <div class="card-img-top text-center" style="padding: 10px">
                 <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image">
@@ -17,12 +19,12 @@
                 {{ $fundraiser->description }}
                 <div class="blockquote-footer" >
                     <p>Creata da: {{ $author->first_name }} {{ $author->last_name }}</p>
-                </div>
+            </div>
             </div>
             
         </div>
         
-        <div style="margin-top: 20px">
+        <div class="py-4">
 
             {{-- Controllo login utente/ruolo utente --}}
             @if (Auth::check() && Auth::user()->hasRole('user'))

@@ -15,7 +15,8 @@
                     </div>
                 </div>
                 <div class="card-body" id="user-infos-cont">
-
+                    {{-- Div messaggio successo cambio password --}}
+                    <div class="container alert alert-success col-md-10" role="alert" id="changes-success"></div>
                     <p>Modifica e salva i tuoi dati</p>
                     
                     <hr>
@@ -75,7 +76,7 @@
                     {{-- hidden fields --}}
                     <div id ="hidden-form-fields">
                         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_user-id" id ="_user_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="_user-id" id ="_user-id" value="{{ Auth::user()->id }}">
                     </div>
 
                     <div class="form-group">
@@ -187,7 +188,7 @@
                 var city = $('#city').val();
                 var cap = $('#CAP').val();
                 var _token = $('#_token').val();
-                var _user_id = $('#_user_id').val();
+                var _user_id = $('#_user-id').val();
 
                 $.ajax({
                     url: "/user/"+_user_id,
@@ -206,7 +207,7 @@
                     }, 
                     // In caso di successo
                     success: function(data) {
-                        console.log('Modifiche salvate');
+                        $('#changes-success').text('Modifiche salvate con successo!');
                     },
                     // In caso di errore
                     error: function(xhr, status) {
@@ -224,6 +225,17 @@
         
         $('#pass-change-success').hide();
         $('#pass-error-message').hide();
+
+        $('#new-password').on('click', function() {
+            $('small#new-pass-error-mess').hide();
+            $('small#confirm-new-pass-error-mess').hide();
+        });
+
+
+        $('#confirm-new-password').on('click', function() {
+            $('small#new-pass-error-mess').hide();
+            $('small#confirm-new-pass-error-mess').hide();
+        });
 
         $(document).ready(function() {
 
@@ -297,9 +309,12 @@
                     $('#pass-error-message').hide();
                     $('#pass-change-success').hide();
                 });
-
                 
             });
+
         });
+
+        
+
     </script>
 @endsection

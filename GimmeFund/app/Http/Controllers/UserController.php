@@ -106,9 +106,9 @@ class UserController extends Controller
      * @param  gainedPoints punt ddell'utente
      * @return 
      */
-    public function addPoints($gainedPoints) {
+    public function addPoints($gainedPoints, $user_id) {
         
-        $user = Auth::user(); // Mi salvo l'utente correntemente loggato
+        $user = User::find($user_id); // Mi salvo l'utente correntemente loggato
 
         $user->points += $gainedPoints;
         $user->save();

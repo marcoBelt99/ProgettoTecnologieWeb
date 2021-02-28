@@ -23,6 +23,9 @@
         <li data-target="#slider_business" data-slide-to="2" class="active">
 
         </li>
+        <li data-target="#slider_business" data-slide-to="3" class="active">
+
+        </li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -36,32 +39,32 @@
             <img class="d-block img-fluid" src="{{ asset("images/photo-8.jpg") }}" alt="Slide1" width="100%">
             {{-- <img class="d-block img-fluid" src="{{ $visual[0]->media_url }}" alt="Slide1" width="100%">  --}}
             <div class="carousel-caption d-none d-md-block">
-                <h2>Solidarietà e unione</h2>
-                <h5>Siamo pronti a collaborare per dare un futuro migliore a tutti!</h5>
+                <h2 class="testoOmbreggiato">Solidarietà e unione</h2>
+                <h5 class="testoOmbreggiato">Siamo pronti a collaborare per dare un futuro migliore a tutti!</h5>
             </div>
         </div>
         <div class="carousel-item">
             {{-- <img class="d-block img-fluid" src="{{ }}" alt="Slide2" width="100%"> --}}
             <img class="d-block img-fluid" src="{{ asset("images/photo-7.jpg") }}" alt="Slide2" width="100%">
             <div class="carousel-caption d-none d-md-block">
-                <h2>Donare</h2>
-                <h5>Racogliamo fondi per le persone e le cause che ti stanno a cuore</h5>
+                <h2 class="testoOmbreggiato">Donare</h2>
+                <h5 class="testoOmbreggiato">Racogliamo fondi per le persone e le cause che ti stanno a cuore</h5>
             </div>
         </div>
         <div class="carousel-item">
             
             <img class="d-block img-fluid" src="{{ asset("images/photo-6.jpg") }}">
             <div class="carousel-caption d-none d-md-block">
-                <h2>Collaboratori</h2>
-                <h5>Un gruppo di nostri volontari al lavoro per aiutare le persone in difficoltà</h5>
+                <h2 class="testoOmbreggiato">Collaboratori</h2>
+                <h5 class="testoOmbreggiato">Un gruppo di nostri volontari al lavoro per aiutare le persone in difficoltà</h5>
             </div>
         </div>
         <div class="carousel-item">
             
             <img class="d-block img-fluid" src="{{ asset("images/photo-9.jpg") }}">
             <div class="carousel-caption d-none d-md-block">
-                <h2>Entra a far parte di GimmeFund!</h2>
-                <h5>Il tuo gesto vale doppio!</h5>
+                <h2 class="testoOmbreggiato">Entra a far parte di GimmeFund!</h2>
+                <h5 class="testoOmbreggiato">Il tuo gesto vale doppio!</h5>
             </div>
         </div>
     </div>
@@ -75,41 +78,61 @@
     </a>
 </div>
 
-
+<img style="display: block; margin-right: auto; margin-left: auto; margin-bottom: -20px; margin-top: 40px" src="{{ asset("images/logo.png") }}">
 
 <div class="container mt-3 mb-3 py-5">
-    <h1 class="display-3 titolo-card">GimmeFund</h1>
     <div class="row">
         <div class="card-group">
-            <div class="card">
+            <div class="card border-none">
                 
                 <div class="card-body">
                     <h2 class="card-title card-center">Crea una raccolta fondi</h2>
-                    <p class="card-text">Crea una raccolta fondi in pochi minuti. È una procedura facile e veloce</p>              
-                    <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block" style="background-color: #54be90 !important;">
-                        Inizia la tua campagna ora!
-                    </a>
+                    <p class="card-text">Crea una raccolta fondi in pochi minuti. È una procedura facile e veloce</p>
+                    {{-- Controllo login utente/ruolo utente --}}
+                    @if (Auth::check() && Auth::user()->hasRole('user'))
+                        <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                    @else
+                        
+                        {{-- Se l'utente non è loggato nel sito --}}
+                        @if(!Auth::check())
+                            <div class="text text-center">
+                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                            </div>
+                        @endif
+                    @endif
                 </div>
                 
             </div>
-            <div class="card">
+            <div class="card border-none">
                 
                 <div class="card-body">
                     <h2 class="card-title card-center">Effettua donazioni</h2>
                     <p class="card-text">Dona in modo da dare un futuro a persone che hanno bisogno di un aiuto economico</p>                            
-                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block" style="background-color: #54be90 !important;">
+                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">
                         Visulizza le raccolte fondi!
                     </a>
                 </div>
                 
             </div>
-            <div class="card">
+            <div class="card border-none">
                 
                 <div class="card-body">
                     <h2 class="card-title card-center">Ottieni coupons</h2>
-                    <p class="card-text">Trasforma i punti in coupons utilizzabili in molti negozi e supermercati per prodotti Fairtrade</p>                            
+                    <p class="card-text">Trasforma i punti in coupons utilizzabili in molti negozi e supermercati per prodotti Fairtrade</p>
+                    
+                    {{-- Controllo login utente/ruolo utente --}}
+                    @if (Auth::check() && Auth::user()->hasRole('user'))
+                        <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
+                    @else
+
+                        {{-- Se l'utente non è loggato nel sito --}}
+                        @if(!Auth::check())
+                            <div class="text text-center">
+                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success"><p>Saldo punti e Coupon</p></a>
+                            </div>
+                        @endif
+                    @endif
                 </div>
-                
             </div>
         </div>
     </div>
@@ -131,9 +154,6 @@
                     <p class="card-text">{{ substr($v->description, 0, 100) }}...</p>
                     <p>Iniziata il: {{ date('d/m/Y', strtotime($v->starting_date)) }}</p>
                     <a href="{{ URL::action('FundraiserController@show', $v->id) }}"><button class="btn btn-primary btn-spl" type="button">Scopri di più</button></a>
-                </div>
-                <div class="card-footer">
-                    <small>Creata da</small>
                 </div>
             </div>
             @endforeach

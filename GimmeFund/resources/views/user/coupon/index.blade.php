@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container col-6">
+<div class="container col-6 py-4">
     <div class="card">
         <div class="card-header">
             {{-- <pre>Punti accumulati</pre> --}}

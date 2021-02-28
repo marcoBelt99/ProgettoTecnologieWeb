@@ -1,16 +1,31 @@
 @charset "UTF-8";
 
 /* Colore di sfondo della barra di navigazione */
+
+
+
 .navbar1 {
     background: #0D4EFA !important;
     text-decoration: none !important;
     font-family: "Nunito";
+    /* top:0; */ /* Aggiunto  */
+   /*  position: fixed; */  /* Make it stick/fixed */
+   /*  transition: top 0.3s; */  /* Transition effect when sliding down (and up) */
   }
 
 .navbar-a { 
     color: white !important;
     text-decoration: none !important;
     font-family: "Nunito";
+
+    /* Aggiunte: */
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 .navbar-a:hover {
@@ -100,9 +115,13 @@ li:last-child {
     text-align: center;
 }
 
+.border-none {
+    border: 0;
+}
 
-
-
+.botton-success {
+    background-color: #54be90;
+}
 
 
 
@@ -111,5 +130,24 @@ li:last-child {
     width: 100px;
     height: 100px;
 }
+
+
+#testochisiamo {
+    text-align: justify;   
+}
+
+#titlechisiamo {
+    margin-top: 20px;
+}
+
+#divp{
+    border: 1px solid;
+}
+
+.testoOmbreggiato { /* Serve per fare il testo ombreggiato delle card nella home */
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 
 

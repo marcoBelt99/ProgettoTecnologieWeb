@@ -1,18 +1,20 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 {{-- ( Mi trovo in http://localhost:8000/admin/users )
 
 Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
-<div class="container">
+<div class="container py-4">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Utenti</div>
 
                 <div class="card-body">
                     <table class="table table-responsive table-striped table-bordered table-hover table-bordered">
-                        {{-- Intestazionetabella --}}
+                        {{-- Intestazione tabella --}}
                         <thead class="thead-dark">
                           <tr>
                             <th scope="col">#</th>

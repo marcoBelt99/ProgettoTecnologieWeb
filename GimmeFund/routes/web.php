@@ -25,6 +25,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
 });
 
+/** @author Breg */
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+    /* Creo la rotta per la visualizzazione degli analytics dell'admin */
+    /** @author Breg */
+    Route::resource('/analytics', 'ChartController');
+});
+
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
 Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
 
@@ -46,7 +53,7 @@ Route::prefix('user')->prefix('user')->name('user.')->group(function() {
 
 Route::get('/coupon', 'CouponController@create')->name('coupon.create');
 
-/**  @author Marco Creo la rotta per la pagina di informazioni: chi siamo (whoweare?  */
+/**  @author Marco Creo la rotta per la pagina di informazioni: chi siamo (whoweare?)  */
 Route::get('/whoweare', function () {
     return view('whoweare');
 });
