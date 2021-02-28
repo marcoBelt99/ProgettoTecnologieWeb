@@ -8,7 +8,7 @@
         <h1 class="font-bold">Statistiche</h1>
 
         <div class="container">
-            <div class="card">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
                 <div class="card-body">
                     <form action="" method="POST">
                         <p class="text">
@@ -30,22 +30,27 @@
                         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                     </form>
                 </div>
+                <div class="container">
+                    <div class="row py-4">
+                        <canvas id="donAmountPerDate" class="col-md-12">
+                            <!-- GRAPH GOES HERE -->
+                        </canvas>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="card">
+                        <div class="row py-4">
+                            <canvas id="totDonPerDate" class="col-md-12">
+                                <!-- GRAPH GOES HERE -->
+                            </canvas>
+                        </div>
+                    </div>
+                </div>  
+
             </div>
         </div>
-
-
-        <div class="row py-4">
-            <canvas id="donAmountPerDate" class="col-md-12">
-                <!-- GRAPH GOES HERE -->
-            </canvas>
-        </div>
-
-        <div class="row py-4">
-            <canvas id="totDonPerDate" class="col-md-12">
-                <!-- GRAPH GOES HERE -->
-            </canvas>
-        </div>
-
+        
     </div>
 
 @endsection
@@ -58,6 +63,8 @@
 
             var ctx1 = $('#donAmountPerDate');
             var ctx2 = $('#totDonPerDate');
+
+            var chart1, chart2;
             
             $.ajax( {
 
@@ -76,7 +83,7 @@
                     $('#start-date').val(dates[0]); // Prima data
                     $('#end-date').val(dates[dates.length-1]); // Ultima data
 
-                    var chart1 = new Chart(ctx1, {
+                    chart1 = new Chart(ctx1, {
                         // The type of chart we want to create
                         type: 'bar',
 
@@ -106,7 +113,7 @@
                         }
                     });
 
-                    var chart2 = new Chart(ctx2, {
+                    chart2 = new Chart(ctx2, {
                         // Tipo di grafico
                         type: 'line',
 
@@ -134,6 +141,7 @@
                         // Opzioni per il grafico
                         options: {
                             // Configuration options go here
+                            responsive: true,
                             title: {
                                 display: true,
                                 fontSize: 20,
@@ -172,176 +180,89 @@
                         'end_date': endDate,
                         '_token': _token
                     },
-                    success: function (newChartData, status) {
-                        /* console.log(status);
-                        console.log(newChartData); */
+                    success: function (newChartsData, status) {
+                        /* console.log(status); */
+                        console.log(newChartsData);
                         // MANCA L'AGGIORNAMENTO DEI DATIIIIIIIIIII
+
+                        var newDates = [];
+                        for(var i = 0; i < newChartsData.axisX.length; i++) {
+                            newDates.push(newChartsData.axisX[i].date);
+                        }
+
+                        // updating chart 1
+                        chart1.data.labels = newDates;
+                        chart1.data.datasets[0].data = newChartsData.axisY;
+                        chart1.update();
+                        // updating chart 2
+                        chart2.data.labels = newDates;
+                        chart1.data.datasets[0].data = newChartsData.numDonations;
+                        chart2.update();
                     },
                     error: function (xhr) {
                         console.log(xhr);
                     }
                 });
-
-            });
+            }); // FINE UPDATE ON START_DATE CHANGE
             
 
             // CHIAMATA AJAX UGUALE A QUELLA SOPRA
             $('#end-date').on('change', function() {
                 var startDate = $('#start-date').val();
                 var endDate = $('#end-date').val();
-                
+                var _token = $('#_token').val();
+
                 if (startDate > endDate) {
-                    $('#err-date-selection').text('Intervallo non valido.');
+                    $('#err-date-selection').text('Intervallo non valido. Seleziona un intervallo valido.').show();
                     return false;
                 }
 
-              /*   console.log(startDate);
-                console.log(endDate); */
+                $.ajax({
+                    url: '/admin/analytics/updateChartsData',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'start_date': startDate,
+                        'end_date': endDate,
+                        '_token': _token
+                    },
+                    success: function (newChartsData, status) {
+                        /* console.log(status); */
+                        console.log(newChartsData);
+                        // MANCA L'AGGIORNAMENTO DEI DATIIIIIIIIIII
+
+                        var newDates = [];
+                        for(var i = 0; i < newChartsData.axisX.length; i++) {
+                            newDates.push(newChartsData.axisX[i].date);
+                        }
+
+                        // updating chart 1
+                        chart1.data.labels = newDates;
+                        chart1.data.datasets[0].data = newChartsData.axisY;
+                        chart1.update();
+                        // updating chart 2
+                        chart2.data.labels = newDates;
+                        chart1.data.datasets[0].data = newChartsData.numDonations;
+                        chart2.update();
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            });// FINE UPDATE ON START_DATE CHANGE
+
+            // EVENTI PER NASCONDERE IL MESSAGGIO DI ERRORE
+            $('#start-date').on('click', function () {
+                $('#err-date-selection').hide();
             });
 
+            $('#end-date').on('click', function () {
+                $('#err-date-selection').hide();
+                
+            });
 
         }); // FINE EVENTO DOCUMENT READY
     
     </script>
 
 @endsection
-
-
-{{-- <script>
-    $(document).ready(function() {
-    //chiamate a funzioni
-        showGraph1();
-        showGraph2();
-        showGraph3();
-    });
-    //definzione del grafico lingue utilizzando dati presi da lingue.php
-    function showGraph1() {
-        {
-            $.post("lingue.php",function(data) {
-                console.log(data);
-                var LINGUA = [];
-                var QUANTITA = [];
-                for (var i in data) {
-                    LINGUA.push(data[i].LINGUA);
-                    QUANTITA.push(data[i].QUANTITA);
-                    }
-                var chartdata = {
-                    labels: LINGUA,
-                    datasets: [{
-                    backgroundColor:["#FF6384",
-                                     "#63FF84",
-                                     "#84FF63",
-                                     "#8463FF",
-                                     "#6384FF",
-                                     'rgba(255, 99, 132)',
-                                     'rgba(54, 162, 235)',
-                                     'rgba(255, 206, 86)',
-                                     'rgba(75, 192, 192, 1)',
-                                     'rgba(153, 102, 255, 1)'
-                                    ],
-                    borderColor: 'black',
-                    borderWidth: 2,
-                    hoverBorderColor: '#666666',
-                    data: QUANTITA
-                        }]
-                    };
-
-
-                var graphTarget = $("#graphCanvas");
-
-                var barGraph = new Chart(graphTarget, {
-                    type: 'pie',
-                    data: chartdata
-                });
-            });
-        }
-    }
-    //definzione del grafico autori utilizzando dati presi da autori.php
-    function showGraph2() {
-        {
-            $.post("autori.php",function(data) {
-                    console.log(data);
-                    var NOMINATIVO = [];
-                    var QUANTITA = [];
-
-                    for (var i in data) {
-                        NOMINATIVO.push(data[i].NOMINATIVO);
-                        QUANTITA.push(data[i].QUANTITA);
-                    }
-
-                    var chartdata2 = {
-                        labels: NOMINATIVO,
-                        datasets: [{
-                            backgroundColor:['rgba(255, 99, 132)',
-                                             'rgba(54, 162, 235)',
-                                             'rgba(255, 206, 86)',
-                                             'rgba(75, 192, 192, 1)',
-                                             'rgba(153, 102, 255, 1)',
-                                             "#FF6384",
-                                             "#63FF84",
-                                             "#84FF63",
-                                             "#8463FF",
-                                             "#6384FF"
-                                            ],
-                            borderColor: 'black',
-                            borderWidth: 2,
-                            hoverBorderColor: '##666666',
-                            data: QUANTITA
-                        }]
-                    };
-
-                var graph = $("#Canvas");
-
-                var pieChart = new Chart(graph, {
-                    type: 'pie',
-                    data: chartdata2
-                });
-            });
-        }
-    }
-
-
-    //definzione del grafico editori utilizzando dati presi da editori.php
-    function showGraph3() {
-        {
-            $.post("editori.php",function(data) {
-                console.log(data);
-                var NOME_E = [];
-                var QUANTITA = [];
-
-                for (var i in data) {
-                    NOME_E.push(data[i].NOME_E);
-                    QUANTITA.push(data[i].QUANTITA);
-                    }
-
-                var chartdata2 = {
-                    labels: NOME_E,
-                    datasets: [{
-                        backgroundColor: [  "#FF6384",
-                                            "#63FF84",
-                                            "rgba(54, 162, 235)",
-                                            "#8463FF",
-                                            "#6384FF",
-                                            'rgba(255, 99, 132)',
-                                            'rgba(255, 206, 86)',
-                                            'rgba(75, 192, 192, 1)',
-                                            'rgba(153, 102, 255, 1)',
-                                            "#84FF63"         
-                                        ],
-                        borderColor: 'black',
-                        borderWidth: 2,
-                        hoverBorderColor: 'black',
-                        data: QUANTITA
-                        }]
-                    };
-
-                var graph = $("#GraphCanv");
-
-                var pieChart = new Chart(graph, {
-                    type: 'doughnut',
-                    data: chartdata2
-                    });
-            });
-        }
-    }
-</script> --}}

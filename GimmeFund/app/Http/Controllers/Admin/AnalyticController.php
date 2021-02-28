@@ -57,12 +57,12 @@ class AnalyticController extends Controller
      */
     public function updateChartDataDonPerDate(Request $request) 
     {
-        /* $startDate = $request->start_date;
-        $endDate = $request->end_date; */
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
 
         // DATE DI PROVA
-        $startDate = date('2021-02-10');
-        $endDate = date('2021-02-26');
+        /* $startDate = date('2021-02-10');
+        $endDate = date('2021-02-26'); */
 
         // Ricavo le date delle donazioni
         $dates = Donation::select('date')->distinct()->whereBetween('date', [$startDate, $endDate])->orderBy('date', 'asc')->get();
