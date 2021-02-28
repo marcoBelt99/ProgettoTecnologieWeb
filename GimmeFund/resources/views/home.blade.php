@@ -80,7 +80,7 @@
 
 <div class="container mt-3 mb-3 py-5">
     <div class="row">
-        <div class="card-group">
+        <div class="card-group show shadow p-3 mb-5 bg-body rounded">
             <div class="card border-none">
                 
                 <div class="card-body">

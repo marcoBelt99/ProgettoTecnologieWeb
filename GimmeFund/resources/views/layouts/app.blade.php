@@ -81,7 +81,8 @@
                     <!-- Right Side Of Navbar -->
                     <div id="divLiCat" onmouseover="ReSetTimer()"  {{-- Div aggiunto!!!!!!!!!!!! --}}
                     onmouseout="setTimeToHide()" 
-                    style="display:none;">
+                    style="display:none;"></div>
+
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::user())
                             <li class="nav-item" style="margin-top: 10px">
@@ -153,7 +154,6 @@
                         {{-- Fine parte destra della navbar --}}
                     </ul>
                 </div> 
-                </div>
             </div>
         </nav>
 
