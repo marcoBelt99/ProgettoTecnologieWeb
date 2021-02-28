@@ -14,7 +14,7 @@
         </div>
     @endif
     
-    <form action="{{ URL::action('FundraiserController@store') }}" method="POST">
+    <form style="margin-top: 40px" action="{{ URL::action('FundraiserController@store') }}" method="POST">
         {{-- Token per Laravel --}}
         @csrf
         {{ method_field('POST') }}
@@ -90,7 +90,7 @@
         <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
         {{-- Bottoni --}}
-        <div class="col-md-6" style="margin-top: 10px">
+        <div style="margin-bottom: 40px" class="col-md-6" style="margin-top: 10px">
             <button type="submit" class="btn btn-outline-primary">
                 Inizia la tua campagna!
             </button>
