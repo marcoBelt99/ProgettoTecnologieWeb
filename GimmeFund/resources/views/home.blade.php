@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- Sezione dello stile: lo stile è stato spostato in .../stili.css --}}
-@section('style')
+@section('style'){{--  --}}
 @endsection
 {{-- Sezione del contenuto --}}
 @section('content')
@@ -37,14 +37,12 @@
             {{-- <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image"> --}}
 
             <img class="d-block img-fluid" src="{{ asset("images/photo-8.jpg") }}" alt="Slide1" width="100%">
-            {{-- <img class="d-block img-fluid" src="{{ $visual[0]->media_url }}" alt="Slide1" width="100%">  --}}
             <div class="carousel-caption d-none d-md-block">
                 <h2 class="testoOmbreggiato">Solidarietà e unione</h2>
                 <h5 class="testoOmbreggiato">Siamo pronti a collaborare per dare un futuro migliore a tutti!</h5>
             </div>
         </div>
         <div class="carousel-item">
-            {{-- <img class="d-block img-fluid" src="{{ }}" alt="Slide2" width="100%"> --}}
             <img class="d-block img-fluid" src="{{ asset("images/photo-7.jpg") }}" alt="Slide2" width="100%">
             <div class="carousel-caption d-none d-md-block">
                 <h2 class="testoOmbreggiato">Donare</h2>
@@ -89,30 +87,27 @@
                     <h2 class="card-title card-center">Crea una raccolta fondi</h2>
                     <p class="card-text">Crea una raccolta fondi in pochi minuti. È una procedura facile e veloce</p>
                     {{-- Controllo login utente/ruolo utente --}}
-                    @if (Auth::check() && Auth::user()->hasRole('user'))
-                        <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
-                    @else
-                        
-                        {{-- Se l'utente non è loggato nel sito --}}
-                        @if(!Auth::check())
-                            <div class="text text-center">
+                    <div class="text text-center">
+                        @if (Auth::check() && Auth::user()->hasRole('user'))
+                            <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                        @else
+                            {{-- Se l'utente non è loggato nel sito --}}
+                            @if(!Auth::check())
                                 <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
-                            </div>
+                            @endif
                         @endif
-                    @endif
+                    </div>
                 </div>
                 
             </div>
-            <div class="card border-none">
-                
+            <div class="card border-none">  
                 <div class="card-body">
                     <h2 class="card-title card-center">Effettua donazioni</h2>
                     <p class="card-text">Dona in modo da dare un futuro a persone che hanno bisogno di un aiuto economico</p>                            
-                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">
-                        Visulizza le raccolte fondi!
-                    </a>
+                    <div class="text text-center">
+                        <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Visulizza le raccolte fondi!</a>
+                    </div>
                 </div>
-                
             </div>
             <div class="card border-none">
                 
@@ -121,17 +116,17 @@
                     <p class="card-text">Trasforma i punti in coupons utilizzabili in molti negozi e supermercati per prodotti Fairtrade</p>
                     
                     {{-- Controllo login utente/ruolo utente --}}
-                    @if (Auth::check() && Auth::user()->hasRole('user'))
-                        <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
-                    @else
-
-                        {{-- Se l'utente non è loggato nel sito --}}
-                        @if(!Auth::check())
-                            <div class="text text-center">
-                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success"><p>Saldo punti e Coupon</p></a>
-                            </div>
+                    <div class="text text-center">
+                        @if (Auth::check() && Auth::user()->hasRole('user'))
+                            <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
+                        @else
+                        
+                            {{-- Se l'utente non è loggato nel sito --}}
+                            @if(!Auth::check())
+                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
+                            @endif
                         @endif
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -142,16 +137,16 @@
 
 
 <!-- Card group -->
-<div class="container text-muted mt-3 mb-3">
+<div class="container text-muted py-5">
     <div class="row">
-        <div class="card-group">
+        <div class="card-group card-home card-3">
             
             @foreach ($visual as $v)
-            <div class="card">
+            <div class="card card-3">
                 <img class="card-img-top img-fluid" src="{{ $v->media_url }}">
                 <div class="card-body">
                     <h4 class="card-title card-center">{{ $v->name }}</h4>                    
-                    <p class="card-text">{{ substr($v->description, 0, 100) }}...</p>
+                    <p class="card-text">{{ substr($v->description, 0, 120) }}...</p>
                     <p>Iniziata il: {{ date('d/m/Y', strtotime($v->starting_date)) }}</p>
                     <a href="{{ URL::action('FundraiserController@show', $v->id) }}"><button class="btn btn-primary btn-spl" type="button">Scopri di più</button></a>
                 </div>

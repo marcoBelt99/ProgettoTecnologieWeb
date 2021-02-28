@@ -3,7 +3,6 @@
 /* Colore di sfondo della barra di navigazione */
 
 
-
 .navbar1 {
     background: #0D4EFA !important;
     text-decoration: none !important;
@@ -123,15 +122,6 @@ li:last-child {
     background-color: #54be90;
 }
 
-
-
-#cuore {
-    margin: 20px;
-    width: 100px;
-    height: 100px;
-}
-
-
 #testochisiamo {
     text-align: justify;   
 }
@@ -149,5 +139,94 @@ li:last-child {
     text-shadow: 2px 2px 4px #000000;
 }
 
+.scrollTabellaGestioneUtentiAdmin { /* Serve per rendere "scrollable" la tabella di gestione degli utenti dell'admin */
+    display:block;
+    height: 500px;
+    /* min-height : 10px ; */
+    overflow-y : scroll; 
+}
 
+.scrollTabellaDonazioni { /* Serve per rendere "scrollable" la tabella delle donazioni */
+    display:block;
+    height: 500px;
+    /* min-height : 10px ; */
+    overflow-y : scroll; 
+}
 
+/* Gestione pagina di informazioni */
+/* .bd-callout-info {
+    border-left-color: #5bc0de;
+}
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-color: rgb(238, 238, 238);
+    border-left-width: 1px;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
+
+.bd-callout p:last-child {
+    margin-bottom: 0;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+} */
+
+/* fine gestione pagina di informazioni */
+
+/* Menu a tendina della navbar */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+/* fine menu a tendina della navbar */
+
+.card-home {
+    border: 4px inset #00c6f5 !important;
+}
+
+.card-3 {
+    border: none;
+}
+
+.card-3:hover {
+    box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.formsostienici {
+   

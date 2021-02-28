@@ -2,25 +2,25 @@
 
 
 @section('content')
-{{-- Prova --}}
-<div class="jumbotron card card-image" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
-    <div class="text-white text-center py-5 px-4">
-        <div>
-            <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Il tuo gesto su GimmeFund vale doppio!</strong></h2>
-            <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!
-            </p>
-            <a class="btn btn-outline-white btn-md"><i class="fas fa-clone left"></i> View project</a>
+
+<div class="carousel-inner">
+    <div class="carousel-item active">
+        <img class="d-block img-fluid" src="{{ asset("images/salti2.png") }}" alt="Slide1" width="100%">
+        <div class="carousel-caption d-none d-md-block">
+            <h2 class="testoOmbreggiato">Su GimmeFund la tua donazione vale il doppio</h2>
         </div>
     </div>
 </div>
-{{-- Fine prova --}}
 
+<div class="text-center py-5">
+    <h1>Guarda le raccolte fondi</h1>
+    <h3>Persone di tutto il mondo raccolgono fondi per le cause che le appassionano</h3>
+</div>
 {{-- Metto il jumbotron per vedere le raccolte fondi. Scorro ogni raccolta fondi con il foreach  --}}
 @foreach ($fundraisers as $fundraiser)
     
       {{--  --}}
-    <div class="container">
+    <div class="container py-2">
         <div class="jumbotron-fundraiser">
             <h1 class="display-4">{{ $fundraiser->name }}</h1>
             <p class="lead">{{ substr($fundraiser->description,0 ,300)}}...</p>

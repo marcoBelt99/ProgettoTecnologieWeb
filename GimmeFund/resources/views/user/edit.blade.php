@@ -211,9 +211,9 @@
                     },
                     // In caso di errore
                     error: function(xhr, status) {
-                        console.log(status);
+                        /* console.log(status);
                         console.log(xhr.responseJSON.message);
-                        console.log(xhr);
+                        console.log(xhr); */
                     }
                 }); // Fine AJAX
             });

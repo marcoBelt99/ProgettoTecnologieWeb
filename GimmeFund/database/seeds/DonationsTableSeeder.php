@@ -20,7 +20,9 @@ class DonationsTableSeeder extends Seeder
         Donation::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        for ($i = 0; $i < 50; $i++) {
+        $MAX_DONANTIONS_NUMBER = 300;
+
+        for ($i = 0; $i < $MAX_DONANTIONS_NUMBER; $i++) {
             $amount = rand(1.0, 200.0);
             $user_id = rand(2, 51);
             

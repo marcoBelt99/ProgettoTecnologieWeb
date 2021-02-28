@@ -23,7 +23,7 @@
         
         <div class="form-group">
             <label for="author">Autore</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
+           <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
             <small id="name" class="form-text text-muted">Questo è il nome che comparirà e i donatori vedranno</small>
         </div>
 
@@ -102,5 +102,3 @@
 
 
 @endsection
-
-

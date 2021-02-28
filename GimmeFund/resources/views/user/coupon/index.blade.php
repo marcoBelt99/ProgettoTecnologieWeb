@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container col-6 py-4">
-    <div class="card">
+    <div class="card card-home">
         <div class="card-header">
             {{-- <pre>Punti accumulati</pre> --}}
             <h4>Punti accumulati</h4>
@@ -15,7 +15,7 @@
             
             {{-- Criterio per poter accedere alla conversione dei punti in buono sconto --}}
             <div class="row">
-                <div class="btn-group btn-group-lg" role="group">
+                <div class="btn-group" role="group">
                     @if ($user->points > 0)
                         <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info">Converti i punti</button></a>
                     @else
@@ -24,7 +24,7 @@
                     @endif
                 </div>
                 <div class="btn-group" role="group">
-                    <button class="btn btn-info" id="my-coupon-btn">I miei buoni</button>
+                    <button class="btn btn-info ml-2" id="my-coupon-btn">I miei buoni</button>
                 </div>
             </div>
         </div>

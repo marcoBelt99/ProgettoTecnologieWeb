@@ -8,7 +8,7 @@
         <div class="text text-center py-4">
             <h1>{{ $fundraiser->name }}</h1>
         </div>        
-        <div class="card col-12" style="padding: 0px">
+        <div class="card col-12 card-home" style="padding: 0px">
             <div class="card-img-top text-center" style="padding: 10px">
                 <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image">
             </div>
@@ -33,14 +33,14 @@
                 {{-- Se l'utente è loggato ed è admin --}}
                 @if (Auth::check() && Auth::user()->hasRole('admin'))
                     <div class="text-center">
-                        <p class="">Donazione non autorizzata per l'utente Admin</p>
+                        <h3>Donazioni non autorizzate per l'utente Admin</h3>
                     </div>
                 @endif
 
                 {{-- Se l'utente non è loggato nel sito --}}
                 @if(!Auth::check())
                     <div class="text text-center">
-                        <a href="{{ route('login') }}" class=""><p>Accedi o registrati per iniziare a donare!</p></a>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Accedi o registrati per iniziare a donare!</a>
                     </div>
                 @endif
             

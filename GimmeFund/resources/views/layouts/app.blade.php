@@ -2,6 +2,10 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- immagine che compare nella scheda del browser -->
+    <link rel="icon" href="{{ URL::asset('images/logoScheda.png')}}" type="image/png" />
+    
+    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
@@ -16,12 +20,10 @@
     <script defer src="{{ asset('js/fonts/all.js') }}"></script>
     {{-- Includo il js per le icone  --}}
     <script defer src="{{ asset('js/fonts/all.js') }}"></script>
-    {{-- Includo il js per Chart.js --}}
-    
-    <!-- Charting library -->
-    <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <!-- Chartisan -->
-    <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
+    {{-- Includo il file js per gli eventi (personalizzato) --}}
+    <script defer src="{{ asset('js/menuDropDownNavbar.js') }}"></script>
+    {{-- Chart.js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
     <!-- Fonts -->
@@ -30,17 +32,20 @@
     {{-- Includo il css per le icone  --}}
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
 
-
     <!-- Styles -->
     <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href={{ URL::asset('css/stili.css') }}>
+    <link type="text/css" rel="stylesheet" href={{ URL::asset('css/barraDiNavigazione.css') }}> {{-- Contiene lo stile specifico per la barra di navigazione --}}
+    <!-- MDB -->
+{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/> --}}
+
     @yield('style')
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1" >
             <div class="container-fluid">
-                <a class="navbar-brand navbar-a" href="{{ url('/') }}">
+                <a class="navbar-brand navbar-a " href="{{ url('/') }}"> 
                     <i class="fas fa-hand-holding-usd"></i> {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,24 +54,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto"> 
                         <li class="">
                             <a class="nav-link navbar-a" href="{{ URL::action('FundraiserController@index') }}" class="nav-link">
                                 <i class="fas fa-hands-helping"></i> Raccolte fondi
                             </a> 
                         </li >
                          <li class="">
+                            <a class="nav-link navbar-a" href="{{ url('/information') }}" class="nav-link">
+                                <i class="fas fa-info-circle"></i> Informazioni
+                            </a>
+                        </li>
+                        <li class="">
                             <a class="nav-link navbar-a" href="{{ url('/whoweare') }}" class="nav-link">
                                 <i class="fas fa-users"></i> Chi siamo
                             </a>
                         </li>
-                        <li class="">
-                            <a class="nav-link navbar-a" href="#" class="nav-link">
-                                <i class="fas fa-info-circle"></i> Informazioni
-                            </a>
-                        </li>
                        <li class="">
-                            <a class="nav-link navbar-a" href="#" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ url('/sostienici') }}" class="nav-link">
                                 <i class="fas fa-joint"></i> Sostienici
                             </a>
                             </a>
@@ -74,6 +79,9 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    <div id="divLiCat" onmouseover="ReSetTimer()"  {{-- Div aggiunto!!!!!!!!!!!! --}}
+                    onmouseout="setTimeToHide()" 
+                    style="display:none;">
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::user())
                             <li class="nav-item" style="margin-top: 10px">
@@ -144,6 +152,7 @@
                         @endguest
                         {{-- Fine parte destra della navbar --}}
                     </ul>
+                </div> 
                 </div>
             </div>
         </nav>

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 ----- -----------------------------------------------------------------------
 | Web Routes
@@ -29,7 +28,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     /* Creo la rotta per la visualizzazione degli analytics dell'admin */
     /** @author Breg */
-    Route::resource('/analytics', 'ChartController');
+    Route::get('/analytics', 'AnalyticController@index')->name('analytics.index');
+    Route::get('/analytics/chartData', 'AnalyticController@getChartDataDonPerDate')->name('analytics.get.harts.data');
+    Route::post('/analytics/updateChartsData', 'AnalyticController@updateChartDataDonPerDate')->name('analytics.update.charts.data');
 });
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
@@ -54,8 +55,8 @@ Route::prefix('user')->prefix('user')->name('user.')->group(function() {
 Route::get('/coupon', 'CouponController@create')->name('coupon.create');
 
 /**  @author Marco Creo la rotta per la pagina di informazioni: chi siamo (whoweare?)  */
-Route::get('/whoweare', function () {
-    return view('whoweare');
+Route::get('/information', function () {
+    return view('information');
 });
 
 /** @author Breg */
@@ -67,3 +68,11 @@ Route::post('/user/{user}/password/' ,'Auth\ChangePasswordController@update')->n
 /* use App\Http\Controllers\StorageFileController;
 Route::get('image/{filename}', [StorageFileController::class,'getPubliclyStorgeFile'])->name('image.displayImage');
 Route::get('image/{filename}', 'StorageFileController@displayImage')->name('image.displayImage'); */
+
+Route::get('/sostienici', function () {
+    return view('sostienici');
+});
+
+Route::get('/whoweare', function () {
+    return view('whoweare');
+});

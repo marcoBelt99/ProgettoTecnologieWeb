@@ -3,21 +3,24 @@
 
 @section('content')
 
-<div class="container card col-md-6">
-    <div class="card-header">
-        <h1>Genera un nuovo Coupon</h1>
-    </div>
-    <p class="card-text">I buoni generati verranno salvati nella sezione I miei Buoni (Saldo Punti > I miei Buoni)</p>
-    <div class="card-body">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<div class="container col-md-6 py-5">
+    <div class="card card-home">
+        <div class="card-header">
+            <h1>Genera un nuovo Coupon</h1>
+        </div>
+        <div class="card-text ml-2 mt-3">
+            <p> I buoni generati verranno salvati nella sezione "I miei Buoni"</p>
+        </div>
+        <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
         <form action="{{ URL::action('CouponController@store') }}" method="POST">
             {{-- Token per Laravel --}}
@@ -51,11 +54,13 @@
             {{-- user id --}}
             <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
             
-            <div class="col-md-6" style="margin-top: 10px">
-                <button type="submit" class="btn btn-primary">
-                    Genera Buono
-                </button>
-                <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-secondary">Indietro</a>
+            <div class="row">
+                <div class="btn-group px-2">
+                    <button type="submit" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Genera Buono</button>
+                </div>
+                <div class="btn-group">
+                    <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-secondary">Indietro</a>
+                </div>
             </div>
         </form>
     </div>

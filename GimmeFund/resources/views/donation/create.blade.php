@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row container-fluid py-4">
-    <div class="card col-md-6">
+    <div class="card col-md-6 card-home">
         <div class="card-header">
             <p class="card-title"><h1>Dona</h1></p>
         </div>
@@ -55,7 +55,7 @@
                         {{-- Messaggio per l'utente se non sceglie il metodo di pagamento --}}
                     </small>
                     
-                    <div id="payment-method-form" style="margin-top: 10px; margin-bottom: 10px;"> 
+                    <div id="payment-method-form" style="margin-top: 50px; margin-bottom: 50px;"> 
                         {{-- Form di pagamento --}}
                     </div>
                 
@@ -87,7 +87,7 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6" id="donations-table-container">
+    <div class="col-md-6 scrollTabellaDonazioni" id="donations-table-container">
         <div class="container col-md-11" style="margin-top: 30px">
             <h3>Le donazioni più recenti</h3>
         </div>
@@ -154,7 +154,7 @@
                     <small style='color: #ff0000' id='iban-err-mex'>  </small>\
                 </div>\
                 <div class='form-group'>\
-                    <label for='beneficiary-name'>Casuale</label>\
+                    <label for='beneficiary-name'>Causale</label>\
                     <input type='text' id='casual' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser_title->name }}' readonly>\
                 </div>\
                 <div class='form-group'>\
@@ -186,7 +186,7 @@
                         <small style='color: #ff0000' id='expdate-err-mex'>  </small>\
                     </div>\
                     <div class='form-group col-6'>\
-                        <label for='cvv-code'>CVC/CVV</label>\
+                        <label for='cvv-code'>CVV</label>\
                         <input type='text' id='cvv-code' name='cvv-code' class='form-control' maxlength='3' placeholder='123'>\
                         <small style='color: #ff0000' id='cvv-err-mex'>  </small>\
                     </div>\

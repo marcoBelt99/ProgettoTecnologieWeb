@@ -23,9 +23,9 @@ class FundraisersTableSeeder extends Seeder
             È un momento difficile per tutti, mai come oggi l’unione deve fare la forza. Amo Bologna, la mia Città, e vorrei dare il mio contributo come penso anche tutti voi. Sono stato contattato da Fondazione Sant’Orsola e Policlinico di Sant’Orsola che ieri hanno lanciato la campagna “più forti INSIEME” e ho deciso di devolvere a loro tutto quello che insieme riusciremo a raccogliere per sostenere gli ospedali e il personale in prima linea nell’emergenza Coronavirus. Sarà mia premura tenervi informati sull’esito della donazione e condividere con voi la Lettera che invierò alla Fondazione al momento della donazione.',
             'starting_date' => '2020-01-30',
             'ending_date' => '2022-01-30',
-            'media_url' => 'https://www.info-cooperazione.it/wp-content/uploads/2018/10/crowdfunding-678698108-5a7a3af3875db90037cf5315-730x310.jpg',
+            'media_url' => 'https://images.gofundme.com/iUAI5wfF6U96vfdxTetXqlDgo9o=/720x405/https://d2g8igdw686xgo.cloudfront.net/46044960_1583830987419996_r.jpg',
             'goal' => 2000000.00,
-            'user_id' => 2,
+            'user_id' => rand(2,51),
             'category_id' => 13,
         ]);
 
@@ -40,7 +40,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2022-07-30',
             'media_url' => 'https://images.gofundme.com/UTo_8ZAhwkJroA-yyPhuv2VgvOY=/720x405/https://d2g8igdw686xgo.cloudfront.net/54325528_1612176346474376_r.jpeg',
             'goal' => 20000.00,
-            'user_id' => 3,
+            'user_id' => rand(2,51),
             'category_id' => 11,
         ]);
         
@@ -59,7 +59,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2022-04-30',
             'media_url' => 'https://images.gofundme.com/-ecGvsFfFg1tlLSLrwVTfQGPG5c=/720x405/https://d2g8igdw686xgo.cloudfront.net/54327046_1612189901425863_r.jpg',
             'goal' => 100000.00,
-            'user_id' => 4,
+            'user_id' => rand(2,51),
             'category_id' => 14,
         ]);
 
@@ -85,7 +85,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2021-05-30',
             'media_url' => 'https://images.gofundme.com/-xvtqXD4PSBK8YUMkc26UjrIwyI=/720x405/https://d2g8igdw686xgo.cloudfront.net/54334192_1612208662585349_r.jpeg',
             'goal' => 250000.00,
-            'user_id' => 5,
+            'user_id' => rand(2,51),
             'category_id' => 5,
         ]);
 
@@ -102,7 +102,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2021-08-24',
             'media_url' => 'https://images.gofundme.com/ej6akNy_9KP8uy3psTksq2KbkcI=/720x405/https://d2g8igdw686xgo.cloudfront.net/54197406_161168189363735_r.jpeg',
             'goal' => 50000.00,
-            'user_id' => 2,
+            'user_id' => rand(2,51),
             'category_id' => 14,
         ]);
 
@@ -118,7 +118,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2022-01-22',
             'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
             'goal' => 25000.00,
-            'user_id' => 3,
+            'user_id' => rand(2,51),
             'category_id' => 5,
         ]);
 
@@ -129,7 +129,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2022-01-22',
             'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
             'goal' => 150000.00,
-            'user_id' => 4,
+            'user_id' => rand(2,51),
             'category_id' => 5,
         ]);
 
@@ -141,7 +141,7 @@ class FundraisersTableSeeder extends Seeder
             'ending_date' => '2021-01-22',
             'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
             'goal' => 150000.00,
-            'user_id' => 4,
+            'user_id' => rand(2,51),
             'category_id' => 5,
         ]);
     }
