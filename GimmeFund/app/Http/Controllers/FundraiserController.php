@@ -92,9 +92,13 @@ class FundraiserController extends Controller
     {
         //dd($fundraiser);
         $author = User::where('id', $fundraiser->user_id)->first();
+        $donations = array();
+        $donations = [ $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')];
+
         return view('fundraiser.details')->with([
             'fundraiser' => $fundraiser,
-            'author' => $author]);
+            'author' => $author,
+            'donations' => $donations]);
     }
 
     /**
