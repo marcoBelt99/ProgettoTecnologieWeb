@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="points-amount">Punti</label>
                 <div class="input-group mb-3">
-                    <input type="number" class="form-control text-center" name="points_amount" id="points-amount" value="0" max="{{ Auth::user()->points }}" min="0" step="1">
+                    <input type="number" class="form-control text-center" name="points_amount" id="points-amount" value="0" max="{{ Auth::user()->points }}" min="2" step="1">
                 </div>
             </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 {{-- ( Mi trovo in: http://localhost:8000/admin/users/1/edit , dove 1 è l'id dell'utente 1)
     Metto la tabella applicandole gli stili con bootstrap 4.6 --}}
-<div class="container">
+<div class="container py-5">
     <div class="row justify-content-center">
     <div class="col-md-8">
             <div class="card">
@@ -67,6 +67,3 @@
     </div>
 </div>
 @endsection
-
-
-

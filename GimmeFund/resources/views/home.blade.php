@@ -6,10 +6,8 @@
 {{-- Sezione del contenuto --}}
 @section('content')
 
-
-
 {{-- <p> {{ count($visual) }}</p> --}}
-{{-- <p>{{ $visual[0][0]['media_url']}}</p> --}}
+{{-- <p>{{ $visual[0][0]['{{ medi }}a_url']}}</p> --}}
 
 <!-- Carousel -->
 <div id="slider_business" class="carousel slide" data-ride="carousel">
@@ -76,54 +74,55 @@
     </a>
 </div>
 
+
 <img style="display: block; margin-right: auto; margin-left: auto; margin-bottom: -20px; margin-top: 40px" src="{{ asset("images/logo.png") }}">
 
-<div class="container mt-3 mb-3 py-5">
+
+<div class="container mt-3 mb-3 py-5"> 
     <div class="row">
         <div class="card-group show shadow p-3 mb-5 bg-body rounded">
             <div class="card border-none">
-                
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h2 class="card-title card-center">Crea una raccolta fondi</h2>
                     <p class="card-text">Crea una raccolta fondi in pochi minuti. È una procedura facile e veloce</p>
-                    {{-- Controllo login utente/ruolo utente --}}
-                    <div class="text text-center">
+                    <div class="text text-center mt-auto">
                         @if (Auth::check() && Auth::user()->hasRole('user'))
-                            <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                            <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
                         @else
                             {{-- Se l'utente non è loggato nel sito --}}
                             @if(!Auth::check())
-                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
                             @endif
                         @endif
                     </div>
                 </div>
-                
             </div>
+
             <div class="card border-none">  
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h2 class="card-title card-center">Effettua donazioni</h2>
                     <p class="card-text">Dona in modo da dare un futuro a persone che hanno bisogno di un aiuto economico</p>                            
-                    <div class="text text-center">
-                        <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Visulizza le raccolte fondi!</a>
+                    {{-- Controllo login utente/ruolo utente --}}
+                    <div class="text text-center mt-auto">
+                        <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Visulizza le raccolte fondi!</a>
                     </div>
                 </div>
             </div>
+
             <div class="card border-none">
-                
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     <h2 class="card-title card-center">Ottieni coupons</h2>
                     <p class="card-text">Trasforma i punti in coupons utilizzabili in molti negozi e supermercati per prodotti Fairtrade</p>
                     
                     {{-- Controllo login utente/ruolo utente --}}
-                    <div class="text text-center">
+                    <div class="text text-center mt-auto">
                         @if (Auth::check() && Auth::user()->hasRole('user'))
-                            <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
+                            <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
                         @else
                         
                             {{-- Se l'utente non è loggato nel sito --}}
                             @if(!Auth::check())
-                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
+                                <a href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Saldo punti e Coupon</a>
                             @endif
                         @endif
                     </div>

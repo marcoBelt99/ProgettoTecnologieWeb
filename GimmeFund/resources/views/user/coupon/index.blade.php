@@ -17,14 +17,14 @@
             <div class="row">
                 <div class="btn-group" role="group">
                     @if ($user->points > 0)
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info">Converti i punti</button></a>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Converti i punti</button></a>
                     @else
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info" disabled>Converti i punti</button></a>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" disabled>Converti i punti</button></a>
                         {{-- <p style="color: #ff0000;">Saldo insufficiente per la convesione</p> --}}
                     @endif
                 </div>
-                <div class="btn-group" role="group">
-                    <button class="btn btn-info ml-2" id="my-coupon-btn">I miei buoni</button>
+                <div class="btn-group px-2" role="group">
+                    <button class="btn btn-primary px-3 align-self-xl-center botton-center" id="my-coupon-btn">I miei buoni</button>
                 </div>
             </div>
         </div>

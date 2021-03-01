@@ -88,8 +88,6 @@
         </form>
 
         {{-- FORM MODIFICA PASSWORD --}}
-        {{-- DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE --}}
-
         {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
         <form action="{{ URL::action('Auth\ChangePasswordController@update', Auth::user()) }}" method="POST">
 
@@ -163,6 +161,7 @@
 
         $('#user-infos-cont').toggle(false);
         $('#user-pass-infos-cont').toggle(false);
+        $('#changes-success').hide();
 
 
         $(document).ready(function() { 
@@ -207,7 +206,7 @@
                     }, 
                     // In caso di successo
                     success: function(data) {
-                        $('#changes-success').text('Modifiche salvate con successo!');
+                        $('#changes-success').text('Modifiche salvate con successo!').show();
                     },
                     // In caso di errore
                     error: function(xhr, status) {

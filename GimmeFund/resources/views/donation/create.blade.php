@@ -79,10 +79,10 @@
                     {{-- <button type="submit" class="btn btn-outline-primary" id="submit-btn">
                         Dona
                     </button> --}}
-                    <a href="" class="btn btn-outline-primary" id="submit-btn">
+                    <a href="" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" id="submit-btn">
                         Dona
                     </a>
-                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-outline-secondary">Indietro</a>
+                    <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-secondary">Indietro</a>
                 </div>
             </form>
         </div>
@@ -312,7 +312,7 @@
                         $('#warning-message').text(xhr.responseJSON.errors.amount).show();
                         console.log(xhr.responseJSON.errors.amount);
                         // alert(xhr.responseJSON.errors.amount);
-                        //alert(xhr.responseText);
+                        // alert(xhr.responseText);
                     }
                 }
             });

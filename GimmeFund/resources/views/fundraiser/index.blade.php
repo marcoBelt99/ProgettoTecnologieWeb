@@ -21,7 +21,7 @@
     
       {{--  --}}
     <div class="container py-2">
-        <div class="jumbotron-fundraiser">
+        <div class="jumbotron-fundraiser jumbofundra">
             <h1 class="display-4">{{ $fundraiser->name }}</h1>
             <p class="lead">{{ substr($fundraiser->description,0 ,300)}}...</p>
                 <hr class="my-4">

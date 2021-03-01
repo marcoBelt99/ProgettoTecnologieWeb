@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="author" content="Enrico Bregoli, Francesco Sindaco, Davide Zanellato, Marco Beltrame">
+    <meta name="keywords" lang="it" content="donazioni, raccolte, fondi, campagne, aiuto ">
+    <meta name="keywords" lang="en" content="donations,crowdfunding, money, fairtrade, help">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -31,7 +33,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     {{-- Includo il css per le icone  --}}
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet" type="text/css">
-
     <!-- Styles -->
     <link rel="stylesheet" href= "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href={{ URL::asset('css/stili.css') }}>
@@ -81,7 +82,8 @@
                     <!-- Right Side Of Navbar -->
                     <div id="divLiCat" onmouseover="ReSetTimer()"  {{-- Div aggiunto!!!!!!!!!!!! --}}
                     onmouseout="setTimeToHide()" 
-                    style="display:none;"></div>
+                    style="display:none;">
+                    </div>
 
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::user())
@@ -123,6 +125,10 @@
                                         <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\AnalyticController@index') }}">
                                             <i class="far fa-chart-bar"></i> Analytics
                                         </a>    
+
+                                        <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\CategoryController@index') }}">
+                                            <i class="fas fa-edit"></i></i> Gestione categorie
+                                        </a>  
                                         
                                         @can('manage-users')
                                         <a class="dropdown-item navbar-a" href="{{ URL::action('Admin\UsersController@index') }}">
@@ -138,6 +144,9 @@
                                         </a>
                                         <a href="{{ URL::action('CouponController@index', Auth::user()) }}" class="dropdown-item navbar-a">
                                             <i class="fas fa-money-bill-alt"></i> Saldo punti e Coupon
+                                        </a>
+                                        <a href="{{ URL::action('CouponController@index', Auth::user()) }}" class="dropdown-item navbar-a">
+                                            <i class="fas fa-money-bill-alt"></i> Le mie raccolte fondi
                                         </a>
                                     @endif
                                     <a class="dropdown-item navbar-a" href="{{ route('logout') }}"
@@ -157,74 +166,52 @@
             </div>
         </nav>
 
-        {{-- PRVOA ICONE
-            visitare il sito: https://fontawesome.com/icons/sign-out-alt?style=solid
-            in /public/fonts/ ci metto tutte le svg che voglio usare (specifiche).
-            Dal sito devo salvarmi la svg e metterla dentro /public/fonts --}}
-            {{-- Provo ad usare il file css per le icone --}}
-            {{-- <p>QUESTE SONO ALCUNE ICONE DI PROVA DA METTERE AD ESEMPIO NEI PULSANTI DELLA NAVBAR O NEI FORM</p>
-            <i class="far fa-angry"></i> <p>faccina arrabbiata</p> --}}
-            {{-- Provo ad usare il file js per le icone --}}
-            {{-- <i class="fas fa-home"></i><p>Home</p> 
-            <i class="fas fa-user"></i> <p>Utente 1</p>
-            <i class="far fa-user"></i> <p>Utente 2</p> 
-            <i class="fal fa-user"></i> <p>Utente 3</p>
-            <i class="fab fa-github-square"></i> 
-            <i class="fas fa-sign-in-alt"></i> <p>log in</p>  
-            <i class="far fa-credit-card"></i> <p>Carta di credito</p>
-            <i class="fas fa-wallet"></i><p>Portafoglio</p>
-            <i class="fad fa-cart-plus"></i> <p>carrello</p>
-            <i class="fas fa-shopping-cart"></i><p>Soldi</p>
-            <i class="fas fa-users"></i><p>Chi siamo</p> --}}
-        {{-- FINE PROVA ICONE --}}
-
-        <main>
+        <main class="main">
             {{-- Includo la cartella creata con il file degli alerts --}}
             @include('partials.alerts')
             {{-- Inclusione del contenuto di una view nel layout --}}
             @yield('content')
         </main>
-
-        <div class="jumbotron-fluid">
-            <div class="container">
-                <h2>
-                    <a class="footer-logo" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}</a>
-                </h2>
-                {{-- INSERIRE I LOGHI NEL FOOTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--}}
-
-                {{-- LOGHIIIII --}}
-                <!-- Facebook -->
-                <a class="btn btn-primary" style="background-color: #3b5998" href="#!" role="button">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-
-                <!-- Twitter -->
-                <a class="btn btn-primary" style="background-color: #55acee" href="#!" role="button">
-                    <i class="fab fa-twitter"></i>
-                </a>
-
-                <!-- Instagram -->
-                <a class="btn btn-primary" style="background-color: #ac2bac" href="#!" role="button">
-                    <i class="fab fa-instagram"></i>
-                </a>
-
-                <!-- Linkedin -->
-                <a class="btn btn-primary" style="background-color: #0082ca" href="#!" role="button">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-
-                <!-- Youtube -->
-                <a class="btn btn-primary" style="background-color: #ed302f" href="#!" role="button">
-                    <i class="fab fa-youtube"></i>
-                </a>
-
-               {{-- FINE LOGHIIII --}}
-                <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
-            </div>
-        </div>
     </div>
     {{-- Inclusione della sezione script della view --}}
     @yield('script')
 </body>
+<div class="footer" id="footer">
+    <div class="l-container">
+        <div class="footer-content">
+            <h2>
+                <a class="footer-logo" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+            </h2>
+            {{-- Loghi --}}
+            <!-- Facebook -->
+            <a class="btn btn-primary" style="background-color: #3b5998" href="#!" role="button">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <!-- Twitter -->
+            <a class="btn btn-primary" style="background-color: #55acee" href="#!" role="button">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <!-- Instagram -->
+            <a class="btn btn-primary" style="background-color: #ac2bac" href="#!" role="button">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-primary" style="background-color: #0082ca" href="#!" role="button">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <!-- Youtube -->
+            <a class="btn btn-primary" style="background-color: #ed302f" href="#!" role="button">
+                <i {{-- Inclusione della sezione script della view --}}
+            class="fab fa-youtube"></i>
+            </a>
+
+            {{-- fine loghi --}}
+            <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
+        </div>
+    </div>
+</div>
 </html>

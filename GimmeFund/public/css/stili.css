@@ -12,10 +12,9 @@
    /*  transition: top 0.3s; */  /* Transition effect when sliding down (and up) */
   }
 
-.navbar-a { 
+.navbar-a {
     color: white !important;
     text-decoration: none !important;
-    font-family: "Nunito";
 
     /* Aggiunte: */
     float: left;
@@ -133,18 +132,23 @@ li:last-child {
 #divp{
     border: 1px solid;
 }
-
+{{  }}
 .testoOmbreggiato { /* Serve per fare il testo ombreggiato delle card nella home */
     color: white;
     text-shadow: 2px 2px 4px #000000;
 }
 
+
 .scrollTabellaGestioneUtentiAdmin { /* Serve per rendere "scrollable" la tabella di gestione degli utenti dell'admin */
     display:block;
-    height: 500px;
+    /* height: 500px; */
+    /* height: auto; */
     /* min-height : 10px ; */
-    overflow-y : scroll; 
+    max-height: 500px;
+    overflow-y : scroll;
+    min-width: 872px;
 }
+
 
 .scrollTabellaDonazioni { /* Serve per rendere "scrollable" la tabella delle donazioni */
     display:block;
@@ -228,5 +232,113 @@ p {
     box-shadow: 16px 16px 20px rgba(0, 0, 0, 0.2); 
 }
 
-.formsostienici {
-   
+.ricercaUtente {
+    padding: 0.75rem;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 95%;
+    margin-bottom: 1rem; 
+}
+
+.botton-center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.botton-center-category {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 65%;
+}
+
+
+.nav {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.nav {
+    
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.testoinfo {
+    text-align: justify;
+}
+
+.jumbofundra{
+    border: 4px inset #00c6f5;
+    
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h4 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h5 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*.footer {
+    background-color: #0b7cde;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 300px;
+    display: block;
+}
+
+.l-container {
+    margin: 0 auto;
+    padding: 0.5rem;
+    min-width: 300px;
+    text-align: center;
+}
+
+.footer-content {
+    padding: 0.5rem;
+}
+
+body {
+    height: 100% !important;
+}
+
+html {
+    height: 100% !important;
+}
+
+.main {
+    min-height: 100% !important;
+}*/

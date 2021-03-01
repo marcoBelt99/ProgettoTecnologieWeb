@@ -91,10 +91,10 @@
 
         {{-- Bottoni --}}
         <div style="margin-bottom: 40px" class="col-md-6" style="margin-top: 10px">
-            <button type="submit" class="btn btn-outline-primary">
+            <button type="submit" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">
                 Inizia la tua campagna!
             </button>
-            <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-outline-secondary">Indietro</a>
+            <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-secondary">Indietro</a>
         </div>
     </form>
 </div>
