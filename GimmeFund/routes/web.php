@@ -34,6 +34,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     Route::post('/analytics/getThreeCatChartsData', 'AnalyticController@getDataCategoryCharts')->name('analytics.update2.charts.data');
 });
 
+/** @author Breg 
+ * Route per CRUD categorie
+*/
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+    Route::resource('/category', 'CategoryController');
+});
+
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
 Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
 
