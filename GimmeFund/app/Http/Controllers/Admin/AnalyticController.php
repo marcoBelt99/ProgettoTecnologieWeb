@@ -98,29 +98,34 @@ class AnalyticController extends Controller
      */
     public function getDataCategoryCharts(Request $request) 
     {
-        isset($request->first_category)   ? $first_category_id  = $request->first_category  : $first_category_id    = 14;
-        isset($request->first_category)   ? $second_category_id = $request->second_category : $second_category_id   = 5;
-        isset($request->first_category)   ? $third_category_id  = $request->third_category  : $third_category_id    = 11;
+        $firstCategoryId  = $request->first_category_id  ?? $firstCategoryId  = 14;
+        $secondCategoryId = $request->second_category_id ?? $secondCategoryId = 5;
+        $thirdCategoryId  = $request->third_category_id  ?? $thirdCategoryId  = 11;
 
-        $firstCategoryFundraisers     = Fundraiser::where('category_id', $first_category_id)->count();
-        $secondCategoryFundraisers    = Fundraiser::where('category_id', $second_category_id)->count();
-        $thirdCategoryFundraisers     = Fundraiser::where('category_id', $third_category_id)->count();
+        //return $firstCategoryId . ' ' . $secondCategoryId . ' ' . $thirdCategoryId;
 
-        $first_category  = Category::find($first_category_id);
-        $second_category = Category::find($second_category_id);
-        $third_category  = Category::find($third_category_id);
-        
+        /*  return $firstCategoryId . " " . $secondCategoryId . " ". $thirdCategoryId;  */
+
+        $firstCategoryFundraisers     = Fundraiser::where('category_id', $firstCategoryId)->count();
+        $secondCategoryFundraisers    = Fundraiser::where('category_id', $secondCategoryId)->count();
+        $thirdCategoryFundraisers     = Fundraiser::where('category_id', $thirdCategoryId)->count();
+        $temp                         = Fundraiser::count();
+        $remaingCategoryFundraisers   = $temp - $firstCategoryFundraisers - $secondCategoryFundraisers - $thirdCategoryFundraisers;
+
+        $firstCategory  = Category::find($firstCategoryId);
+        $secondCategory = Category::find($secondCategoryId);
+        $thirdCategory  = Category::find($thirdCategoryId);
+
+        $firstCategoryName  = Category::select('name')->where('id', $firstCategoryId)->first();
+        $secondCategoryName = Category::select('name')->where('id', $secondCategoryId)->first();
+        $thirdCategoryName  = Category::select('name')->where('id', $thirdCategoryId)->first();
+
         return json_encode([
-            'status'                => 'success',
-            'firstCatFundNumber'    => $firstCategoryFundraisers,
-            'secondCatFundNumber'   => $secondCategoryFundraisers,
-            'thirdCatFundNumber'    => $thirdCategoryFundraisers,
-            'firstCategoryName'     => $first_category->name,
-            'secondCategoryName'    => $second_category->name,
-            'thirdCategoryName'     => $third_category->name,
-            'firstCategoryId'       => $first_category_id,
-            'secondCategoryId'      => $second_category_id,
-            'thirdCategoryId'       => $third_category_id,
+            'status'         => 'success',
+            'firstCategory'  => ['id' => $firstCategoryId,  'name' => $firstCategoryName,  'fundNumber' => $firstCategoryFundraisers],
+            'secondCategory' => ['id' => $secondCategoryId, 'name' => $secondCategoryName, 'fundNumber' => $secondCategoryFundraisers],
+            'thirdCategory'  => ['id' => $thirdCategoryId,  'name' => $thirdCategoryName,  'fundNumber' => $thirdCategoryFundraisers],
+            'remaingCatFund' => ['name' => 'Restanti Campagne Fondi', 'fundNumber' => $remaingCategoryFundraisers],
         ]);
         
     }
