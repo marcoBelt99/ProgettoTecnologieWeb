@@ -30,7 +30,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     /** @author Breg */
     Route::get('/analytics', 'AnalyticController@index')->name('analytics.index');
     Route::get('/analytics/chartData', 'AnalyticController@getChartDataDonPerDate')->name('analytics.get.harts.data');
-    Route::post('/analytics/updateChartsData', 'AnalyticController@updateChartDataDonPerDate')->name('analytics.update.charts.data');
+    Route::post('/analytics/updateChartsData', 'AnalyticController@updateChartDataDonPerDate')->name('analytics.update1.charts.data');
+    Route::post('/analytics/getThreeCatChartsData', 'AnalyticController@getDataCategoryCharts')->name('analytics.update2.charts.data');
 });
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */

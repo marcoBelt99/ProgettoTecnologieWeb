@@ -46,8 +46,53 @@
                             </canvas>
                         </div>
                     </div>
-                </div>  
+                </div>
+            </div>
 
+            {{-- Grafico delle tre categorie --}}
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        <p class="text">Seleziona tre categorie</p>
+                        <div class="row">
+                            <div class="form-group col">
+                                <p>1° Categoria</p>
+                                <select class="form-control" id="first-category-id" name="first-category-id">
+                                    <option selected>--- Seleziona la categoria ---</option>
+                                    @foreach ($donationCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <p>2° Categoria</p>
+                                <select class="form-control" id="second-category-id" name="second-category-id">
+                                    <option selected>--- Seleziona la categoria ---</option>
+                                    @foreach ($donationCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <p>3° Categoria</p>
+                                <select class="form-control" id="third-category-id" name="third-category-id">
+                                    <option selected>--- Seleziona la categoria ---</option>
+                                    @foreach ($donationCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        {{-- token --}}
+                        <input type="hidden" name="_token_3cat_form" id="_token_3cat_form" value="{{ csrf_token() }}">
+                    </form>
+
+                    <canvas id="threeCategoriesCharts">
+                        <!-- GRAPH GOES HERE -->
+                    </canvas>
+
+                </div>
             </div>
         </div>
         
@@ -59,12 +104,16 @@
     
     <script type="text/javascript">
         
+        /**
+         * @author @EnricoBreg
+         */
         $(document).ready(function() {
 
             var ctx1 = $('#donAmountPerDate');
             var ctx2 = $('#totDonPerDate');
+            var ctx3 = $('#threeCategoriesCharts');
 
-            var chart1, chart2;
+            var chart1, chart2, chart3;
             
             $.ajax( {
 
@@ -229,7 +278,6 @@
                     success: function (newChartsData, status) {
                         /* console.log(status); */
                         console.log(newChartsData);
-                        // MANCA L'AGGIORNAMENTO DEI DATIIIIIIIIIII
 
                         var newDates = [];
                         for(var i = 0; i < newChartsData.axisX.length; i++) {
@@ -261,8 +309,111 @@
                 
             });
 
+            // CHIAMATA AJAX PER POPOLARE IL GRAFICO DELLE TRE CATEGORIE
+            var first_category = $('#first-category-id').val();
+            var second_category = $('#second-category-id').val();
+            var third_category = $('#third-category-id').val();
+            var _token_3cat_form = $('#_token_3cat_form').val();
+
+            console.log(first_category);
+            console.log(second_category);
+            console.log(third_category);
+            console.log(_token_3cat_form);
+
+            $.ajax({
+                url: '/admin/analytics/getThreeCatChartsData',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    'first_catregory': first_category,
+                    'second_category': second_category,
+                    'third_category': third_category,
+                    '_token': _token_3cat_form
+                },
+                success: function(chartData, status) {
+                    // Only for debugging purposes
+                    /* console.log(status);
+                    console.log(chartData); */
+
+                    // Aggiornamento valori input boxes
+                    $('#first-category-id').val(chartData.firstCategoryId);
+                    $('#second-category-id').val(chartData.secondCategoryId);
+                    $('#third-category-id').val(chartData.thirdCategoryId);
+
+                    // Drawing new chart (pie chart)
+                    chart3 = new Chart(ctx3, {
+                        // chart type
+                        type: 'pie',
+                        // chart data
+                        data: {
+                            labels: [chartData.firstCategoryName, chartData.secondCategoryName, chartData.thirdCategoryName],
+                            datasets: [{
+                                label: 'Numeri di campagne fondi per categoria',
+                                
+                                backgroundColor: [
+                                    '#0000FF', 
+                                    '#FF0000', 
+                                    '#00FF00'],
+
+                                borderColor: [
+                                    '#0000FF',
+                                    '#FF0000', 
+                                    '#00FF00'],
+                                data: [
+                                    chartData.firstCatFundNumber, 
+                                    chartData.secondCatFundNumber, 
+                                    chartData.thirdCatFundNumber]
+                            }]
+                        },
+                        // chart options
+                        options: {
+                            // Legenda
+                            legend: {
+                                display: true,
+                                position: 'right',
+                                labels: {
+                                    fontColor: '#222222'
+                                }
+                            },
+                            // Responsive
+                            responsive: true,
+                            // Titolo
+                            title: {
+                                display: true,
+                                fontSize: 20,
+                                position: 'bottom',
+                                text: 'Numeri di donazioni per categoria'
+                            }
+                        }
+
+                    });
+
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                    alert("Error on AJAX POST request");
+                }
+            });
+
+            // Inizio evento on change per le cateorie
+            $('#first-category-id').on('change', function() {
+                $first_category_id  = $('#first-category-id').val();
+                $second_category_id = $('#second-category-id').val();
+                $third_category_id  = $('#third-category-id').val();
+                
+                // Only for debugging purpose
+                /* console.log($first_category_id);
+                console.log($second_category_id);
+                console.log($third_category_id); */
+
+                $.ajax({});
+
+            });
+
+
+
         }); // FINE EVENTO DOCUMENT READY
-    
+        
     </script>
 
 @endsection
