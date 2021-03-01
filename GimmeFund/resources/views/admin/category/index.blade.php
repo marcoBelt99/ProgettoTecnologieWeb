@@ -58,7 +58,7 @@
                                             <form action="{{ URL::action('Admin\CategoryController@destroy', $category->id) }}" method="POST">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" onclick="alert('Attenzione Operazione irreversibile')" class="btn btn-danger align-self-xl-center botton-center-category m-1">Elimina</button>
+                                                <button type="submit" onclick="alert('Attenzione Operazione irreversibile. Le raccolte fondi con questa categoria verranno aggiornate alla categoria ALTRO')" class="btn btn-danger align-self-xl-center botton-center-category m-1">Elimina</button>
                                             </form>
                                         @endif
                                     </td>

@@ -118,8 +118,18 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
+        // Prima di eliminare la voce aggiorno tutte le refenze nelle raccolte fondi
+        $fundraisers = Fundraiser::all()->where('category_id', $id);
+        foreach($fundraisers as $fr) {
+            $fr->category_id = 1; // Ricadono tutte sulla categoria altro
+            $fr->save();
+        }
+
+        // Infine elimino la categoria
         $category->delete();
 
+        // Ritorno la route
         return redirect()->route('admin.category.index');
     }
 }
