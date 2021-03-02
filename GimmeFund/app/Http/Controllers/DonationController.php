@@ -90,7 +90,8 @@ class DonationController extends Controller
             'donation' => $donation,
             'date' => date('d/m/Y', strtotime($donation->date)), 
             'donator_first_name' => $donator->first_name, 
-            'donator_last_name' => $donator->last_name
+            'donator_last_name' => $donator->last_name,
+            'gainedPoints' => $gainedPoints,
             ]);
         
         //return redirect('/fundraiser');

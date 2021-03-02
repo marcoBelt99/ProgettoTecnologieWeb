@@ -142,7 +142,7 @@
             
             @foreach ($visual as $v)
             <div class="card card-3">
-                <img class="card-img-top img-fluid" src="{{ $v->media_url }}">
+                <img class="card-img-top img-fluid" src="{{ $v->filename }}">
                 <div class="card-body">
                     <h4 class="card-title card-center">{{ $v->name }}</h4>                    
                     <p class="card-text">{{ substr($v->description, 0, 120) }}...</p>

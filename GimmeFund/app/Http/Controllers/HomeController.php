@@ -34,7 +34,7 @@ class HomeController extends Controller
             ];
         }
 
-        $visual = Fundraiser::select('id', 'name', 'description', 'media_url', 'starting_date')->orderBy('starting_date', 'desc')->limit(3)->get();
+        $visual = Fundraiser::select('id', 'name', 'description', 'filename', 'starting_date')->orderBy('starting_date', 'desc')->limit(3)->get();
         //dd($visual);
 
         return view('home')->with([

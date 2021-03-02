@@ -1,7 +1,8 @@
 {{-- Questa pagina contiene il layout che si replicherà in tutte le altre pagine  --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
+<div id="container">
+    <div id="header">
     <!-- immagine che compare nella scheda del browser -->
     <link rel="icon" href="{{ URL::asset('images/logoScheda.png')}}" type="image/png" />
     
@@ -38,11 +39,11 @@
     <link type="text/css" rel="stylesheet" href={{ URL::asset('css/stili.css') }}>
     <link type="text/css" rel="stylesheet" href={{ URL::asset('css/barraDiNavigazione.css') }}> {{-- Contiene lo stile specifico per la barra di navigazione --}}
     <!-- MDB -->
-{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/> --}}
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet"/> --}}
 
     @yield('style')
-</head>
-<body>
+    </div>
+    <div id="content">
     <div id="app">
         {{-- Navbar: (Marco: l'ho resa fixed-top, ossia che può sempre essere vista) --}}
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1 {{-- fixed-top --}}" >
@@ -87,21 +88,17 @@
                     </div>
 
                     <ul class="navbar-nav ml-auto">
-                        @if (Auth::user())
-                            <li class="nav-item" style="margin-top: 10px">
-                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">
-                                    Inizia la tua campagna ora!
-                                </a> 
-                                {{-- <a class="btn btn-info btn-sm btn-rounded px-3 my-0 d-none d-lg-inline-block"
-                                   href="{{ URL::action('FundraiserController@create') }}" target="_blank"
-                                   role="button"
-                                   style="background-color: #54be90 !important;">
-                                <span>Inizia la tua campagna ora!</span>
-                                </a> --}}
-                                {{-- <button type="button" class="btn btn-success btn-rounded" onclick=" window.open('fundraiser/create','_blank')">Success</button> --}}
-                            </li>
-    
-                        @endif
+                        <li class="nav-item" style="margin-top: 10px">
+                            @if (Auth::check() && Auth::user()->hasRole('user'))
+                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                            @else
+                            {{-- Se l'utente non è loggato nel sito --}}
+                                @if(!Auth::check())
+                                    <a href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                @endif
+                            @endif
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -176,43 +173,14 @@
     </div>
     {{-- Inclusione della sezione script della view --}}
     @yield('script')
-</body>
-<div class="footer" id="footer">
-    <div class="l-container">
-        <div class="footer-content">
-            <h2>
-                <a class="footer-logo" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
-            </h2>
-            {{-- Loghi --}}
-            <!-- Facebook -->
-            <a class="btn btn-primary" style="background-color: #3b5998" href="#!" role="button">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-
-            <!-- Twitter -->
-            <a class="btn btn-primary" style="background-color: #55acee" href="#!" role="button">
-                <i class="fab fa-twitter"></i>
-            </a>
-
-            <!-- Instagram -->
-            <a class="btn btn-primary" style="background-color: #ac2bac" href="#!" role="button">
-                <i class="fab fa-instagram"></i>
-            </a>
-
-            <!-- Linkedin -->
-            <a class="btn btn-primary" style="background-color: #0082ca" href="#!" role="button">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-
-            <!-- Youtube -->
-            <a class="btn btn-primary" style="background-color: #ed302f" href="#!" role="button">
-                <i {{-- Inclusione della sezione script della view --}}
-            class="fab fa-youtube"></i>
-            </a>
-
-            {{-- fine loghi --}}
-            <p class="lead footer-privacy">Cookies<br/>Policy<br/>&copy; All Rights Reserved</p>
-        </div>
+    </div>
+    <div id="footer">
+        <h2>
+            <a class="footer-logo" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+        </h2>
+      
+        {{-- fine loghi --}}
+        <p class="">Cookies - Policy - &copy;All Rights Reserved<p>
     </div>
 </div>
 </html>

@@ -18,6 +18,7 @@
                         {{ method_field('POST') }}
 
                         <div class="container">
+                            
                             <div class="row">
                                 <div class="col-10">
                                     <div class="form-group">
@@ -29,7 +30,7 @@
 
                                 <div class="col-2" style="margin-top: 32px">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary" id="submit-btn">AGGIUNGI</button>
+                                        <button type="submit" class="btn btn-primary" id="submit-btn">Aggiungi</button>
                                     </div>
                                 </div>
                             </div>
@@ -80,27 +81,25 @@
 
     <script type="text/javascript">
 
-        $('#success-mess-alert').hide();
         $('#err-mess-small').hide();
-        $('#error-mess-alert').hide();
 
         $(document).ready(function() {
 
             $('#category-name').on('click', function() {
-                $('#error-mess-alert').hide();
                 $('#err-mess-small').hide();
-                $('#success-mess-alert').hide();
             });
 
-            $('#submit-btn').on('click', function() {
+            $('#submit-btn').on('click', function(e) {
+                e.preventDefault();
 
                 var newCategoryName = $('#category-name').val();
-                var _token = $('#new-category-form-token').val();
+                var _token = $('#_new_category_token').val();
                 
                 if (newCategoryName.length == 0) {
                     $('#err-mess-small').text('Inserire un nome valido').show();
                     return false;
                 }
+
             });
         });
     </script>

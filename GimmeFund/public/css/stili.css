@@ -118,7 +118,11 @@ li:last-child {
 }
 
 .botton-success {
-    background-color: #54be90;
+    background-color: #38c172;
+}
+
+.botton-success:hover {
+    background-color: #2fa360;
 }
 
 #testochisiamo {
@@ -347,3 +351,63 @@ html {
 .main {
     min-height: 100% !important;
 }*/
+
+html,body{
+    height:100%;
+}
+
+#container{
+    position:relative; 
+    width: 100%; 
+    height: auto !important;
+    height: 100%;
+    min-height:100%;
+}
+
+
+#content{
+   /*  padding: 0 0 100px 0; */ /* commentata da marco */
+    width: auto;
+    margin: auto;
+    padding: 0 0 100px 0
+     /* min-height: 1300px; aggiunta marco */
+     /*  height: auto; aggiunta marco */
+}
+
+#footer{
+    background: #0D4EFA ;
+    bottom: 0;
+    height: 100px; /* prova marco min-height: 100px; */
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    /* height: auto;
+    margin-top: -300px;
+    Inizio prova marco */
+    /* padding-bottom: 10px; */
+    /* Fine prova marco */
+}
+   
+
+
+/* 
+.wrapper {
+    height: 100vh;
+    display: flex; */
+
+    /* Direction of the items, can be row or column */
+/*     flex-direction: column;
+} */
+
+/* main {
+    flex: 1;
+} */   /* height: 100vh;
+    display: flex; */
+
+    /* Direction of the items, can be row or column */
+/*     flex-direction: column;
+} */
+
+/* main {
+    flex: 1;
+} */

@@ -7,13 +7,13 @@
         <div class="row">
 
             <div class="container-fluid col-3" style="margin-top: 120px; position: absolute; left: 10px;">
-                <h5><a name="fast-nav" style="color: #0B7CDE">#</a> Navigazione veloce</h5>
+                <h5><a name="fast-nav" style="color: #000000">Menù dei grafici</h5>
                 <ul style="list-style-type: none;">
                     <li>
-                        <a href="#donations-per-date">Donazioni per date</a>
+                        <a href="#donations-per-date">Donazioni per intervallo di date</a>
                     </li>
                     <li>
-                        <a href="#three-categories-chart">Donazioni per date</a>
+                        <a href="#three-categories-chart">Raccolte fondi per categoria</a>
                     </li>
                 </ul>
             </div>

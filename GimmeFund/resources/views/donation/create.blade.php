@@ -8,31 +8,31 @@
             <p class="card-title"><h1>Dona</h1></p>
         </div>
         <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form action="{{ URL::action('DonationController@store') }}" method="POST">
                 {{ method_field('POST') }}
 
+                <div class="alert alert-success" role="alert" id="alert-container">
+                    <h4 class="alert-heading" id="alert-title">
+                        <!-- Il testo va qui -->
+                    </h4>
+                    <p id="alert-text">
+                        <!-- Il testo va qui -->
+                    </p>
+                </div>
+
                 <div id="warning-container col-md-12">
                     <div class="alert alert-danger text-center" id="warning-message">
+                        <!-- L'avviso va qui -->
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="amount">Importo</label>
-                    <div class="input-group mb-3">
+                    <div class="input-group col-mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">€</span>
                         </div>
-                        <input type="text" class="form-control text-center" name="amount" id="amount">
+                        <input type="text" class="form-control text-center" name="amount" id="amount" placeholder="1.00">
                         <small style='color: #ff0000' id='amount-err-mex'>  </small>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     </small>
                     
                     <div id="payment-method-form" style="margin-top: 50px; margin-bottom: 50px;"> 
-                        {{-- Form di pagamento --}}
+                        {{-- Il form di pagamento --}}
                     </div>
                 
                 </div>
@@ -76,9 +76,6 @@
                 <input type="hidden" name="date" id="date" value="{{ date('Y-m-d') }}">
 
                 <div class="col-md-6" style="margin-top: 20px">
-                    {{-- <button type="submit" class="btn btn-outline-primary" id="submit-btn">
-                        Dona
-                    </button> --}}
                     <a href="" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" id="submit-btn">
                         Dona
                     </a>
@@ -109,7 +106,7 @@
                     @foreach ($donations as $donation)
                         <tr>
                             <td>{{ $donators[$donation->id]->first_name }} {{ $donators[$donation->id]->last_name }}</td>
-                            <td>{{ $donation->amount }} €</td>
+                            <td>{{ number_format($donation->amount, 2, '.', '') }} €</td>
                             <td>{{ date('d/m/Y', strtotime($donation->date)) }}</td>
                         </tr>
                     @endforeach
@@ -129,6 +126,7 @@
 <script type="text/javascript">
 
     // Messaggi inizialmente nascosti
+    $('#alert-container').toggle(false);
     $('#warning-message').hide();
     $('small').hide();
 
@@ -136,8 +134,8 @@
 
         // Quanto l'utente sceglie il metodo di pagamento compare il form per quel dato metodo
         var duration = 300; // Durata animazione toggle
-        var chosen_method = '';
-        var html_ba_method = "\
+        var chosenMethod;
+        var htmlBaMethod = "\
         <div class='container card col-md-10'>\
             <div class='card-header bg-transparent'>\
                 <p class='card-title'><h5>Pagamento con Bonifico Bancario</h5></p>\
@@ -146,16 +144,16 @@
                 <div class='form-group'>\
                     <label for='holder'>Titolare del conto</label>\
                     <input type='text' id='ba-holder' name='ba-holder' class='form-control'>\
-                    <small style='color: #ff0000; ' id='holder-err-mex'>  </small>\
+                    <small style='color: #ff0000; ' id='ba-holder-err-mess'>  </small>\
                 </div>\
                 <div class='form-group'>\
                     <label for='bank-account-id'>IBAN</label>\
                     <input type='text' id='bank-account-id' name='bank-account-id' class='form-control'>\
-                    <small style='color: #ff0000' id='iban-err-mex'>  </small>\
+                    <small style='color: #ff0000' id='iban-err-mess'>  </small>\
                 </div>\
                 <div class='form-group'>\
                     <label for='beneficiary-name'>Causale</label>\
-                    <input type='text' id='casual' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser_title->name }}' readonly>\
+                    <input type='text' id='causal' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser_title->name }}' readonly>\
                 </div>\
                 <div class='form-group'>\
                     <label for='beneficiary-name'>Beneficiario</label>\
@@ -168,8 +166,8 @@
             </div>\
         </div>";
 
-        var html_cc_method = 
-        "<div class='container card col-md-10'>\
+        var htmlCcMethod = "\
+        <div class='container card col-md-10'>\
             <div class='card-header bg-transparent'>\
                 <p class='card-title'><h5>Pagamento con Carta Prepagata/Carta di Credito</h5></p>\
             </div>\
@@ -177,18 +175,18 @@
                 <div class='form-group'>\
                     <label for='cc-number'>Numero di carta</label>\
                     <input type='text' id='cc-number' name='cc-number' class='form-control'>\
-                    <small style='color: #ff0000' id='ccnum-err-mex'>  </small>\
+                    <small style='color: #ff0000' id='ccnum-err-mess'>  </small>\
                 </div>\
                 <div class='row'>\
                     <div class='form-group col-6'>\
                         <label for='exp-date'>Scadenza</label>\
-                        <input type='text' class='form-control' id='exp-date' name='exp-date' maxlength='5' placeholder='mm/aa'>\
-                        <small style='color: #ff0000' id='expdate-err-mex'>  </small>\
+                        <input type='text' class='form-control' id='exp-cc-date' name='exp-cc-date' maxlength='5' placeholder='mm/aa'>\
+                        <small style='color: #ff0000' id='exp-cc-date-err-mess'>  </small>\
                     </div>\
                     <div class='form-group col-6'>\
                         <label for='cvv-code'>CVV</label>\
                         <input type='text' id='cvv-code' name='cvv-code' class='form-control' maxlength='3' placeholder='123'>\
-                        <small style='color: #ff0000' id='cvv-err-mex'>  </small>\
+                        <small style='color: #ff0000' id='cvv-err-mess'>  </small>\
                     </div>\
                 </div>\
             </div>\
@@ -199,22 +197,27 @@
             $('#unchosen-payment-method-mess').hide();
         });
         
+        /* 
+         * slideUp del form di pagamento per bonifico bancario, sostituzione del contenuto e slideDown, 
+         * aggiornamento variabile per il metodo di pagamento scelto 
+         */
         $('input[type=radio][name=payment-method][id=radio-bank-transfer]').change(function() {
             $('#payment-method-form').slideUp(duration, function() { 
-                $('#payment-method-form').slideDown(duration).html(html_ba_method);
+                $('#payment-method-form').slideDown(duration).html(htmlBaMethod);
             });
-            chosen_method = "ba";
-        });
-        
-        $('input[type=radio][name=payment-method][id=radio-credit-card]').change(function() {
-            $('#payment-method-form').slideUp(duration, function() { 
-                $('#payment-method-form').slideDown(duration).html(html_cc_method);
-            });
-            chosen_method = "cc";
+            chosenMethod = "ba";
         });
 
-        // I messaggi di errore spariscono una volta che l'utente fa il focusIn
-        // COME FARE????? CI DEVO PENSARE ~ breg
+        /* 
+         * slideUp del form di pagamento per carta di credito, sostituzione del contenuto e slideDown, 
+         * aggiornamento variabile per il metodo di pagamento scelto 
+         */
+        $('input[type=radio][name=payment-method][id=radio-credit-card]').change(function() {
+            $('#payment-method-form').slideUp(duration, function() { 
+                $('#payment-method-form').slideDown(duration).html(htmlCcMethod);
+            });
+            chosenMethod = "cc";
+        });
 
         // ======================================= AJAX ======================================= //
         /* All'evento "click sul pulsante": 'Dona', aggiungi nella tabella di id #donations-table i dati */
@@ -229,54 +232,63 @@
                 return false;
             }
             
-            /** @author breg  */
-            // DA RICONTROLLARE
+            /** @author Breg  */
+            // +-------------------------------------------------------------------------------------------+
+            // |                                                                                           |
+            // |                               VALIDAZIONE FORM DI PAGAMENTO                               |
+            // |                                                                                           |
+            // +-------------------------------------------------------------------------------------------+
+            
+            // Prendo i dati dei vari campi del form di pagamento e li controllo
+            var baHolder = $('#ba-holder').val();
+            var baId = $('#bank-account-id').val();
+            var ccNumber = $('#cc-number').val();
+            var expCcDate = $('#exp-cc-date').val();
+            var cvvCode = $('#cvv-code').val();
 
-            /* // Verifica dei campi inseriti nel metodo di pagamento
-            if (chosen_method == "ba") { // CASO CHE IL METODO SCELTO SIA BANK TRANSFER
-                var ba_holder = $('input#ba-holder').val();
-                var ba_iban = $('input#bank-account-id').val();
-                // Controllo textbox titolare del conto corrente
-                if (ba_holder == '') {
-                    $('small#holder-err-mex').text("Inserire il titolare del conto").show();
-
-                    // Controllo textbox IBAN conto corrente
-                    if (ba_iban == '') {
-                        $('small#iban-err-mex').text("Inserire l'IBAN del conto").show();
+            // Controllo che tipo di metodo di pagamento sta usando l'utente
+            if (chosenMethod == 'ba') { // Bonifico bancario
+                if ((baHolder.length == 0) || (baId.length == 0)) { // Errore form di pagamento
+                    // Controllo cosa ha causato l'errore
+                    if (baHolder.length == 0) {
+                        $('#ba-holder-err-mess').text('Manca l\'interstatario del Conto Corrente').show();
                     }
+                    if (baId.length == 0) {
+                        $('#iban-err-mess').text('Manca l\'IBAN del conto corrente').show();
+                    }
+                    return false; // Se mi trovo qui vuol dire che avevo trovato un errore
                 }
-                // Interruzione evento submit
-                return false;
             }
 
-            if (chosen_method == "cc") { // CASO CHE IL METODO SCELTO SUA CREDIT CARD
-                var amount = $('input#amount').val();
-                var cc_number = $('input#cc-number').val();
-                var exp_date = $('input#exp-date').val();
-                var cvv_code = $('input#cvv-code').val();
-
-                $('input#amount-err-mex').text("Inserire l'importo della donazione").show();
-
-                if (cc_number == '') {
-                    $('small#ccnum-err-mex').text("Inserire il numero della carta").show();
-
-                    if (exp_date == '') {
-                        $('small#expdate-err-mex').text("Inserire il numero della carta").show();
+            // Controllo che tipo di metodo di pagamento sta usando l'utente
+            if (chosenMethod == 'cc') { // Carta di credito
+                if ((ccNumber.length == 0) || (expCcDate.length == 0) || (cvvCode.length == 0)) { // Errore form di pagamento
+                    // Controllo cosa ha causato l'errore
+                    if (ccNumber.length == 0) {
+                        $('#ccnum-err-mess').text('Manca il numero della Carta di Credito').show();
                     }
-
-                    if (cvv_code == '') {
-                        $('small#cvv-err-mex').text("Inserire il codice CVC/CVV").show();
+                    if (expCcDate.length == 0) {
+                        $('#exp-cc-date-err-mess').text('Manca la data di scadenza').show();
                     }
+                    if (cvvCode.length == 0) {
+                        $('#cvv-err-mess').text('Manca il codice CVV/CVC').show();
+                    }
+                    return false; // Se mi trovo qui vuol dire che avevo trovato un errore
                 }
-                // Interruzione del submit
-                return false;
-            } */
+            }
+
+            // +-------------------------------------------------------------------------------------------+
+            // |                                                                                           |
+            // |                          FINE VALIDAZIONE FORM DI PAGAMENTO                               |
+            // |                                                                                           |
+            // +-------------------------------------------------------------------------------------------+
+
 
             /* Variabili per la richiesta ajax post */
             var amount = $('#amount').val();
             var _token = $('#_token').val();
-            var user_id = $('#user_id').val();
-            var fundraiser_id = $('#fundraiser_id').val();
+            var userId = $('#user_id').val();
+            var fundraiserId = $('#fundraiser_id').val();
             var date = $('#date').val();
             
             $.ajax({
@@ -286,8 +298,8 @@
                 data: { 
                     'amount': amount,
                     '_token': _token,
-                    'user_id': user_id,
-                    'fundraiser_id': fundraiser_id,
+                    'user_id': userId,
+                    'fundraiser_id': fundraiserId,
                     'date': date
                 },
                 // In caso di successo:
@@ -300,8 +312,13 @@
                         var newRow = $('<tr/>').append(newColDonatorName).append(newColAmount).append(newColDate);
                         // Alcune prove su console:
                         $('#donations-table').prepend(newRow); // Ricorda: inserire gli id negli elementi HTML!!
-                        //console.log(newRow);
-                        //console.log("Hai donato!");
+                        
+                        $('#amount').val('0');
+                        // Avviso l'utente dell'effettiva donazione
+                        $('#alert-title').text('Grazie per aver donato!');
+                        $('#alert-text').text('La tua donazione è stata registrata con successo. Punti donazione guadagnati: ' + data.gainedPoints);
+                        $('#alert-text').append('. Visita altre raccolte fondi oppure consulta il tuo saldo punti donazioni.');
+                        $('#alert-container').slideDown();
                     }
                 }, 
                 // In caso di errore
@@ -317,6 +334,9 @@
                 }
             });
         }); // fine evento: "click sul pulsante 'Dona' "
+
+        
+
     }); // fine document ready function
 
 </script>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-/* In questo file posso mettere tutte le funzioni che voglio, e richiamarle dove voglio :) */
+/* In questo file posso mettere tutte le funzion{{ i ch }}e voglio, e richiamarle dove voglio :) */
 class FundraiserController extends Controller
 {
     /**
@@ -54,7 +54,6 @@ class FundraiserController extends Controller
      */
     public function store(Request $request)
     {
-
         $input = $request->all();
         // Uso sempre il metodo di Piva per la validazione
         $validator =$request->validate([
@@ -64,7 +63,7 @@ class FundraiserController extends Controller
             'goal' => 'required|numeric',
             'ending_date' => 'required',
             'description' => 'required',
-            'media_url' => 'required',
+            'uploadedfile' => 'required',
         ], 
         [
             // Messaggi di errore 
@@ -75,10 +74,28 @@ class FundraiserController extends Controller
             'goal.numeric' => 'L\'obiettivo deve essere un numero',
             'ending_date.required' => 'Manca la data di scandenza della campagna',
             'description.required' => 'Manca la descrizione della campagna',
-            'media_url.required' => 'Manca il link per foto',
+            'uploadedfile.required' => 'Carica la foto per procedere',
         ]);
         
-        Fundraiser::create($input);
+        // Variabili che servono per l'upload delle foto relative ad una nuova raccolta fondi
+        $file = $request->file('uploadedfile');
+        $filename = $file->getClientOriginalName();
+        $filename = time() . '_' . $filename;
+        
+        $path = $file->storeAs('public', $filename);
+        
+        Fundraiser::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'starting_date' => $request->starting_date,
+            'ending_date' => $request->ending_date,
+            'goal' => $request->goal,
+            'user_id' => $request->user_id,
+            'category_id' => $request->category_id,
+            'filename' => $filename,
+        ]);
+
+        
 
         return redirect('/fundraiser');
     }

@@ -10,7 +10,8 @@
         </div>     
         <div class="card col-12 card-home" style="padding: 0px">
             <div class="card-img-top text-center" style="padding: 10px">
-            <img src="{{ $fundraiser->media_url }}" class="img-fluid" alt="Image">
+                {{-- Upload immagine da device dell'utente --}}
+                <img style="width: 100%" src="{{ Storage::url("{$fundraiser->filename}") }}" alt="{{ $fundraiser->filename }}" />
             </div>
             <div class="card-header" style="height : 62px">
                 <p class="card-title" style="font-size: 25px; text-align: center">Descrizione</p>
@@ -37,7 +38,7 @@
                 {{-- Se l'utente è loggato ed è admin --}}
                 @if (Auth::check() && Auth::user()->hasRole('admin'))
                     <div class="text-center">
-                        <h3 style="color: red">Donazioni non autorizzate per l'utente Admin</h3>
+                        <h3 style="color: #FF0000">Donazioni non autorizzate per l'utente Admin</h3>
                     </div>
                 @endif
 

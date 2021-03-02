@@ -14,7 +14,8 @@
         </div>
     @endif
     
-    <form style="margin-top: 40px" action="{{ URL::action('FundraiserController@store') }}" method="POST">
+    <form style="margin-top: 40px" action="{{ URL::action('FundraiserController@store') }}" method="POST" 
+    enctype="multipart/form-data">
         {{-- Token per Laravel --}}
         @csrf
         {{ method_field('POST') }}
@@ -23,7 +24,7 @@
         
         <div class="form-group">
             <label for="author">Autore</label>
-           <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
+            <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" readonly>
             <small id="name" class="form-text text-muted">Questo è il nome che comparirà e i donatori vedranno</small>
         </div>
 
@@ -67,13 +68,13 @@
             </div>
         </div>
         
-        {{-- link media --}}
-        
+        {{-- upload immagine --}}
+
         <div class="form-group">
-            <label for="media_url">Link di una foto per la copertina della campagna</label>
-            <input type="text" class="form-control" id="media_url" name="media_url">
-            <small id="media_url" class="form-text text-muted">Copia il link di una immagine che per te ritieni importante</small>
+            <label for="author">Carica l'immagine in formato JPG o PNG</label>
+           <input type="file" class="form-control" id="uploadedfile" name="uploadedfile" value="">
         </div>
+        
 
         {{-- descrizione --}}
         <div class="form-group">

@@ -122,7 +122,7 @@ class CategoryController extends Controller
         // Prima di eliminare la voce aggiorno tutte le refenze nelle raccolte fondi
         $fundraisers = Fundraiser::all()->where('category_id', $id);
         foreach($fundraisers as $fr) {
-            $fr->category_id = 1; // Ricadono tutte sulla categoria altro
+            $fr->category_id = 1; // Ricadono tutte sulla categoria "altro"
             $fr->save();
         }
 

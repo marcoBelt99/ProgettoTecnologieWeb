@@ -23,7 +23,7 @@ class FundraisersTableSeeder extends Seeder
             È un momento difficile per tutti, mai come oggi l’unione deve fare la forza. Amo Bologna, la mia Città, e vorrei dare il mio contributo come penso anche tutti voi. Sono stato contattato da Fondazione Sant’Orsola e Policlinico di Sant’Orsola che ieri hanno lanciato la campagna “più forti INSIEME” e ho deciso di devolvere a loro tutto quello che insieme riusciremo a raccogliere per sostenere gli ospedali e il personale in prima linea nell’emergenza Coronavirus. Sarà mia premura tenervi informati sull’esito della donazione e condividere con voi la Lettera che invierò alla Fondazione al momento della donazione.',
             'starting_date' => '2020-01-30',
             'ending_date' => '2022-01-30',
-            'media_url' => 'https://images.gofundme.com/iUAI5wfF6U96vfdxTetXqlDgo9o=/720x405/https://d2g8igdw686xgo.cloudfront.net/46044960_1583830987419996_r.jpg',
+            'filename' => 'bolognaFR.jpg',
             'goal' => 2000000.00,
             'user_id' => rand(2,51),
             'category_id' => 13,
@@ -38,7 +38,7 @@ class FundraisersTableSeeder extends Seeder
             L\'invio della somma sarà documentato e postato sui social, così da dimostrare la buonafede di questa raccolta nata velocemente per far fronte a questa triste tragedia',
             'starting_date' => '2020-05-30',
             'ending_date' => '2022-07-30',
-            'media_url' => 'https://images.gofundme.com/UTo_8ZAhwkJroA-yyPhuv2VgvOY=/720x405/https://d2g8igdw686xgo.cloudfront.net/54325528_1612176346474376_r.jpeg',
+            'filename' => 'martinaFR.jpeg',
             'goal' => 20000.00,
             'user_id' => rand(2,51),
             'category_id' => 11,
@@ -57,7 +57,7 @@ class FundraisersTableSeeder extends Seeder
             Grazie',
             'starting_date' => '2020-01-25',
             'ending_date' => '2022-04-30',
-            'media_url' => 'https://images.gofundme.com/-ecGvsFfFg1tlLSLrwVTfQGPG5c=/720x405/https://d2g8igdw686xgo.cloudfront.net/54327046_1612189901425863_r.jpg',
+            'filename' =>'davideFR.jpg',
             'goal' => 100000.00,
             'user_id' => rand(2,51),
             'category_id' => 14,
@@ -83,7 +83,7 @@ class FundraisersTableSeeder extends Seeder
             Grazie a tutti coloro che vorranno contribuire per...un futuro per Stefano!',
             'starting_date' => '2020-05-30',
             'ending_date' => '2021-05-30',
-            'media_url' => 'https://images.gofundme.com/-xvtqXD4PSBK8YUMkc26UjrIwyI=/720x405/https://d2g8igdw686xgo.cloudfront.net/54334192_1612208662585349_r.jpeg',
+            'filename' => 'stefanoFR.jpeg',
             'goal' => 250000.00,
             'user_id' => rand(2,51),
             'category_id' => 5,
@@ -100,7 +100,7 @@ class FundraisersTableSeeder extends Seeder
             Antonio è nato il 23 luglio 1976 a Pioltello, dove continua a vivere, con la sua famiglia.',
             'starting_date' => '2020-02-10',
             'ending_date' => '2021-08-24',
-            'media_url' => 'https://images.gofundme.com/ej6akNy_9KP8uy3psTksq2KbkcI=/720x405/https://d2g8igdw686xgo.cloudfront.net/54197406_161168189363735_r.jpeg',
+            'filename' => 'tonyFR.jpeg',
             'goal' => 50000.00,
             'user_id' => rand(2,51),
             'category_id' => 14,
@@ -116,7 +116,7 @@ class FundraisersTableSeeder extends Seeder
             Ogni piccolo gesto è un grande regalo per il loro futuro.',
             'starting_date' => '2020-03-30',
             'ending_date' => '2022-01-22',
-            'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
+            'filename' => 'marcoFR.jpeg',
             'goal' => 25000.00,
             'user_id' => rand(2,51),
             'category_id' => 5,
@@ -127,22 +127,22 @@ class FundraisersTableSeeder extends Seeder
             'description' => 'Non lo so',
             'starting_date' => '2020-03-30',
             'ending_date' => '2022-01-22',
-            'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
+            'filename' => 'fabioFR.jpeg',
             'goal' => 150000.00,
             'user_id' => rand(2,51),
             'category_id' => 5,
         ]);
 
         // RACCOLTA FONDI DI PROVA
-        $fundraiser7 = Fundraiser::create([
+        /* $fundraiser8 = Fundraiser::create([
             'name' => 'Raccolta Fondi TEST',
             'description' => 'TEST',
             'starting_date' => '2020-01-01',
             'ending_date' => '2021-01-22',
-            'media_url' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
+            'filename' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
             'goal' => 150000.00,
             'user_id' => rand(2,51),
             'category_id' => 5,
-        ]);
+        ]); */
     }
 }
