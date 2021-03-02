@@ -132,7 +132,7 @@ li:last-child {
 #divp{
     border: 1px solid;
 }
-{{  }}
+
 .testoOmbreggiato { /* Serve per fare il testo ombreggiato delle card nella home */
     color: white;
     text-shadow: 2px 2px 4px #000000;
@@ -181,6 +181,11 @@ p {
 } */
 
 /* fine gestione pagina di informazioni */
+
+/* Gestione dropdown menu: */
+.dropdown:hover>.dropdown-menu { /* dropdown menu hover */
+    display: block;
+  }
 
 /* Menu a tendina della navbar */
 .dropbtn {

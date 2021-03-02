@@ -44,7 +44,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1" >
+        {{-- Navbar: (Marco: l'ho resa fixed-top, ossia che può sempre essere vista) --}}
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1 {{-- fixed-top --}}" >
             <div class="container-fluid">
                 <a class="navbar-brand navbar-a " href="{{ url('/') }}"> 
                     <i class="fas fa-hand-holding-usd"></i> {{ config('app.name', 'Laravel') }}
@@ -73,7 +74,7 @@
                         </li>
                        <li class="">
                             <a class="nav-link navbar-a" href="{{ url('/sostienici') }}" class="nav-link">
-                                <i class="fas fa-joint"></i> Sostienici
+                                <i class="fas fa-pray"></i> Sostienici
                             </a>
                             </a>
                         </li>
@@ -104,11 +105,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link navbar-a" href="{{ route('login') }}">Accedi</a>
+                                <a class="nav-link navbar-a" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Accedi</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link navbar-a" href="{{ route('register') }}">Registrati</a>
+                                    <a class="nav-link navbar-a" href="{{ route('register') }}"><i class="fas fa-pen"></i> Registrati</a>
                                 </li>
                             @endif
                         @else
@@ -146,7 +147,7 @@
                                             <i class="fas fa-money-bill-alt"></i> Saldo punti e Coupon
                                         </a>
                                         <a href="{{ URL::action('CouponController@index', Auth::user()) }}" class="dropdown-item navbar-a">
-                                            <i class="fas fa-money-bill-alt"></i> Le mie raccolte fondi
+                                            <i class="fas fa-donate"></i> Le mie raccolte fondi
                                         </a>
                                     @endif
                                     <a class="dropdown-item navbar-a" href="{{ route('logout') }}"
