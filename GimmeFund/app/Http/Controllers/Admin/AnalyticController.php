@@ -97,14 +97,12 @@ class AnalyticController extends Controller
      * @return json_encoded data for view
      */
     public function getDataCategoryCharts(Request $request) 
-    {
-        $firstCategoryId  = $request->first_category_id  ?? $firstCategoryId  = 14;
-        $secondCategoryId = $request->second_category_id ?? $secondCategoryId = 5;
-        $thirdCategoryId  = $request->third_category_id  ?? $thirdCategoryId  = 11;
+    {  
+        $categoriesNumber = Category::all()->count();
 
-        //return $firstCategoryId . ' ' . $secondCategoryId . ' ' . $thirdCategoryId;
-
-        /*  return $firstCategoryId . " " . $secondCategoryId . " ". $thirdCategoryId;  */
+        $firstCategoryId  = $request->first_category_id  ?? $firstCategoryId  = rand(1, $categoriesNumber);
+        $secondCategoryId = $request->second_category_id ?? $secondCategoryId = rand(1, $categoriesNumber);
+        $thirdCategoryId  = $request->third_category_id  ?? $thirdCategoryId  = rand(1, $categoriesNumber);
 
         $firstCategoryFundraisers     = Fundraiser::where('category_id', $firstCategoryId)->count();
         $secondCategoryFundraisers    = Fundraiser::where('category_id', $secondCategoryId)->count();
