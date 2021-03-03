@@ -9,7 +9,7 @@
                     <div class="card-head">
                         <h1 id="titlechisiamo">Come funziona GimmeFund</h1>
                     </div>
-                        <div class="card-body bd-callout-info bd-callout shadow p-3 mb-5 bg-white rounded margin-right: 10px">
+                        <div class="card-body bd-callout-info bd-callout shadow p-3 mb-5 bg-white rounded">
                             <p class="testoinfo textp">
                                 {{-- Cos'è il crowdfunding --}}
                                 Il crowdfunding offre l’opportunità di raccogliere fondi per i propri obiettivi o per aiutare gli altri a superare
