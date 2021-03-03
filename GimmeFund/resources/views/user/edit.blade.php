@@ -7,7 +7,7 @@
             
             {{ method_field('PUT') }}
 
-            <div class="card">
+            <div class="card-home">
                 <div class="card-header">
                     <h4>I miei dati personali</h4>
                     <div class="text-right" id="expand-card-body-btn1">
@@ -91,7 +91,7 @@
         {{-- Come cambiare la password => https://gist.github.com/Aslam97/4c320dac0c50f3bbfd64164ad8fdd61a --}}
         <form action="{{ URL::action('Auth\ChangePasswordController@update', Auth::user()) }}" method="POST">
 
-            <div class="card" style="margin-top: 10px; margin-bottom: 30px;">
+            <div class="card-home" style="margin-top: 10px; margin-bottom: 30px;">
                 <div class="card-header">
                     <h4>Cambia password</h4>
                     <div class="text-right" id="expand-card-body-btn2">

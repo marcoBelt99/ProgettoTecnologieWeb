@@ -16,6 +16,7 @@ class CreateDonationsTable extends Migration
             $table->id();
             $table->date('date');
             $table->float('amount');
+            $table->boolean('anonimate')->default(false);
             $table->integer('user_id')->foreign()->references('id')->on('users')->constrained()->onDelete('cascade');
             $table->integer('fundraiser_id')->foreign()->references('id')->on('fundraisers')->constrained()->onDelete('cascade');
             $table->timestamps();

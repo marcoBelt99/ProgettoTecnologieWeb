@@ -29,7 +29,7 @@ class DonationController extends Controller
     public function create($fundraiser_id)
     {
         /* Notare l'uso del metodo sortByDesc(), per ordinare le donazioni in ordine di data decrescenti*/
-        $fundraiser_title = Fundraiser::select('name')->where('id', $fundraiser_id)->first();
+        $fundraiser = Fundraiser::find($fundraiser_id);
         $donations = Donation::all()->where('fundraiser_id', $fundraiser_id)->sortByDesc('date');
         $donators = array();
     
@@ -40,8 +40,7 @@ class DonationController extends Controller
         }
 
         return view('donation.create')->with([
-            'fundraiser_id' => $fundraiser_id,
-            'fundraiser_title' => $fundraiser_title, 
+            'fundraiser' => $fundraiser, 
             'donations' => $donations,
             'donators' => $donators]);
     }
@@ -71,7 +70,14 @@ class DonationController extends Controller
             'amount.max' => 'L\'importo massimo della donazione è: 200.00 €'
         ]);
 
-        $donation = Donation::create($input);
+        //$donation = Donation::create($input);
+        $donation = Donation::create([
+            'date' => date('Y-m-d'),
+            'amount' => $request->amount,
+            'anonimate' => $request->anonimate,
+            'user_id' => $request->user_id,
+            'fundraiser_id' => $request->fundraiser_id
+        ]);
         
         // Analizzo 'amount' per ottenere, un determinato punteggio
         $amount = intval($request->amount);

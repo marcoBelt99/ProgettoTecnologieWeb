@@ -2,6 +2,11 @@
 
 @section('content')
 
+<div class="container py-4">
+    <p>Donazione a fovore della raccolta fondi:<p>
+        <h1>{{ $fundraiser->name }}</h1>
+</div>
+
 <div class="row container-fluid py-4">
     <div class="card col-md-6 card-home">
         <div class="card-header">
@@ -36,6 +41,15 @@
                         <small style='color: #ff0000' id='amount-err-mex'>  </small>
                     </div>
                 </div>
+
+                <div class="form-check">
+                    <div class="input-group col-mb-3">
+                        <input type="checkbox" class="form-check-input" name="anonimate" id="anonimate">
+                        <label for="anonimate">Dedidero che la mia donazione resti anonima</label>
+                    </div>
+                </div>
+
+                <hr>
                 
                 <p>Seleziona il metodo di pagamento:</p>
                 <div class="form-check">
@@ -67,13 +81,10 @@
                 <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                 
                 {{-- fundraiser id --}}
-                <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser_id }}"/>
+                <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser->id }}"/>
                 
                 {{-- user id --}}
                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                
-                {{-- date --}}
-                <input type="hidden" name="date" id="date" value="{{ date('Y-m-d') }}">
 
                 <div class="col-md-6" style="margin-top: 20px">
                     <a href="" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" id="submit-btn">
@@ -105,7 +116,11 @@
                 <tbody>
                     @foreach ($donations as $donation)
                         <tr>
-                            <td>{{ $donators[$donation->id]->first_name }} {{ $donators[$donation->id]->last_name }}</td>
+                            @if ($donation->anonimate == 1)
+                                <td><i class="far fa-user-circle"></i> Anonimo</td>
+                            @else
+                                <td><i class="far fa-user-circle"></i> {{ $donators[$donation->id]->first_name }} {{ $donators[$donation->id]->last_name }}</td>
+                            @endif
                             <td>{{ number_format($donation->amount, 2, '.', '') }} €</td>
                             <td>{{ date('d/m/Y', strtotime($donation->date)) }}</td>
                         </tr>
@@ -153,7 +168,7 @@
                 </div>\
                 <div class='form-group'>\
                     <label for='beneficiary-name'>Causale</label>\
-                    <input type='text' id='causal' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser_title->name }}' readonly>\
+                    <input type='text' id='causal' name='causal' class='form-control' value='Donazione raccolta fondi GimmeFund-Italia {{ $fundraiser->name }}' readonly>\
                 </div>\
                 <div class='form-group'>\
                     <label for='beneficiary-name'>Beneficiario</label>\
@@ -284,12 +299,17 @@
             // +-------------------------------------------------------------------------------------------+
 
 
+            // Controllo che l'utente voglia rimanere anonimo
+            var anonimate = 0;
+            if ($('input[id=anonimate]').is(':checked')) {
+                anonimate = 1;
+            }
+
             /* Variabili per la richiesta ajax post */
             var amount = $('#amount').val();
             var _token = $('#_token').val();
             var userId = $('#user_id').val();
             var fundraiserId = $('#fundraiser_id').val();
-            var date = $('#date').val();
             
             $.ajax({
                 url: '/donation', 
@@ -297,15 +317,24 @@
                 dataType: "json", // Dati da passare in formato json:
                 data: { 
                     'amount': amount,
-                    '_token': _token,
+                    'anonimate': anonimate,
                     'user_id': userId,
                     'fundraiser_id': fundraiserId,
-                    'date': date
+                    '_token': _token,
                 },
                 // In caso di successo:
                 success: function(data) {                        
                     if (data.status === 'success') {
-                        var newColDonatorName = $('<td/>', { text: data.donator_first_name + " " + data.donator_last_name});
+                        var newColDonatorName;
+                        var iconHtml = "<i class='far fa-user-circle'></i>";
+                        var userName = data.donator_first_name + " " + data.donator_last_name;
+
+                        if (anonimate == 1) {
+                            newColDonatorName = $('<td/>').append("<i class='far fa-user-circle'></i> " + "Anonimo")
+                        } else {
+                            newColDonatorName = $('<td/>').append("<i class='far fa-user-circle'></i> " + userName);
+                        }
+
                         var newColAmount = $('<td/>', { text: data.donation.amount + " €" });
                         var newColDate = $('<td/>', { text: data.date });
                         // Aggiungo la riga ritornata dalla chiamata Ajax
@@ -324,7 +353,7 @@
                 // In caso di errore
                 // xhr è l'errore ritornato (XHR => XmlHttpRequest)
                 error: function(xhr) {
-                    // 
+                    console.log(xhr);
                     if (xhr.status == 422) {
                         $('#warning-message').text(xhr.responseJSON.errors.amount).show();
                         console.log(xhr.responseJSON.errors.amount);

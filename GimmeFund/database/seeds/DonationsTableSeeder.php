@@ -30,6 +30,7 @@ class DonationsTableSeeder extends Seeder
                 'date' => Carbon::now()->subDays(rand(2,20))->format('Y-m-d'),
                 'amount' => $amount,
                 'user_id' => $user_id,
+                'anonimate' => rand(0,1),
                 'fundraiser_id' => rand(1,8),
             ]);
 
@@ -39,7 +40,6 @@ class DonationsTableSeeder extends Seeder
             $gainedPoints = $donationController->computeGainedPoints($amount);
             $userController = new UserController();
             $userController->addPoints($gainedPoints, $user_id);
-
         }
     }
 }

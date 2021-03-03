@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="container-fluid py-4">
-    <div class="card col-md-6 card-home">
+<div class="container-fluid col-8 py-4">
+    <div class="card card-home">
         <div class="card-header">
             <p class="card-title"><h1>Dona</h1></p>
         </div>
