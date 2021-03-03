@@ -22,7 +22,7 @@ class CreateFundraisersTable extends Migration
             $table->string('filename'); // foto (presa tramite input del form di tipo  upload)
             $table->float('goal', 10, 2); // obbiettivo
             $table->integer('user_id')->foreign()->references('id')->on('users')->contrained()->onDelete('cascade'); // chiave esterna dell'utente che ha aperto la raccolta fondi
-            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained(1)->onDelete('cascade')->onUpdate('cascade'); // chiave esterna della categoria */
+            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained(1)->onDelete('cascade')->onUpdate('cascade'); // chiave esterna della campagna */
             $table->timestamps();
         });
     }

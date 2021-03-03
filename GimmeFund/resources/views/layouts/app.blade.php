@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="csrf_token() }}">
     <meta name="author" content="Enrico Bregoli, Francesco Sindaco, Davide Zanellato, Marco Beltrame">
     <meta name="keywords" lang="it" content="donazioni, raccolte, fondi, campagne, aiuto ">
     <meta name="keywords" lang="en" content="donations,crowdfunding, money, fairtrade, help">
@@ -45,14 +45,9 @@
     <div id="app">
         {{-- Navbar: (Marco: l'ho resa fixed-top, ossia che può sempre essere vista) --}}
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1 {{-- fixed-top --}}" >
+            <img style="width: 5%" src="{{ asset("images/LOGONAVBAR.gif") }}">
             <div class="container-fluid">
-                <a class="navbar-brand navbar-a " href="{{ url('/') }}"> 
-                    <i class="fas fa-hand-holding-usd"></i> {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto"> 
@@ -86,13 +81,13 @@
                     </div>
 
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item" style="margin-top: 10px">
+                        <li class="nav-item" style="margin-top: 10px; margin-right: 30px;">
                             @if (Auth::check() && Auth::user()->hasRole('user'))
-                                <a href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                <a style="" href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
                             @else
                             {{-- Se l'utente non è loggato nel sito --}}
                                 @if(!Auth::check())
-                                    <a href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                    <a style="" href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
                                 @endif
                             @endif
                         </li>
@@ -141,7 +136,7 @@
                                         <a href="{{ URL::action('CouponController@index', Auth::user()) }}" class="dropdown-item navbar-a">
                                             <i class="fas fa-money-bill-alt"></i> Saldo punti e Coupon
                                         </a>
-                                        <a href="{{ URL::action('CouponController@index', Auth::user()) }}" class="dropdown-item navbar-a">
+                                        <a href="{{ URL::action('FundraiserController@getUserFundraisers', Auth::user()->id) }}" class="dropdown-item navbar-a">
                                             <i class="fas fa-donate"></i> Le mie raccolte fondi
                                         </a>
                                     @endif
@@ -173,12 +168,20 @@
     @yield('script')
     </div>
     <div id="footer">
+        <div style="float: left; margin-top: 40px; margin-left: 90px">
         <h2>
             <a class="footer-logo" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
         </h2>
-      
-        {{-- fine loghi --}}
-        <p class="">Cookies - Policy - &copy;All Rights Reserved<p>
+        </div>
+        <div style="float: right; margin-top: 60px; margin-right: 40px">
+            <ul id="menufoot">
+                <li class="footli"><a class="afoot">Cookies</a></li>
+                <li class="footli"><a class="afoot">&copy;All Rights Reserved</a></li>
+            </ul> 
+        </div> 
+        <div style="float: right; margin-top: 60px;">
+            <a style="padding-left: 4px" href="https://www.iubenda.com/privacy-policy/67847635" class="iubenda-white iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script></li>
+        </div>
     </div>
 </div>
 </html>

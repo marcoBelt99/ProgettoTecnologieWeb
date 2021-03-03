@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container py-4">
-    <p>Donazione a fovore della raccolta fondi:<p>
+    <h5>Donazione a fovore della raccolta fondi:</h5>
         <h1>{{ $fundraiser->name }}</h1>
 </div>
 
-<div class="row container-fluid py-4">
-    <div class="card col-md-6 card-home">
+<div class="container py-4">
+    <div class="row">
+    <div class="card col-md-6 card-home py-4">
         <div class="card-header">
-            <p class="card-title"><h1>Dona</h1></p>
+            <p class="card-title"><h2>Dona</h2></p>
         </div>
         <div class="card-body">
             <form action="{{ URL::action('DonationController@store') }}" method="POST">
@@ -87,7 +87,7 @@
                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
                 <div class="col-md-6" style="margin-top: 20px">
-                    <a href="" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" id="submit-btn">
+                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn">
                         Dona
                     </a>
                     <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-secondary">Indietro</a>
@@ -97,7 +97,7 @@
     </div>
     <div class="col-md-6 scrollTabellaDonazioni" id="donations-table-container">
         <div class="container col-md-11" style="margin-top: 30px">
-            <h3>Le donazioni più recenti</h3>
+            <h2>Le donazioni più recenti</h2>
         </div>
 
         {{-- Tabella delle donazioni effettuate dagli utenti --}}
@@ -130,6 +130,7 @@
             </table>
 
         </div>
+    </div>
     </div>
 </div>
 

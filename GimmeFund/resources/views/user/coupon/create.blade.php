@@ -3,10 +3,10 @@
 
 @section('content')
 
-<div class="container col-md-6 py-5">
+<div class="container col-md-6 py-4">
     <div class="card card-home">
         <div class="card-header">
-            <h1>Genera un nuovo Coupon</h1>
+            <h2>Genera un nuovo Coupon</h2>
         </div>
         <div class="card-text ml-2 mt-3">
             <p> I buoni generati verranno salvati nella sezione "I miei Buoni"</p>
@@ -56,7 +56,7 @@
             
             <div class="row">
                 <div class="btn-group px-2">
-                    <button type="submit" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Genera Buono</button>
+                    <button type="submit" class="btn btn-success">Genera Buono</button>
                 </div>
                 <div class="btn-group">
                     <a href="{{ URL::action('CouponController@index', Auth::user()->id) }}" class="btn btn-secondary">Indietro</a>

@@ -59,7 +59,7 @@
                 {{-- hidden fields --}}
 
                 <div class="col-md-6" style="margin-top: 20px">
-                    <a href="" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" id="submit-btn">
+                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn">
                         Dona
                     </a>
                 </div>

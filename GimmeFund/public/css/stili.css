@@ -6,7 +6,6 @@
 .navbar1 {
     background: #0D4EFA !important;
     text-decoration: none !important;
-    font-family: "Nunito";
     /* top:0; */ /* Aggiunto  */
    /*  position: fixed; */  /* Make it stick/fixed */
    /*  transition: top 0.3s; */  /* Transition effect when sliding down (and up) */
@@ -33,7 +32,6 @@
 
 .navbar-li {
     background: #0B7CDE;
-    font-family: "Nunito";
 }
 
 .linav {
@@ -82,9 +80,6 @@ li:last-child {
     font-family: "Nunito";
 }
 
-.footer-logo:hover {
-    font-size: 48px;
-}
 
 .footer-privacy { 
     color: white !important;
@@ -118,11 +113,11 @@ li:last-child {
 }
 
 .botton-success {
-    background-color: #38c172;
+    background-color: #00c6f5;
 }
 
 .botton-success:hover {
-    background-color: #2fa360;
+    background-color: #0bded0;
 }
 
 #testochisiamo {
@@ -375,7 +370,7 @@ html,body{
 }
 
 #footer{
-    background: #0D4EFA ;
+    background: #0D4EFA; 
     bottom: 0;
     height: 100px; /* prova marco min-height: 100px; */
     position: absolute;
@@ -411,3 +406,86 @@ html,body{
 /* main {
     flex: 1;
 } */
+
+
+/* Stili footer */
+#menufoot {
+    list-style-type: none;
+}
+
+.footli {
+    display: inline;
+}
+
+.afoot {
+    color:white !important; /* Colore del testo */ 
+    text-decoration:none !important; /* Nessuna decorazione */
+    padding:4px 20px; /* Distanza tra le singole voci */
+}
+
+
+/* Bottoni utente per modificare le proprie campagne */
+.bottomfundra{
+    width: 80%; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+/* Logo */
+#logo {
+    display: block; 
+    margin-right: auto; 
+    margin-left: auto;  
+    margin-top: 40px;
+}
+
+/* Informazioni */
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem
+}
+
+.bd-callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem
+}
+
+.bd-callout p:last-child {
+    margin-bottom: 0
+}
+
+.bd-callout code {
+    border-radius: .25rem
+}
+
+.bd-callout+.bd-callout {
+    margin-top: -.25rem
+}
+
+.bd-callout-info {
+    border-left-color: #5bc0de
+}
+
+.bd-callout-info h4 {
+    color: #5bc0de
+}
+
+.bd-callout-warning {
+    border-left-color: #f0ad4e
+}
+
+.bd-callout-warning h4 {
+    color: #f0ad4e
+}
+
+.bd-callout-danger {
+    border-left-color: #d9534f
+}
+
+.bd-callout-danger h4 {
+    color: #d9534f
+}

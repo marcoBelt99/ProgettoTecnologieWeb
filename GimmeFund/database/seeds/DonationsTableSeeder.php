@@ -31,7 +31,7 @@ class DonationsTableSeeder extends Seeder
                 'amount' => $amount,
                 'user_id' => $user_id,
                 'anonimate' => rand(0,1),
-                'fundraiser_id' => rand(1,8),
+                'fundraiser_id' => rand(1,7),
             ]);
 
             // Punti utente

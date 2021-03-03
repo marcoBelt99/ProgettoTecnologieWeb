@@ -30,7 +30,7 @@
 
                                 <div class="col-2" style="margin-top: 32px">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary" id="submit-btn">Aggiungi</button>
+                                        <button type="submit" class="btn btn-success" id="submit-btn">Aggiungi</button>
                                     </div>
                                 </div>
                             </div>

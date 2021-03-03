@@ -9,7 +9,7 @@
 
             <div class="card-home">
                 <div class="card-header">
-                    <h4>I miei dati personali</h4>
+                    <h2>I miei dati personali</h2>
                     <div class="text-right" id="expand-card-body-btn1">
                         <a href="#" style="font-size: 16px">Mostra/Nascondi</a>
                     </div>
@@ -17,10 +17,6 @@
                 <div class="card-body" id="user-infos-cont">
                     {{-- Div messaggio successo cambio password --}}
                     <div class="container alert alert-success col-md-10" role="alert" id="changes-success"></div>
-                    <p>Modifica e salva i tuoi dati</p>
-                    
-                    <hr>
-
                     {{-- Nome - Cognome --}}
                     <div class="form-group row">
 
@@ -80,7 +76,7 @@
                     </div>
 
                     <div class="form-group">
-                        <a href="#" id="submit-btn" class="btn btn-primary col-md-2">Salva</a>
+                        <a href="#" id="submit-btn" class="btn btn-success col-md-2">Salva</a>
                     </div>
                     
                 </div>
@@ -93,7 +89,7 @@
 
             <div class="card-home" style="margin-top: 10px; margin-bottom: 30px;">
                 <div class="card-header">
-                    <h4>Cambia password</h4>
+                    <h2>Cambia password</h2>
                     <div class="text-right" id="expand-card-body-btn2">
                         <a href="#" style="font-size: 16px">Mostra/Nascondi</a>
                     </div>
@@ -107,16 +103,11 @@
                     <div class="container alert alert-danger col-md-10" role="alert" id="pass-error-message">
                         Se l'errore persiste contattare l'assistenza di GimmeFund.
                     </div>
-
-                    <p>Modifica la tua password</p>
-                    
-                    <hr>
-
                     {{-- Old Password --}}
                     <div class="form-group row">
                         <div class="col-md-10">
                             <label for="old-password" class="form-check-label">Vecchia password</label>
-                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password">
+                            <input type="password" name="old-password" id="old-password" class="form-control col-md-5" placeholder="Vecchia Password" autocomplete>
                             <small id="old-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                     </div>
@@ -126,13 +117,13 @@
 
                         <div class="col-md-6">
                             <label for="new-password" class="form-check-label">Nuova Password</label>
-                            <input type="password" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password">
+                            <input type="password" class="form-control" name="new-password" id="new-password" placeholder="Nuova Password" autocomplete>
                             <small id="new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
                         
                         <div class="col-6">
                             <label for="confirm-password" class="form-check-label">Conferma Nuova Password</label>
-                            <input type="password" class="form-control" name="confirm-new-password" id="confirm-new-password" placeholder="Conferma Nuova Password">
+                            <input type="password" class="form-control" name="confirm-new-password" id="confirm-new-password" placeholder="Conferma Nuova Password" autocomplete>
                             <small id="confirm-new-pass-error-mess" style="color: #ff0000"> </small>
                         </div>
 
@@ -144,7 +135,7 @@
 
 
                     <div class="form-group">
-                        <a id="pass-submit-btn" type="submit" class="btn btn-primary col-md-2">Salva</a>
+                        <a id="pass-submit-btn" type="submit" class="btn btn-success col-md-2">Salva</a>
                     </div>
                     
                 </div>

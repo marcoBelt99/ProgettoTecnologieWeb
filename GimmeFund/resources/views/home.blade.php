@@ -18,16 +18,12 @@
         <li data-target="#slider_business" data-slide-to="1" class="active">
 
         </li>
-        <li data-target="#slider_business" data-slide-to="2" class="active">
+        <li data-target="#slider_business" data-slide-to="2" class="active"></li>
 
-        </li>
-        <li data-target="#slider_business" data-slide-to="3" class="active">
-
-        </li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            {{-- Inserisco un'immagine: crowdfunding1 --}}
+            {{-- Inserisco un'immagine:crowdfunding1 --}}
             {{-- {{ asset('img/crowdfunding1.jpg') }} --}}
             {{-- {{ HTML::image('img/crowdfunding1.jpg', 'alt text', array('class' => 'css-class')) }} --}}
             {{-- src="{{URL::asset('/image/crowdfunding1.jpg')}}" --}}
@@ -55,14 +51,6 @@
                 <h5 class="testoOmbreggiato">Un gruppo di nostri volontari al lavoro per aiutare le persone in difficoltà</h5>
             </div>
         </div>
-        <div class="carousel-item">
-            
-            <img class="d-block img-fluid" src="{{ asset("images/photo-9.jpg") }}">
-            <div class="carousel-caption d-none d-md-block">
-                <h2 class="testoOmbreggiato">Entra a far parte di GimmeFund!</h2>
-                <h5 class="testoOmbreggiato">Il tuo gesto vale doppio!</h5>
-            </div>
-        </div>
     </div>
     <a class="carousel-control-prev" href="#slider_business" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -74,9 +62,7 @@
     </a>
 </div>
 
-
-<img style="display: block; margin-right: auto; margin-left: auto; margin-bottom: -20px; margin-top: 40px" src="{{ asset("images/logo.png") }}">
-
+<img id="logo" src="{{ asset("images/logo.png") }}">
 
 <div class="container mt-3 mb-3 py-5"> 
     <div class="row">
@@ -141,8 +127,8 @@
         <div class="card-group card-home card-3">
             
             @foreach ($visual as $v)
-            <div class="card card-3">
-                <img class="card-img-top img-fluid" src="{{ $v->filename }}">
+            <div class="card card-3" >
+                <img class="card-img-top img-fluid" style="height: 48%" src="{{ Storage::url("{$v->filename}") }}">
                 <div class="card-body">
                     <h4 class="card-title card-center">{{ $v->name }}</h4>                    
                     <p class="card-text">{{ substr($v->description, 0, 120) }}...</p>

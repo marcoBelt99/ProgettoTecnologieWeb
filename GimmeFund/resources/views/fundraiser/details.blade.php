@@ -51,5 +51,30 @@
             
             @endif
         </div>
+
+
+        <h2 style="margin-top: 60px">Commenti sulla raccolta fondi</h2>
+
+        <table class="table table-striped" id="donations-table">
+                {{-- Intestazione tabella --}}
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nominativo</th>
+                        <th scope="col">Commento</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+                {{-- Corpo tabella --}}
+                <tbody>
+                    
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    
+                </tbody>
+        </table>
+
     </div>
 @endsection

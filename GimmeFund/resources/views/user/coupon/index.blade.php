@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container col-6 py-4">
+
+<div class="container col-md-6 py-4">
     <div class="card card-home">
         <div class="card-header">
             {{-- <pre>Punti accumulati</pre> --}}
-            <h4>Punti accumulati</h4>
+            <h2>Punti accumulati</h2>
         </div>
         <div class="card-body">
             <p>Saldo punti: <kbd>{{ $user->points }}</kbd></p>
@@ -17,14 +18,14 @@
             <div class="row">
                 <div class="btn-group" role="group">
                     @if ($user->points > 0)
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Converti i punti</button></a>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-success">Converti i punti</button></a>
                     @else
-                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success" disabled>Converti i punti</button></a>
+                        <a href="{{ URL::action('CouponController@create') }}" ><button class="btn btn-success" disabled>Converti i punti</button></a>
                         {{-- <p style="color: #ff0000;">Saldo insufficiente per la convesione</p> --}}
                     @endif
                 </div>
                 <div class="btn-group px-2" role="group">
-                    <button class="btn btn-primary px-3 align-self-xl-center botton-center" id="my-coupon-btn">I miei buoni</button>
+                    <button class="btn btn-primary" id="my-coupon-btn">I miei buoni</button>
                 </div>
             </div>
         </div>
@@ -32,9 +33,9 @@
 </div>
 
 <div class="container col-6" id="coupon-cont">
-    <div class="container col-md-6">
+    <div class="container col-md-8">
         <table class="table table-striped">
-            <thead>
+            <thead class="thead-dark">
               <tr>
                 <th scope="col">Codice Coupon</th>
                 <th scope="col">Sconto di (euro)</th>

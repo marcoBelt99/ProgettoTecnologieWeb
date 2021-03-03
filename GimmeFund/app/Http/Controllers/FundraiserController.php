@@ -6,6 +6,7 @@ use App\Fundraiser;
 use App\Donation;
 use App\Category;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -83,7 +84,7 @@ class FundraiserController extends Controller
         $filename = time() . '_' . $filename;
         
         $path = $file->storeAs('public', $filename);
-        
+
         Fundraiser::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -94,8 +95,6 @@ class FundraiserController extends Controller
             'category_id' => $request->category_id,
             'filename' => $filename,
         ]);
-
-        
 
         return redirect('/fundraiser');
     }
@@ -125,8 +124,10 @@ class FundraiserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Fundraiser $fundraiser)
-    {
-        //
+    {   
+        $categories = Category::all();
+
+        return view('user.fundraiser.edit')->with(['fundraiser'  => $fundraiser, 'categories' => $categories]);
     }
 
     /**
@@ -138,7 +139,25 @@ class FundraiserController extends Controller
      */
     public function update(Request $request, Fundraiser $fundraiser)
     {
-        //
+        // modifica dei campi
+        $fundraiser->name = $request->name;
+        $fundraiser->description = $request->description;
+        $fundraiser->goal = $request->goal;
+        $fundraiser->category_id = $request->category_id;
+        
+        // Modifica foto
+        if (isset($request->uploadedfile)) {
+            $file = $request->file('uploadedfile');
+            $filename = $file->getClientOriginalName();
+            $filename = time() . '_' . $filename;
+            $path = $file->storeAs('public', $filename);
+            $fundraiser->filename = $filename;
+        }
+
+        // Salvataggio raccolta fondi
+        $fundraiser->save();
+        
+        return redirect()->route('user.fundraisers', Auth::user()->id)->with(['message' => 'Modifiche salvate con successo']);
     }
 
     /**
@@ -149,6 +168,35 @@ class FundraiserController extends Controller
      */
     public function destroy(Fundraiser $fundraiser)
     {
-        //
+        $fundraiserToDelete = Fundraiser::find($fundraiser->id);
+        $fundraiserToDelete->delete();
+
+        return redirect()->route('user.fundraisers', Auth::user()->id);        
+    }
+
+    public function getUserFundraisers($userId) 
+    {
+        $userFundraisers = Fundraiser::where('user_id', $userId)->get();
+        $totDonationsFundraiser = [];
+        $numberDonationsFundraiser = [];
+
+        foreach($userFundraisers as $uf) {
+            $totDonationsFundraiser += [
+                $uf->id => Donation::where('fundraiser_id', $uf->id)->sum('amount')
+            ];
+            $numberDonationsFundraiser += [
+                $uf->id => Donation::where('fundraiser_id', $uf->id)->count()
+            ];
+        }
+
+        $today = date('Y-m-d'); 
+
+        return view('user.fundraiser.userFundraisers')
+            ->with([
+                'userFundraisers' => $userFundraisers,
+                'totDonationsPerFundraiser' => $totDonationsFundraiser,
+                'numberDonationsFundraiser' => $numberDonationsFundraiser,
+                'today' => $today
+                ]);
     }
 }

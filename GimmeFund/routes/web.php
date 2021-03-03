@@ -42,7 +42,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 });
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
-Route::resource('/fundraiser', 'FundraiserController');//->middleware('can:make-fundraiser');
+Route::resource('/fundraiser', 'FundraiserController', ['except' => ['update', 'show']]);//->middleware('can:make-fundraiser');
+Route::put('/update/fundraiser/{fundraiser}', 'FundraiserController@update')->name('fundraiser.update');
+Route::get('/show/fundraiser/{fundraiser}', 'FundraiserController@show')->name('show.fundraiser');
+Route::get('/fundraiser/user/{user}', 'FundraiserController@getUserFundraisers')->name('user.fundraisers');
 
 /* Creo la rotta per la pagina fundraiser ed il middleware per differenziare sempre le azioni per utente ordinario e admin */
 Route::get('/donation/{id}', 'DonationController@create')->name('donation.create')->middleware(['auth', 'can:make-donation']);
