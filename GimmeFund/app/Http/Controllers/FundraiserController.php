@@ -96,7 +96,7 @@ class FundraiserController extends Controller
             'filename' => $filename,
         ]);
 
-        return redirect('/fundraiser');
+        return redirect()->route('user.fundraisers', Auth::user()->id);
     }
 
     /**
@@ -144,6 +144,7 @@ class FundraiserController extends Controller
         $fundraiser->description = $request->description;
         $fundraiser->goal = $request->goal;
         $fundraiser->category_id = $request->category_id;
+        $fundraiser->ending_date = $request->ending_date;
         
         // Modifica foto
         if (isset($request->uploadedfile)) {
@@ -169,7 +170,10 @@ class FundraiserController extends Controller
     public function destroy(Fundraiser $fundraiser)
     {
         $fundraiserToDelete = Fundraiser::find($fundraiser->id);
-        $fundraiserToDelete->delete();
+        Storage::delete($fundraiser->filename); // Cancellazione foto caricata 
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! riguardare la cancellazione del file
+
+        $fundraiserToDelete->delete(); // Cancellazione campagna
 
         return redirect()->route('user.fundraisers', Auth::user()->id);        
     }

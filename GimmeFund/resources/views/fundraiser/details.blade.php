@@ -32,13 +32,20 @@
         <div class="py-4">
 
             {{-- Controllo login utente/ruolo utente --}}
-            @if (Auth::check() && Auth::user()->hasRole('user'))
+            @if (Auth::check() && Auth::user()->hasRole('user') && Auth::user()->id != $fundraiser->user_id)
                 <a style="text-decoration: none"href="{{ URL::action('DonationController@create', $fundraiser->id) }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
             @else
                 {{-- Se l'utente è loggato ed è admin --}}
                 @if (Auth::check() && Auth::user()->hasRole('admin'))
                     <div class="text-center">
                         <h3 style="color: #FF0000">Donazioni non autorizzate per l'utente Admin</h3>
+                    </div>
+                @endif
+
+                {{-- Utente creatore della campagna --}}
+                @if (Auth::user()->id == $fundraiser->user_id)
+                    <div class="text-center">
+                        <h3 style="color: #FF0000">Non puoi donare alla tua stessa racconta fondi</h3>
                     </div>
                 @endif
 

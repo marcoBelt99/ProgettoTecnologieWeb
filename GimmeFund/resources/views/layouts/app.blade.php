@@ -96,7 +96,7 @@
                             @else
                             {{-- Se l'utente non è loggato nel sito allora non può vedere il bottone (link) di nome 'Inizia la tua campagna ora!' --}}
                                 @if(!Auth::check())
-                                    <a {{-- style="" --}} href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success" data-toggle="tooltip" data-placement="bottom" title="Crea la tua raccolta fondi>Inizia la tua campagna ora!</a>
+                                    <a {{-- style="" --}} href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success" data-toggle="tooltip" data-placement="bottom" title="Crea la tua raccolta fondi">Inizia la tua campagna ora!</a>
                                 @endif
                             @endif
                         </li>

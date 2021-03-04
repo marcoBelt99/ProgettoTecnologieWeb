@@ -50,10 +50,9 @@
                     </select>
                 </div>
 
-                {{-- goal - data fine --}}
-
+                {{-- goal --}}
                 <div class="row">
-                    <div class=" form-group col-6">
+                    <div class="form-group col-6">
                         <label for="goal">Obiettivo</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -61,23 +60,30 @@
                             </div>
                         <input type="text" class="form-control" name="goal" id="goal" value="{{ $fundraiser->goal }}">
                     </div>
-                    <small id="name" class="form-text text-muted">Obiettivo attuale: {{ number_format($fundraiser->goal, 2, '.',' ') }} €</small>
+                    <small id="name" class="form-text text-muted">Obiettivo attuale: {{ number_format($fundraiser->goal, 2, '.',' ') }} €</small>                    
                 </div>
-    
-                {{-- upload immagine --}}
 
+                {{-- upload immagine --}}
                 <div class="form-group col-6">
                     <label for="author">Carica l'immagine in formato JPG o PNG</label>
                     <input type="file" class="form-control" id="uploadedfile" name="uploadedfile">
                     <small class="form-text text-muted">Foto attuale: {{ substr($fundraiser->filename, 11, 255) }}</small>
                 </div>
     
+                {{-- data di fine--}}
+                <div class="form-group col-6">
+                    <label for="ending_date">Data di fine</label>
+                    <input type="date" class="form-control" name="ending_date" id="ending_date" value="{{ $fundraiser->ending_date }}" onchange="dateCheck()">
+                    <small class="form-text text-muted">Prolunga la data di chiusura della tua campagna per continuare a ricevere donazioni</small>
+                    <small class="form-text" style="color: #ff0000;" id="invalid-date-err"></small>
+                </div>
 
                 {{-- descrizione --}}
                 <div class="form-group col-12">
                     <label for="description">Descrizione</label>
                     <textarea class="form-control" id="description" name ="description" rows="6">{{ $fundraiser->description }}</textarea>
                     <small id="description" class="form-text text-muted">Modifica la descrizione</small>
+                    <small class="form-text" style="color: #ff0000;" id="invalid-descr-err"></small>
                 </div>
 
                 {{-- Bottoni --}}
@@ -94,6 +100,46 @@
 @endsection
 
 @section('script')
+
 <script type="text/javascript">
+
+    $('#invalid-date-err').hide();
+    $('#invalid-descr-err').hide();
+    
+    var isDateValid = true;
+    var initialDate = new Date($('#ending_date').val());
+    
+    function dateCheck() {
+        var endingDate = new Date($('#ending_date').val());        
+
+        if (initialDate > endingDate) {
+            $('#invalid-date-err').text('Inserire una data valida successiva al: ' + initialDate.getDate() + '/' + initialDate.getMonth() + '/' + initialDate.getFullYear()).show();
+            isDateValid = false;
+        } else {
+            isDateValid = true;
+            $('#invalid-date-err').hide();
+        }
+    }
+
+    $(document).ready(function () {
+
+        $('#description').on('click', function () {
+            $('#invalid-descr-err').hide();
+        });
+
+        $('#submit-btn').on('click', function () {
+
+            if ($('#description').val().length == 0) {
+                $('#invalid-descr-err').text('Inserisci una descrizione valida').show();
+                return false;
+            }
+
+            if (!isDateValid) 
+                return false;
+        });
+    });
+    
+
 </script>
+
 @endsection

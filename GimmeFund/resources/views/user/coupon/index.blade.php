@@ -12,7 +12,6 @@
             <p>Saldo punti: <kbd>{{ $user->points }}</kbd></p>
             {{-- <p>Saldo punti: {{ $user->points }}</p> --}}
             <p>Numero di donazioni effettuate: <kbd>{{ $n_donations }}</kbd></p>
-            {{-- <p>Numero di donazioni effettuate: {{ $n_donations }}</p> --}}
             
             {{-- Criterio per poter accedere alla conversione dei punti in buono sconto --}}
             <div class="row">
@@ -34,24 +33,29 @@
 
 <div class="container col-6" id="coupon-cont">
     <div class="container col-md-8">
-        <table class="table table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Codice Coupon</th>
-                <th scope="col">Sconto di (euro)</th>
-                <th scope="col">Creato il</th>
-              </tr>
-            </thead>
-            <tbody>
-                @foreach ($usrCoupons as $usrCoupon)
+        <h3>I miei Coupon Fair Trade</h3>
+        @if (count($usrCoupons) == 0)
+            <p>Sembra che non ci siano ancora coupon. Converti subito i tuoi punti e fai aquisti equosolidali!</p>
+        @else
+            <table class="table table-striped">
+                <thead class="thead-dark">
                 <tr>
-                    <td>{{ $usrCoupon->code }}</td>
-                    <td>{{ number_format($usrCoupon->amount, 2, ',', '.') }}</td>
-                    <td>{{ date('d/m/Y', strtotime($usrCoupon->created_at)) }}</td>
+                    <th scope="col">Codice Coupon</th>
+                    <th scope="col">Sconto di (euro)</th>
+                    <th scope="col">Creato il</th>
                 </tr>
-                @endforeach
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                    @foreach ($usrCoupons as $usrCoupon)
+                    <tr>
+                        <td>{{ $usrCoupon->code }}</td>
+                        <td>{{ number_format($usrCoupon->amount, 2, ',', '.') }}</td>
+                        <td>{{ date('d/m/Y', strtotime($usrCoupon->created_at)) }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>    
+        @endif
     </div>
 </div>
 

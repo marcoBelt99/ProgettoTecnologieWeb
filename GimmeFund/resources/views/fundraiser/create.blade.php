@@ -68,7 +68,8 @@
 
                     <div class="form-group col-6">
                         <label for="category">Data di fine</label>
-                        <input type="date" name="ending_date" id="name" class="form-control">
+                        <input type="date" name="ending_date" id="ending_date" class="form-control">
+                        <small id="invalid-date-err" class="form-text" style="color: #ff0000"></small>
                     </div>
         
                     {{-- upload immagine --}}
@@ -95,7 +96,7 @@
 
                     {{-- Bottoni --}}
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success" id="submit-btn">
                             Crea la tua campagna!
                         </button>
                         <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-secondary">Indietro</a>
@@ -105,4 +106,35 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    
+    <script type="text/javascript">
+        var isDateValid = true;
+        $(document).ready(function() {
+            $('#ending_date').on('change', function() {
+                    
+                var today = new Date();
+                var endingDate = new Date($('#ending_date').val());
+
+                if (endingDate < today) {
+                    isDateValid = false;
+                    $('#invalid-date-err').text('Inserire una data successiva a quella odierna').show();
+                } else {
+                    isDateValid = true;
+                    $('#invalid-date-err').hide();
+                }    
+            });
+            
+            $('#submit-btn').on('click', function() {
+                if (isDateValid == false) {
+                    return false;
+                }
+            })
+        });
+
+
+    </script>
+
 @endsection
