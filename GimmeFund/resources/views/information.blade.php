@@ -94,7 +94,8 @@ realizzazione di progetti, eventualmente in cambio di un utile o di un prodotto.
 {{-- ####################################################################################### --}}
 {{-- ####################################################################################### --}}
 {{-- ####################################################################################### --}}
-
+<br>
+<br>
 <div class="container-fluid content-row">
     <div class="row row-mb-4">
         <div class="col-sm-12 col-lg-6">
@@ -154,5 +155,7 @@ realizzazione di progetti, eventualmente in cambio di un utile o di un prodotto.
     </div> {{-- fine row --}}
         
 </div>
+<br>
+<br>
 
 @endsection
