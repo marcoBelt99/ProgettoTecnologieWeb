@@ -43,31 +43,39 @@
     </div>
     <div id="content">
     <div id="app">
-        {{-- Navbar: (Marco: l'ho resa fixed-top, ossia che può sempre essere vista) --}}
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar1 {{-- fixed-top --}}" >
-            <img style="width: 5%" src="{{ asset("images/LOGONAVBAR.gif") }}">
+        {{-- Navbar: ( 'fixed-top' significa che la navbar può sempre essere vista quando si fa lo scroll verso il basso) --}}
+        <nav class="navbar navbar-default navbar-expand-md navbar-light bg-white shadow-sm navbar1 {{-- fixed-top --}}" >
             <div class="container-fluid">
-                
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{-- LOGO --}}
+                <a class="navbar-brand" href="{{ url('/') }}"> 
+                    {{-- <i class="fas fa-hand-holding-usd"></i> {{ config('app.name', 'Laravel') }} --}}
+                    <img  class="zoom" {{-- style="width: 5%"  --}} src="{{ asset("images/LOGONAVBAR.gif") }}" width=50 height=50 alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                {{-- FINE LOGO --}}
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"> {{-- Gli elementi di questo div, quando la barra è collassata, si spostano tutti dentro un hamburger menu --}}
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto"> 
                         <li class="">
-                            <a class="nav-link navbar-a" href="{{ URL::action('FundraiserController@index') }}" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ URL::action('FundraiserController@index') }}" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Visualizza tutte le raccolte fondi">
                                 <i class="fas fa-hands-helping"></i> Raccolte fondi
                             </a> 
                         </li >
                          <li class="">
-                            <a class="nav-link navbar-a" href="{{ url('/information') }}" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ url('/information') }}" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Scopri cos'è il crowdfunding">
                                 <i class="fas fa-info-circle"></i> Informazioni
                             </a>
                         </li>
                         <li class="">
-                            <a class="nav-link navbar-a" href="{{ url('/whoweare') }}" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ url('/whoweare') }}" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Scopri chi siamo">
                                 <i class="fas fa-users"></i> Chi siamo
                             </a>
                         </li>
                        <li class="">
-                            <a class="nav-link navbar-a" href="{{ url('/sostienici') }}" class="nav-link">
+                            <a class="nav-link navbar-a" href="{{ url('/sostienici') }}" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Aiutaci a sostenere la nostra startup">
                                 <i class="fas fa-pray"></i> Sostienici
                             </a>
                             </a>
@@ -82,12 +90,13 @@
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item" style="margin-top: 10px; margin-right: 30px;">
+                            {{-- Se l'utente è loggato ed il suo ruolo è quello di utente ordinario, allora mostragli il bottone (link) di nome 'Inizia la tua campagna ora!' --}}
                             @if (Auth::check() && Auth::user()->hasRole('user'))
-                                <a style="" href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                <a {{-- style="" --}} href="{{ URL::action('FundraiserController@create') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success" data-toggle="tooltip" data-placement="bottom" title="Crea la tua raccolta fondi!">Inizia la tua campagna ora!</a>
                             @else
-                            {{-- Se l'utente non è loggato nel sito --}}
+                            {{-- Se l'utente non è loggato nel sito allora non può vedere il bottone (link) di nome 'Inizia la tua campagna ora!' --}}
                                 @if(!Auth::check())
-                                    <a style="" href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success">Inizia la tua campagna ora!</a>
+                                    <a {{-- style="" --}} href="{{ route('login') }}" class="btn btn-info btn-rounded d-none d-lg-inline-block botton-success" data-toggle="tooltip" data-placement="bottom" title="Crea la tua raccolta fondi>Inizia la tua campagna ora!</a>
                                 @endif
                             @endif
                         </li>
@@ -166,7 +175,7 @@
     </div>
     {{-- Inclusione della sezione script della view --}}
     @yield('script')
-    </div>
+</div>
     <div id="footer">
         <div style="float: left; margin-top: 40px; margin-left: 90px">
         <h2>

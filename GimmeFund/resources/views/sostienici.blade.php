@@ -5,7 +5,7 @@
 <div class="container-fluid col-8 py-4">
     <div class="card card-home">
         <div class="card-header">
-            <p class="card-title"><h1>Dona</h1></p>
+            <p class="card-title"><h1>Sostieni GimmeFund con una donazione</h1></p>
         </div>
         <div class="card-body">
             <form>
@@ -59,7 +59,7 @@
                 {{-- hidden fields --}}
 
                 <div class="col-md-6" style="margin-top: 20px">
-                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn">
+                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn" onclick="jump('alert-container')">
                         Dona
                     </a>
                 </div>
@@ -231,7 +231,7 @@
             $('#amount').val('0');
             // Avviso l'utente dell'effettiva donazione
             $('#alert-title').text('Grazie per aver donato!');
-            $('#alert-text').text('La tua donazione è stata registrata con successo.');
+            $('#alert-text').text('La tua donazione è stata registrata con successo. ');
             $('#alert-text').append('GimmeFund ti ringrazia!');
             $('#alert-container').show();
 
@@ -244,6 +244,18 @@
         }); // fine evento: "click sul pulsante 'Dona' "
 
     }); // fine document ready function
+
+   /** 
+    *   @author 'Marco' 
+    *   @param 'h' id di quanto saltare
+    *   Salta all'id 'h' grazie al calcolo di un offset che salvo in 'top'
+    *   In questo caso, la userò per saltare all'alter-container per vedere il risultato della donazione.
+    *   All'evento click sul bottone (link) di nome 'Dona' sarà attivata questa funzione
+    */
+   function jump(h){
+    var top = document.getElementById(h).offsetTop;
+    window.scrollTo(0, top);
+}
 
 </script>
 

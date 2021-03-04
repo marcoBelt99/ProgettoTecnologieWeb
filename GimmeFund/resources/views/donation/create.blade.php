@@ -87,7 +87,7 @@
                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
 
                 <div class="col-md-6" style="margin-top: 20px">
-                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn">
+                    <a href="" class="btn btn-success btn-rounded px-3 my-0 d-none d-lg-inline-block" id="submit-btn" onclick="jump('alert-container')">
                         Dona
                     </a>
                     <a href="{{ URL::action('FundraiserController@index') }}" class="btn btn-secondary">Indietro</a>
@@ -368,6 +368,18 @@
         
 
     }); // fine document ready function
+
+    /** 
+    *   @author 'Marco' 
+    *   @param 'h' id di quanto saltare
+    *   Salta all'id 'h' grazie al calcolo di un offset che salvo in 'top'
+    *   In questo caso, la userò per saltare all'alter-container per vedere il risultato della donazione.
+    *   All'evento click sul bottone (link) di nome 'Dona' sarà attivata questa funzione
+    */
+   function jump(h){
+    var top = document.getElementById(h).offsetTop;
+    window.scrollTo(0, top);
+}
 
 </script>
 
