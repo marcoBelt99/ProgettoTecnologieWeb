@@ -16,9 +16,8 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->longText('text');
-            $table->date('date');
             $table->integer('user_id')->foreign()->references('id')->on('users')->contrained()->onDelete('cascade'); /* Chiave esterna dell'utente */
-            $table->integer('category_id')->foreign()->references('id')->on('categories')->contrained(1)->onDelete('cascade')->onUpdate('cascade'); /* Chiave esterna della campagna */
+            $table->integer('fundraiser_id')->foreign()->references('id')->on('fundraisers')->contrained(1)->onDelete('cascade')->onUpdate('cascade'); /* Chiave esterna della campagna */
             $table->timestamps();
         });
     }

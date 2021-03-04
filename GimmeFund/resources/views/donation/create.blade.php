@@ -376,10 +376,10 @@
     *   In questo caso, la userò per saltare all'alter-container per vedere il risultato della donazione.
     *   All'evento click sul bottone (link) di nome 'Dona' sarà attivata questa funzione
     */
-   function jump(h){
-    var top = document.getElementById(h).offsetTop;
-    window.scrollTo(0, top);
-}
+    function jump(h){
+        var top = document.getElementById(h).offsetTop;
+        window.scrollTo(0, top);
+    }
 
 </script>
 

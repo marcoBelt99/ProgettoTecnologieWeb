@@ -6,8 +6,6 @@
 {{-- Sezione del contenuto --}}
 @section('content')
 
-{{-- <p> {{ count($visual) }}</p> --}}
-{{-- <p>{{ $visual[0][0]['{{ medi }}a_url']}}</p> --}}
 
 <!-- Carousel -->
 <div id="slider_business" class="carousel slide" data-ride="carousel">
@@ -63,7 +61,6 @@
 </div>
 
 <img id="logo" src="{{ asset("images/logo.png") }}">
-
 <div class="container mt-3 mb-3 py-5"> 
     <div class="row">
         <div class="card-group show shadow p-3 mb-5 bg-body rounded">
@@ -125,7 +122,6 @@
 <div class="container text-muted py-5">
     <div class="row">
         <div class="card-group card-home card-3">
-            
             @foreach ($visual as $v)
             <div class="card card-3" >
                 <img class="card-img-top img-fluid" style="height: 48%" src="{{ Storage::url("{$v->filename}") }}">

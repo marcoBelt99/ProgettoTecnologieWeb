@@ -9,7 +9,10 @@
             <h2>Genera un nuovo Coupon</h2>
         </div>
         <div class="card-text ml-2 mt-3">
-            <p> I buoni generati verranno salvati nella sezione "I miei Buoni"</p>
+            <p> I buoni generati verranno salvati nella sezione "I miei Buoni".
+                I Coupons generati sono spendibili presso punti vendita di prodotti FairTrade.
+            </p>
+            <img src="{{ Storage::url("FairTrade-Logo.svg.png") }}" style="height: 100px; width: 100px;">
         </div>
         <div class="card-body">
             @if ($errors->any())

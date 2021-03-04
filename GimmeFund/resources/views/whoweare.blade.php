@@ -11,7 +11,6 @@
                 <img class="card-img-top img-fluid" src="{{ asset('images/marco.jpg') }}">
                 <div class="card-body">
                     <h2 class="card-title card-center">Marco</h2>
-                    <p class="card-text card-center" style="font-size: 20px">Soprannominato "Bootstrap Man"</p>
                 </div>
             </div>
         </div>
@@ -20,7 +19,6 @@
                 <img class="card-img-top img-fluid" src="{{ asset('images/davide.jpg') }}">
                 <div class="card-body">
                     <h2 class="card-title card-center">Davide</h2>
-                    <p class="card-text card-center" style="font-size: 20px">Conosciuto come "Css God"</p>
                 </div>
             </div>
         </div>
@@ -29,7 +27,6 @@
                 <img class="card-img-top img-fluid" style="height: 40%" src="{{ asset('images/francesco.jpg') }}">
                 <div class="card-body">
                     <h2 class="card-title card-center">Francesco</h2>
-                    <p class="card-text card-center" style="font-size: 20px">Colui che seleziona compulsivamente le immagini
                     </p>
                 </div>
             </div>
@@ -39,7 +36,6 @@
                 <img class="card-img-top img-fluid" style="height: 40%" src="{{ asset('images/enrico.jpg') }}">
                 <div class="card-body">
                     <h2 class="card-title card-center">Enrico</h2>
-                    <p class="card-text card-center" style="font-size: 20px">Il collezionista di errori Javascript</p>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Comment;
 
-class CommentssTableSeeder extends Seeder
+class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,26 +13,27 @@ class CommentssTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Fundraiser::truncate();
+        Comment::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        $MAX_COMMENTS_NUMBER = 100;
 
-        $comment1 = Comment::create([
-            'text' => 'prova',
-            'date' => '2021-03-03',
-            'user_id' => rand(2,51),
-            'category_id' => 1,
-
-        ]);
-
-        $comment2 = Comment::create([
-            'text' => 'djeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-            'date' => '2021-02-25',
-            'user_id' => rand(2,51),
-            'category_id' => 2,
-        ]);
-
-
+        $textComment = [
+            'Bellissima Iniziativa Complimenti', 
+            'Io ho donato e ne sono felice!', 
+            'Spero raggiungiante l\'obbiettivo',
+            'Io ho donato!',
+            'Bellissima iniziattiva!',
+            'Bellissima idea!'
+        ];
+        
+        for($i = 0; i < $MAX_COMMENTS_NUMBER; $i++){
+            Comment::create([
+                'text' => $textComment[rand(0, count($textComment)-1)],
+                'user_id' => rand(2, 51),
+                'fundraiser_id' => rand(1,9)
+            ]);
+        }
         
     }
 }

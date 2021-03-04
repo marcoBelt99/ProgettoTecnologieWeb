@@ -35,7 +35,7 @@
             @if (Auth::check() && Auth::user()->hasRole('user') && Auth::user()->id != $fundraiser->user_id)
                 <a style="text-decoration: none"href="{{ URL::action('DonationController@create', $fundraiser->id) }}"><button type="button" class="btn btn-success btn-lg btn-block">Dona ora</button></a>
             @else
-                {{-- Se l'utente è loggato ed è admin --}}
+                {{-- Se utente è loggato ed è admin --}}
                 @if (Auth::check() && Auth::user()->hasRole('admin'))
                     <div class="text-center">
                         <h3 style="color: #FF0000">Donazioni non autorizzate per l'utente Admin</h3>
@@ -43,13 +43,13 @@
                 @endif
 
                 {{-- Utente creatore della campagna --}}
-                @if (Auth::user()->id == $fundraiser->user_id)
+                @if (Auth::check() && Auth::user()->id == $fundraiser->user_id)
                     <div class="text-center">
                         <h3 style="color: #FF0000">Non puoi donare alla tua stessa racconta fondi</h3>
                     </div>
                 @endif
 
-                {{-- Se l'utente non è loggato nel sito --}}
+                {{-- Se utente non è loggato nel sito --}}
                 @if(!Auth::check())
                     <div class="text text-center">
                         <a href="{{ route('login') }}" class="btn btn-info btn-rounded px-3 my-0 d-none d-lg-inline-block botton-success">Accedi per iniziare a donare!</a>
@@ -60,28 +60,149 @@
         </div>
 
 
-        <h2 style="margin-top: 60px">Commenti sulla raccolta fondi</h2>
-
-        <table class="table table-striped" id="donations-table">
-                {{-- Intestazione tabella --}}
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Nominativo</th>
-                        <th scope="col">Commento</th>
-                        <th scope="col">Data</th>
-                    </tr>
-                </thead>
+        <h3 style="margin-top: 60px"><i class="far fa-comments"></i> Commenti</h3>
+        <table class="table table-striped card-home" id="comments-table">
+                
                 {{-- Corpo tabella --}}
                 <tbody>
-                    
+                    @foreach ($comments as $c)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><i class='far fa-user-circle'></i> {{ $users[$c->id]->first_name }} {{ $users[$c->id]->last_name }}</td>
+                            <td>{{ $c->text }}</td>
+                            <td>{{ date('d/m/Y', strtotime($c->created_at)) }}</td>
+                            <td>
+                                @if (Auth::check() && Auth::user()->id == $c->user_id)
+                                    <a class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $c->id }}" onclick="deleteComment(this)"><i class="fas fa-trash-alt"></i></a>
+                                @endif
+                            </td>
                         </tr>
-                    
+                    @endforeach        
                 </tbody>
         </table>
+        @if (Auth::check())
+            <form action="{{ URL::action('CommentController@store') }}" method="POST">
+                {{ method_field('POST') }}
+                <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser->id }}">
+                <div class="container" style="margin-bottom: 20px">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <textarea name="comment_text" id="comment_text" class="form-control" placeholder="Scrivi un commento!" cols="100%" rows="2"></textarea>
+                            <small id="invalid-comment-text-err" class="form-text" style="color: #ff0000"></small>
+                        </div>
 
+                        <div class="col-md-2">
+                            <button type="submit" id="add-comment-btn" name="add-comment-btn" class="btn btn-success m-1">Aggiungi</button>
+                        </div>
+                    </div>
+                </div>
+            </form>            
+        @else
+            <div class="text-center py-3">
+                <p>Accedi o Registrati per lasciare un commento</p>
+            </div>
+        @endif
+        
     </div>
+@endsection
+
+@section('script')
+
+<script type="text/javascript">
+
+    $('#invalid-comment-text-err').hide();
+    
+    function deleteComment(html) {
+
+        var row = $(html).parents('tr');
+        var commentId = $(html).attr('data-id');
+        var _token = $('#_token').val();
+
+        $.ajax({
+            url: '/comment/' + commentId,
+            type: 'DELETE',
+            dataType: 'json',
+            data: {
+                'commentId': commentId,
+                '_token': _token
+            },
+            success: function (data, status) {
+                if (data.status == 'success') {
+                    $(row).remove();
+                }
+            },
+            error: function (data, status) {
+                console.log(data);
+                console.log(status);
+            }
+        });
+    }
+
+
+    $(document).ready(function() {
+
+        $('#comment-text').on('click', function () {
+            $('#invalid-comment-text-err').hide();
+        });
+
+        $('#add-comment-btn').on('click', function (e) {
+            e.preventDefault();
+
+            var commentText = $('#comment_text').val();
+            var userId = $('#user_id').val();
+            var fundraiserId = $('#fundraiser_id').val();
+            var _token = $('#_token').val();
+            
+            if (commentText.length == 0) {
+                $('#invalid-comment-text-err').text('Inserisci un commento prima di pubblicare').show();
+                return false;
+            }
+
+            $.ajax({
+                url: '/comment',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'commentText': commentText,
+                    'userId': userId,
+                    'fundraiserId': fundraiserId,
+                    '_token': _token
+                },
+                success: function (data, status) {
+
+                    if (data.status == 'success') { // Success
+                        // Costruire la riga della tabella con il nuovo commento
+                        var userName = data.user.firstName + " " + data.user.lastName;
+                        var newUserNameCol = $('<td/>').append("<i class='far fa-user-circle'></i> " + userName);
+                        var newTextCol = $('<td/>', {text: data.comment.text}).append('</a>')
+                        var newDateCol = $('<td/>', {text: data.date})
+                        var newRow = $('<tr/>').append(newUserNameCol).append(newTextCol).append(newDateCol);
+                        
+                        
+                        var delAction = $('<a/>', {
+                            html: '<i class="fas fa-trash-alt"></i>',
+                            class: "btn btn-outline-danger btn-sm btn-delete",
+                            onclick: 'deleteComment(this)',
+                            "data-id": data.comment.id
+                        });
+                        
+                        var newColAction = $('<td/>').append(delAction);
+                        newRow.append(newColAction);
+                        $('#comments-table').append(newRow);
+                        
+                        // Reset del commento
+                        $('#comment_text').val('');
+                    }
+                },
+                error: function (data, status) {
+                    console.log(data);
+                    console.log(status);
+                }
+            });
+        });
+    });
+
+</script>
+
 @endsection

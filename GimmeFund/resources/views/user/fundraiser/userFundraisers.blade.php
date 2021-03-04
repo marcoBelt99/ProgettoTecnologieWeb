@@ -9,13 +9,13 @@
     
 
     @if (count($userFundraisers) == 0)
-        <div class="col-sm-6 py-4">
+        <div class="col-md-6 py-4">
             <p>Sembra non ci siano raccolte fondi a tuo nome. <a href="{{ URL::action('FundraiserController@create') }}">Creane subito una!</a></p>
         </div>
     
     @else
         @foreach ($userFundraisers as $uf)
-            <div class="col-sm-3 py-4">
+            <div class="col-md-3 py-4">
                 <div class="card-home" style="width: 18rem; height: auto;">
                     <img style="height: 200px" src="{{ Storage::url("{$uf->filename}") }}" class="card-img-top" alt="{{ $uf->filename }}">
                     <div class="card-body">

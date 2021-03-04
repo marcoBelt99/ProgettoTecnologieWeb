@@ -45,11 +45,12 @@
                     <div class="form-group">
                         <label for="category">Categoria</label>
                         <select class="form-control" id="category_id" name="category_id">
-                            <option selected>--- Seleziona la categoria ---</option>
+                            <option value="0" selected>--- Seleziona la categoria ---</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
+                        <small id="invalid-category-err" class="form-text" style="color: #ff0000"></small>
                     </div>
 
                     {{-- goal - data fine --}}
@@ -67,7 +68,7 @@
         
 
                     <div class="form-group col-6">
-                        <label for="category">Data di fine</label>
+                        <label for="category">Le donazioni chiudono il</label>
                         <input type="date" name="ending_date" id="ending_date" class="form-control">
                         <small id="invalid-date-err" class="form-text" style="color: #ff0000"></small>
                     </div>
@@ -111,10 +112,13 @@
 @section('script')
     
     <script type="text/javascript">
+        
+        $('#invalid-category-err').hide();
+
         var isDateValid = true;
         $(document).ready(function() {
             $('#ending_date').on('change', function() {
-                    
+                
                 var today = new Date();
                 var endingDate = new Date($('#ending_date').val());
 
@@ -127,7 +131,20 @@
                 }    
             });
             
+            $('#category_id').on('click', function () {
+                $('#invalid-category-err').hide(); 
+            });
+
             $('#submit-btn').on('click', function() {
+
+                var categoryId = $('#category_id').val();
+
+                if (categoryId == 0) {
+                    $('#invalid-category-err').text('Scegli una categoria').show();
+                    return false;
+                }
+
+
                 if (isDateValid == false) {
                     return false;
                 }

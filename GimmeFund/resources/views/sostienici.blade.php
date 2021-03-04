@@ -29,8 +29,8 @@
                             <span class="input-group-text">€</span>
                         </div>
                         <input type="text" class="form-control text-center" name="amount" id="amount" placeholder="1.00">
-                        <small style='color: #ff0000' id='amount-err-mex'>  </small>
                     </div>
+                    <small style='color: #ff0000' id='amount-err-mex'>  </small>
                 </div>
                 
                 <p>Seleziona il metodo di pagamento:</p>
@@ -82,6 +82,10 @@
     $('#important-advice').show();
 
     $(document).ready(function() {
+
+        $('#amount').on('click', function () {
+            $('#amount-err-mex').hide();
+        });
 
         // Quanto l'utente sceglie il metodo di pagamento compare il form per quel dato metodo
         var duration = 300; // Durata animazione toggle
@@ -177,6 +181,12 @@
             
             e.preventDefault();
             
+            var amount = $('#amount').val();
+            if (amount <= 0) {
+                $('#amount-err-mex').text('Inserisci un importo valido').show();
+            }
+
+
             /* Controllo che sia stato scelta una delle due opzioni del checkbox */
             if (!($('input[type=radio]').is(':checked'))) {
                 $('#unchosen-payment-method-mess').text('Scegli il metodo di pagamento per proseguire').show();
@@ -228,7 +238,7 @@
                 }
             }
 
-            $('#amount').val('0');
+            $('#amount').val('');
             // Avviso l'utente dell'effettiva donazione
             $('#alert-title').text('Grazie per aver donato!');
             $('#alert-text').text('La tua donazione è stata registrata con successo. ');
@@ -252,10 +262,10 @@
     *   In questo caso, la userò per saltare all'alter-container per vedere il risultato della donazione.
     *   All'evento click sul bottone (link) di nome 'Dona' sarà attivata questa funzione
     */
-   function jump(h){
-    var top = document.getElementById(h).offsetTop;
-    window.scrollTo(0, top);
-}
+    function jump(h){
+        var top = document.getElementById(h).offsetTop;
+        window.scrollTo(0, top);
+    }
 
 </script>
 

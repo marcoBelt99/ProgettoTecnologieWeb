@@ -28,10 +28,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     /* Creo la rotta per la visualizzazione degli analytics dell'admin */
     /** @author Breg */
-    Route::get('/analytics', 'AnalyticController@index')->name('analytics.index');
-    Route::get('/analytics/chartData', 'AnalyticController@getChartDataDonPerDate')->name('analytics.get.harts.data');
-    Route::post('/analytics/updateChartsData', 'AnalyticController@updateChartDataDonPerDate')->name('analytics.update1.charts.data');
-    Route::post('/analytics/getThreeCatChartsData', 'AnalyticController@getDataCategoryCharts')->name('analytics.update2.charts.data');
+    Route::get('/analytics', 'AnalyticController@index')->name('analytics.index')->middleware('can:see-analytics');
+    Route::get('/analytics/chartData', 'AnalyticController@getChartDataDonPerDate')->name('analytics.get.harts.data')->middleware('can:see-analytics');
+    Route::post('/analytics/updateChartsData', 'AnalyticController@updateChartDataDonPerDate')->name('analytics.update1.charts.data')->middleware('can:see-analytics');
+    Route::post('/analytics/getThreeCatChartsData', 'AnalyticController@getDataCategoryCharts')->name('analytics.update2.charts.data')->middleware('can:see-analytics');
 });
 
 /** @author Breg 
@@ -42,11 +42,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 });
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
-Route::resource('/fundraiser', 'FundraiserController', ['except' => ['update', 'show']]);//->middleware('can:make-fundraiser');
-Route::put('/update/fundraiser/{fundraiser}', 'FundraiserController@update')->name('fundraiser.update');
+Route::resource('/fundraiser', 'FundraiserController', ['except' => ['index', 'update', 'show']])->middleware('can:make-fundraiser');
+Route::put('/update/fundraiser/{fundraiser}', 'FundraiserController@update')->name('fundraiser.update')->middleware('can:make-fundraiser');
 Route::get('/show/fundraiser/{fundraiser}', 'FundraiserController@show')->name('show.fundraiser');
-Route::get('/fundraiser/user/{user}', 'FundraiserController@getUserFundraisers')->name('user.fundraisers');
-
+Route::get('/fundraiser/user/{user}', 'FundraiserController@getUserFundraisers')->name('user.fundraisers')->middleware('can:make-fundraiser');
+Route::get('/fundraiser', 'FundraiserController@index')->name('fundraiser.index');
 /* Creo la rotta per la pagina fundraiser ed il middleware per differenziare sempre le azioni per utente ordinario e admin */
 Route::get('/donation/{id}', 'DonationController@create')->name('donation.create')->middleware(['auth', 'can:make-donation']);
 
@@ -87,3 +87,5 @@ Route::get('/sostienici', function () {
 Route::get('/whoweare', function () {
     return view('whoweare');
 });
+/** Rotte dei commenti */
+Route::resource('/comment', 'CommentController');

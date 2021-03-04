@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Comment;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = Comment::create([
+            'text' => $request->commentText,
+            'user_id' => $request->userId,
+            'fundraiser_id' => $request->fundraiserId
+        ]);
+        
+        $user = User::find($request->userId);
+        
+        return json_encode([
+            'status' => 'success',
+            'comment' => $comment,
+            'date' => date('d-m-Y', strtotime($comment->created_at)),
+            'user' => ['firstName' => $user->first_name, 'lastName' => $user->last_name]
+        ]);
     }
 
     /**
@@ -80,6 +94,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+
+        return json_encode([
+            'status' => 'success'
+        ]);
     }
 }

@@ -20,7 +20,7 @@ class DonationsTableSeeder extends Seeder
         Donation::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        $MAX_DONANTIONS_NUMBER = 300;
+        $MAX_DONANTIONS_NUMBER = 400;
 
         for ($i = 0; $i < $MAX_DONANTIONS_NUMBER; $i++) {
             $amount = rand(1.0, 200.0);
@@ -31,7 +31,7 @@ class DonationsTableSeeder extends Seeder
                 'amount' => $amount,
                 'user_id' => $user_id,
                 'anonimate' => rand(0,1),
-                'fundraiser_id' => rand(1,7),
+                'fundraiser_id' => rand(1,9),
             ]);
 
             // Punti utente

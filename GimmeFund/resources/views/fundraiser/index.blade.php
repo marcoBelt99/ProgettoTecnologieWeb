@@ -18,8 +18,7 @@
 </div>
 {{-- Metto il jumbotron per vedere le raccolte fondi. Scorro ogni raccolta fondi con il foreach  --}}
 @foreach ($fundraisers as $fundraiser)
-    
-      {{--  --}}
+
     <div class="container py-2">
         <div class="jumbotron-fundraiser jumbofundra">
             <h1 class="display-4">{{ $fundraiser->name }}</h1>

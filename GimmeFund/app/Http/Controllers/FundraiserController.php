@@ -6,6 +6,7 @@ use App\Fundraiser;
 use App\Donation;
 use App\Category;
 use App\User;
+use App\Comment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class FundraiserController extends Controller
                 $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')
             ];
         }
+
         return view('fundraiser.index')->with([
             'fundraisers' => $fundraisers, 
             'donations' => $donations]);
@@ -110,11 +112,20 @@ class FundraiserController extends Controller
         $author = User::where('id', $fundraiser->user_id)->first();
         $donations = array();
         $donations = [ $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')];
+        
+        $comments = Comment::where('fundraiser_id', $fundraiser->id)->get();
+
+        $users = [];
+        foreach($comments as $c) {
+            $users += [$c->id => User::find($c->user_id)];
+        }
 
         return view('fundraiser.details')->with([
             'fundraiser' => $fundraiser,
             'author' => $author,
-            'donations' => $donations]);
+            'donations' => $donations,
+            'comments' =>  $comments,
+            'users' => $users]);
     }
 
     /**
@@ -171,7 +182,6 @@ class FundraiserController extends Controller
     {
         $fundraiserToDelete = Fundraiser::find($fundraiser->id);
         Storage::delete($fundraiser->filename); // Cancellazione foto caricata 
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! riguardare la cancellazione del file
 
         $fundraiserToDelete->delete(); // Cancellazione campagna
 

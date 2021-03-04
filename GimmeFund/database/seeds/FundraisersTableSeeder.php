@@ -122,27 +122,52 @@ class FundraisersTableSeeder extends Seeder
             'category_id' => 5,
         ]);
 
+        
         $fundraiser7 = Fundraiser::create([
-            'name' => 'Raccolta per la famiglia di Fabio',
-            'description' => 'Non lo so',
-            'starting_date' => '2020-03-30',
+            'name' => 'Operazione BALKAN HELP',
+            'description' => 'Questa volta ci dirigeremo a est anziché a sud… verso il grande gelo anziché verso il caldo del continente africano.
+            Perché la nostra solidarietà non conosce confini e frontiere.
+            L’obbiettivo è trasportare e consegnare nei Balcani capi d’abbigliamento, coperte e sacchi a pelo, calzature ma anche viveri alle vittime del terremoto a Glina e Petrjnia  in  Croazia e ai profughi a Lipa in Bosnia-Erzegovina.',
+            'starting_date' => '2021-03-04',
             'ending_date' => '2022-01-22',
-            'filename' => 'fabioFR.jpeg',
-            'goal' => 150000.00,
+            'filename' => 'BalkaanFR.png',
+            'goal' => 1500.00,
             'user_id' => rand(2,51),
-            'category_id' => 5,
-        ]);
+            'category_id' => 15,
+        ]); 
 
-        // RACCOLTA FONDI DI PROVA
-        /* $fundraiser8 = Fundraiser::create([
-            'name' => 'Raccolta Fondi TEST',
-            'description' => 'TEST',
-            'starting_date' => '2020-01-01',
-            'ending_date' => '2021-01-22',
-            'filename' => 'https://images.gofundme.com/GhRLPT2LqWhNXV6iAaSgF4f8vrQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/47045586_1585586810297238_r.jpeg',
-            'goal' => 150000.00,
+       
+
+        $fundraiser8 = Fundraiser::create([
+            'name' => 'Asilo di Clivio: doniamo tornando bimbi',
+            'description' => 'Ciao a tutti,
+            La situazione improvvisa che abbiamo dovuto affrontare ha stravolto la serena quotidianità del nostro Asilo.
+            La chiusura improvvisa ci costringe a trovare delle soluzioni alternative per garantirne la futura riapertura e assicurare un futuro sereno ai nostri bimbi.
+            A fronte del mancati versamenti delle quote mensili, noi tutti che amiamo il nostro Asilo, abbiamo voluto metterci in gioco e ideare una raccolta fondi finalizzata a supportare nelle numerose spese questa istituzione centenaria del paese di Clivio.
+            Abbiamo così pensato di permettere a tutti voi di essere protagonisti della raccolta attraverso la condivisione di foto e racconti inerenti la vostra infanzia.
+            Ti chiediamo quindi di fare un tuffo nella tua infanzia e di fare una donazione all’Asilo.
+            Siamo sicuri che sarà bellissimo cogliere quest’occasione per rivedere le nostre foto da piccoli.',
+            'starting_date' => '2021-03-04',
+            'ending_date' => '2022-03-22',
+            'filename' => 'AsiloFR.png',
+            'goal' => 15000.00,
             'user_id' => rand(2,51),
-            'category_id' => 5,
-        ]); */
+            'category_id' => 11,
+        ]); 
+
+        $fundraiser9 = Fundraiser::create([
+            'name' => 'Premio Concorso di poesia Niccolò Bizzarri',
+            'description' => 'Siamo un gruppo informale di studenti universitari fiorentini amici di Niccolò Bizzarri.
+            A un anno dalla sua scomparsa, ci interessa ricordare e diffondere la speranza che Nicco testimonia per ciascuno di noi. Per molti infatti, il limite, il dramma della vita, rimane spesso solo occasione di rabbia verso Dio (per chi crede) o verso la vita: per Nicco non è stato così. Nicco “abitava” il suo limite, lo guardava, soprattutto negli ultimi mesi in cui era con noi. E la ragione per cui poteva farlo era la coscienza che tutta la realtà costituiva un bene per la sua vita. In particolare in mezzo a questo periodo segnato dalla pandemia, in cui tanti di noi hanno vissuto più da vicino l’esperienza del limite, la sua testimonianza è decisiva per noi.
+            Non solo Nicco ha fatto questa esperienza, ma l’ha anche raccontata nei versi mirabili delle sue poesie, recentemente pubblicate: quei versi sono uno strumento formidabile della sua testimonianza oggi. Nicco è cresciuto in questa sua passione perché ha avuto il coraggio di scrivere ad alcuni poeti, che hanno letto le sue poesie, dandogli suggerimenti e orizzonti di lavoro. È per dare anche ad altri la possibilità di conoscere e confrontarsi con dei maestri che abbiamo pensato di dedicargli un concorso di poesia.
+            Per finanziare il premio del concorso apriamo questa raccolta fondi. Questo ci permetterebbe di: organizzare un seminario di poesia di due giorni con i poeti in giuria (coprendo tutte le spese), come premio per una decina di vincitori del concorso; offrire ai vincitori del concorso un premio in denaro (nella forma di buoni libro); realizzare un evento civico di lettura delle poesie di Nicco in occasione della premiazione del concorso.
+            Grazie a tutti per il prezioso sostegno!!',
+            'starting_date' => '2021-03-04',
+            'ending_date' => '2022-01-22',
+            'filename' => 'NiccoloFR.png',
+            'goal' => 7000.00,
+            'user_id' => rand(2,51),
+            'category_id' => 8,
+        ]);
     }
 }

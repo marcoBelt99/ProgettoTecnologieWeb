@@ -51,11 +51,14 @@
                                     {{-- Metto i bottoni per la Modifica e l'Eliminazione di un Utente. (Premendo su tali bottoni, ovviamente accedo alle rispettive pagine) --}}
                                     <a style="text-decoration:none" href="{{ URL::action('Admin\UsersController@edit', $u->id) }}"><button type="button" class="btn btn-primary align-self-xl-center botton-center m-1">Modifica</button></a>
                                     {{-- Preparo un form (con metodo POST) per l'eliminazione dell'utente --}}
-                                    <form action="{{ URL::action('Admin\UsersController@destroy', $u->id)}}" method="POST">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-danger align-content-xl-center botton-center m-1">Elimina</button>
-                                    </form>
+                                    @if ($u->id != 1)
+                                        <form action="{{ URL::action('Admin\UsersController@destroy', $u->id)}}" method="POST">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-danger align-content-xl-center botton-center m-1">Elimina</button>
+                                        </form>                          
+                                    @endif
+                                    
                                 </td>
                               </tr>
                             @endforeach

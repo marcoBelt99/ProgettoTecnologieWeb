@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -57,6 +58,16 @@ class AuthServiceProvider extends ServiceProvider
         /* Creo un Gate per accedere o meno alla pagina dei coupon: se l'utente ha i punti sufficienti allora può accedere a tale pagina, altrimenti no */
         Gate::define('create-coupon', function($user) {
             return $user->hasPoints();
+        });
+
+        /* Creo un Gate per accedere o meno alla pagina di gestione delle categorie */
+        Gate::define('manage-categories', function($user) {
+            return $user->hasRole('admin');
+        });
+
+        /* Creo un Gate per accedere o meno alla pagina dei grafici e delle statistiche */
+        Gate::define('see-analytics', function($user) {
+            return $user->hasRole('admin');
         });
     }
 }
