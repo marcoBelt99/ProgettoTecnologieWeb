@@ -24,7 +24,7 @@
                     @endif
                 </div>
                 <div class="btn-group px-2" role="group">
-                    <button class="btn btn-primary" id="my-coupon-btn">I miei buoni</button>
+                    <button class="btn btn-secondary" id="my-coupon-btn">I miei buoni</button>
                 </div>
             </div>
         </div>
@@ -33,9 +33,9 @@
 
 <div class="container col-6" id="coupon-cont">
     <div class="container col-md-8">
-        <h3>I miei Coupon Fair Trade</h3>
+        <h3>I miei Coupons FairTrade</h3>
         @if (count($usrCoupons) == 0)
-            <p>Sembra che non ci siano ancora coupon. Converti subito i tuoi punti e fai aquisti equosolidali!</p>
+            <p>Sembra che non ci siano ancora coupon. Converti subito i tuoi punti e fai acquisti equosolidali!</p>
         @else
             <table class="table table-striped">
                 <thead class="thead-dark">

@@ -47,7 +47,7 @@ class CommentController extends Controller
         return json_encode([
             'status' => 'success',
             'comment' => $comment,
-            'date' => date('d-m-Y', strtotime($comment->created_at)),
+            'date' => date('d/m/Y', strtotime($comment->created_at)),
             'user' => ['firstName' => $user->first_name, 'lastName' => $user->last_name]
         ]);
     }
@@ -94,6 +94,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $this->authorize('delete', $comment); // Policy
+
         $comment->delete();
 
         return json_encode([

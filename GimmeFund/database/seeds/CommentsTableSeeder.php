@@ -24,10 +24,11 @@ class CommentsTableSeeder extends Seeder
             'Spero raggiungiante l\'obbiettivo',
             'Io ho donato!',
             'Bellissima iniziattiva!',
-            'Bellissima idea!'
+            'Bellissima idea!',
+            'Bella idea!'
         ];
         
-        for($i = 0; i < $MAX_COMMENTS_NUMBER; $i++){
+        for($i = 0; $i < $MAX_COMMENTS_NUMBER; $i++){
             Comment::create([
                 'text' => $textComment[rand(0, count($textComment)-1)],
                 'user_id' => rand(2, 51),

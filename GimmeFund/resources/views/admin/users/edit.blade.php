@@ -52,10 +52,10 @@
                         @endforeach
                         
                         <div class="col-md-6" style="margin-top: 10px">
-                            <button type="submit" class="btn btn-outline-primary">
+                            <button type="submit" class="btn btn-success">
                                 Salva
                             </button>
-                            <a href="{{ URL::action('Admin\UsersController@index') }}"><button type="submit" class="btn btn-outline-secondary"></a>
+                            <a href="{{ URL::action('Admin\UsersController@index') }}"><button type="submit" class="btn btn-secondary"></a>
                                 Indietro
                             </button>
                         </div>

@@ -25,7 +25,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 });
 
 /** @author Breg */
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:see-analytics')->group(function() {
     /* Creo la rotta per la visualizzazione degli analytics dell'admin */
     /** @author Breg */
     Route::get('/analytics', 'AnalyticController@index')->name('analytics.index')->middleware('can:see-analytics');
@@ -37,16 +37,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
 /** @author Breg 
  * Route per CRUD categorie
 */
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-categories')->group(function() {
     Route::resource('/category', 'CategoryController');
 });
 
 /* Creo la rotta per la raccolta fondi: effettuabile solo dagli utenti ordinari */
-Route::resource('/fundraiser', 'FundraiserController', ['except' => ['index', 'update', 'show']])->middleware('can:make-fundraiser');
-Route::put('/update/fundraiser/{fundraiser}', 'FundraiserController@update')->name('fundraiser.update')->middleware('can:make-fundraiser');
+Route::resource('/fundraiser', 'FundraiserController', ['except' => ['index', 'update', 'show', 'edit']])->middleware('can:make-fundraiser');
+Route::put('/update/fundraiser/{fundraiser}', 'FundraiserController@update')->name('fundraiser.update');
 Route::get('/show/fundraiser/{fundraiser}', 'FundraiserController@show')->name('show.fundraiser');
 Route::get('/fundraiser/user/{user}', 'FundraiserController@getUserFundraisers')->name('user.fundraisers')->middleware('can:make-fundraiser');
 Route::get('/fundraiser', 'FundraiserController@index')->name('fundraiser.index');
+Route::get('/fundraiser/{fundraiser}/edit', 'FundraiserController@edit');
+
 /* Creo la rotta per la pagina fundraiser ed il middleware per differenziare sempre le azioni per utente ordinario e admin */
 Route::get('/donation/{id}', 'DonationController@create')->name('donation.create')->middleware(['auth', 'can:make-donation']);
 
@@ -65,7 +67,7 @@ Route::prefix('user')->prefix('user')->name('user.')->group(function() {
 
 Route::get('/coupon', 'CouponController@create')->name('coupon.create');
 
-/**  @author Marco Creo la rotta per la pagina di informazioni: chi siamo (whoweare?)  */
+/**  @author Marco Creo la rotta per la pagina di informazioni  */
 Route::get('/information', function () {
     return view('information');
 });
@@ -73,19 +75,14 @@ Route::get('/information', function () {
 /** @author Breg */
 Route::post('/user/{user}/password/' ,'Auth\ChangePasswordController@update')->name('user.change.password');
 
-/** @author Marco
- *  Creo la rotta per poter gestire le immagini nei tag <img src="" ...>
- */
-/* use App\Http\Controllers\StorageFileController;
-Route::get('image/{filename}', [StorageFileController::class,'getPubliclyStorgeFile'])->name('image.displayImage');
-Route::get('image/{filename}', 'StorageFileController@displayImage')->name('image.displayImage'); */
-
-Route::get('/sostienici', function () {
+Route::get('/supportus', function () {
     return view('sostienici');
-});
+})->middleware('can:support-us');
 
+/* Creo la rotta per la pagina chi siamo */
 Route::get('/whoweare', function () {
     return view('whoweare');
 });
+
 /** Rotte dei commenti */
 Route::resource('/comment', 'CommentController');

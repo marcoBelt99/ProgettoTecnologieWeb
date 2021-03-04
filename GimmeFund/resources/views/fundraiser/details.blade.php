@@ -71,7 +71,7 @@
                             <td>{{ $c->text }}</td>
                             <td>{{ date('d/m/Y', strtotime($c->created_at)) }}</td>
                             <td>
-                                @if (Auth::check() && Auth::user()->id == $c->user_id)
+                                @if ((Auth::check() && Auth::user()->id == $c->user_id) || (Auth::check() && Auth::user()->hasRole('admin')))
                                     <a class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $c->id }}" onclick="deleteComment(this)"><i class="fas fa-trash-alt"></i></a>
                                 @endif
                             </td>
@@ -79,26 +79,33 @@
                     @endforeach        
                 </tbody>
         </table>
-        @if (Auth::check())
-            <form action="{{ URL::action('CommentController@store') }}" method="POST">
-                {{ method_field('POST') }}
-                <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
-                <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser->id }}">
-                <div class="container" style="margin-bottom: 20px">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <textarea name="comment_text" id="comment_text" class="form-control" placeholder="Scrivi un commento!" cols="100%" rows="2"></textarea>
-                            <small id="invalid-comment-text-err" class="form-text" style="color: #ff0000"></small>
-                        </div>
-
-                        <div class="col-md-2">
-                            <button type="submit" id="add-comment-btn" name="add-comment-btn" class="btn btn-success m-1">Aggiungi</button>
-                        </div>
+    
+        <form action="{{ URL::action('CommentController@store') }}" method="POST">
+            {{ method_field('POST') }}
+            <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
+            @if(Auth::check() && Auth::user()->hasRole('user'))
+            <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+            @endif
+            <input type="hidden" name="fundraiser_id" id="fundraiser_id" value="{{ $fundraiser->id }}">
+            <div class="container" style="margin-bottom: 20px">
+                <div class="row">
+                    @if(Auth::check() && Auth::user()->hasRole('user'))
+                    <div class="col-md-10">
+                        <textarea name="comment_text" id="comment_text" class="form-control" placeholder="Scrivi un commento!" cols="100%" rows="2"></textarea>
+                        <small id="invalid-comment-text-err" class="form-text" style="color: #ff0000"></small>
                     </div>
+                    <div class="col-md-2">
+                        <button type="submit" id="add-comment-btn" name="add-comment-btn" class="btn btn-success m-1">Aggiungi</button>
+                    </div>
+                    @endif
                 </div>
-            </form>            
-        @else
+            </div>
+        </form>            
+        @if(Auth::check() && Auth::user()->hasRole('admin'))
+            <div class="text-center py-3">
+                <h3 style="color: red">L'admin non può inserire commenti</h3>
+            </div>
+        @elseif(!Auth::check()) 
             <div class="text-center py-3">
                 <p>Accedi o Registrati per lasciare un commento</p>
             </div>
@@ -113,6 +120,7 @@
 
     $('#invalid-comment-text-err').hide();
     
+    /* Chiamata ajax delete comment => ed eliminazione riga della tabella dei commenti */
     function deleteComment(html) {
 
         var row = $(html).parents('tr');
@@ -175,8 +183,8 @@
                         // Costruire la riga della tabella con il nuovo commento
                         var userName = data.user.firstName + " " + data.user.lastName;
                         var newUserNameCol = $('<td/>').append("<i class='far fa-user-circle'></i> " + userName);
-                        var newTextCol = $('<td/>', {text: data.comment.text}).append('</a>')
-                        var newDateCol = $('<td/>', {text: data.date})
+                        var newTextCol = $('<td/>', {text: data.comment.text});
+                        var newDateCol = $('<td/>', {text: data.date});
                         var newRow = $('<tr/>').append(newUserNameCol).append(newTextCol).append(newDateCol);
                         
                         

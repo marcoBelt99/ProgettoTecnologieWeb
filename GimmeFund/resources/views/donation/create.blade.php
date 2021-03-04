@@ -307,7 +307,7 @@
             }
 
             /* Variabili per la richiesta ajax post */
-            var amount = $('#amount').val();
+            var amount = $('#amount').val(); 
             var _token = $('#_token').val();
             var userId = $('#user_id').val();
             var fundraiserId = $('#fundraiser_id').val();
@@ -327,7 +327,6 @@
                 success: function(data) {                        
                     if (data.status === 'success') {
                         var newColDonatorName;
-                        var iconHtml = "<i class='far fa-user-circle'></i>";
                         var userName = data.donator_first_name + " " + data.donator_last_name;
 
                         if (anonimate == 1) {
@@ -340,8 +339,8 @@
                         var newColDate = $('<td/>', { text: data.date });
                         // Aggiungo la riga ritornata dalla chiamata Ajax
                         var newRow = $('<tr/>').append(newColDonatorName).append(newColAmount).append(newColDate);
-                        // Alcune prove su console:
-                        $('#donations-table').prepend(newRow); // Ricorda: inserire gli id negli elementi HTML!!
+                        
+                        $('#donations-table').prepend(newRow); 
                         
                         $('#amount').val('0');
                         // Avviso l'utente dell'effettiva donazione

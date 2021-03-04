@@ -14,7 +14,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        //'App\Model' => 'App\Policies\ModelPolicy',
+        Fundraiser::class => FundraiserPolicy::class,
+        Comment::class => CommentPolicy::class,
     ];
 
     /**
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('make-fundraiser', function($user) {
             return $user->hasRole('user');
         }); 
+        
         /* Creo un  Gate per le donazione, che possono essere fatte solo dagli utenti ordinari */
         Gate::define('make-donation', function($user) {
             return $user->hasRole('user');
@@ -57,7 +60,7 @@ class AuthServiceProvider extends ServiceProvider
 
         /* Creo un Gate per accedere o meno alla pagina dei coupon: se l'utente ha i punti sufficienti allora può accedere a tale pagina, altrimenti no */
         Gate::define('create-coupon', function($user) {
-            return $user->hasPoints();
+            return $user->hasPoints() && $user->hasRole('user');
         });
 
         /* Creo un Gate per accedere o meno alla pagina di gestione delle categorie */
@@ -68,6 +71,10 @@ class AuthServiceProvider extends ServiceProvider
         /* Creo un Gate per accedere o meno alla pagina dei grafici e delle statistiche */
         Gate::define('see-analytics', function($user) {
             return $user->hasRole('admin');
+        });
+
+        Gate::define('support-us', function($user) {
+            return $user->hasRole('user');
         });
     }
 }

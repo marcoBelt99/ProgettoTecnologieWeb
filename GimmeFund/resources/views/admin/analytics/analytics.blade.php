@@ -98,7 +98,7 @@
                                 </div>
 
                                 <div class="form-group text-right" style="margin-top: 40px;">
-                                    <button class="btn btn-primary" id="form-update-btn" name="form-update-btn" type="button">AGGIORNA</button>
+                                    <button class="btn btn-success" id="form-update-btn" name="form-update-btn" type="button">Aggiorna</button>
                                 </div>
                             </div>
 
@@ -127,14 +127,15 @@
          */
         $(document).ready(function() {
 
+            /* Vengono presi i canvas dei grafici dal DOM */
             var ctx1 = $('#donAmountPerDate');
             var ctx2 = $('#totDonPerDate');
             var ctx3 = $('#threeCategoriesCharts');
 
+            /* Tre variabili per i tre grafici */
             var chart1, chart2, chart3;
             
-            $.ajax( {
-
+            $.ajax({
                 url: '/admin/analytics/chartData',
                 type: 'GET',
                 dataType: 'json',
@@ -150,8 +151,9 @@
                     $('#start-date').val(dates[0]); // Prima data
                     $('#end-date').val(dates[dates.length-1]); // Ultima data
 
+                    // Creazione del primo grafico
                     chart1 = new Chart(ctx1, {
-                        // The type of chart we want to create
+                        // The type of chart
                         type: 'bar',
 
                         // The data for our dataset
@@ -180,6 +182,7 @@
                         }
                     });
 
+                    /* Creazione del secondo grafico */
                     chart2 = new Chart(ctx2, {
                         // Tipo di grafico
                         type: 'line',
@@ -214,7 +217,7 @@
                             scales: {
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: true
+                                        beginAtZero: true // Gli assi del grafico partono dall'origine
                                     }
                                 }]
                             }
@@ -227,7 +230,7 @@
                     /* console.log(xhr); */
                 }
 
-            }); // FINE CHIAMATA AJAX
+            }); // FINE CHIAMATA PRIMA CHIAMATA AJAX
             
             // UPDATE CHARTS DATA
             $('#start-date').on('change', function() {
@@ -239,8 +242,6 @@
                     $('#err-date-selection').text('Intervallo non valido.');
                     return false;
                 }
-                
-                // console.log('ciao');
                 
                 $.ajax({
                     url: '/admin/analytics/updateChartsData',
@@ -256,6 +257,7 @@
                         /* console.log(status); */
                         /* console.log(newChartsData); */
 
+                        /* Creo un array di date da passare a labels per il grafico */
                         var newDates = [];
                         for(var i = 0; i < newChartsData.axisX.length; i++) {
                             newDates.push(newChartsData.axisX[i].date);
@@ -267,7 +269,7 @@
                         chart1.update();
                         // updating chart 2
                         chart2.data.labels = newDates;
-                        chart1.data.datasets[0].data = newChartsData.numDonations;
+                        chart2.data.datasets[0].data = newChartsData.numDonations;
                         chart2.update();
                     },
                     error: function (xhr) {
@@ -301,6 +303,7 @@
                         /* console.log(status); */
                         /* console.log(newChartsData); */
 
+                        /* Creo un array di date da passare a labels per il grafico */
                         var newDates = [];
                         for(var i = 0; i < newChartsData.axisX.length; i++) {
                             newDates.push(newChartsData.axisX[i].date);
@@ -312,14 +315,14 @@
                         chart1.update();
                         // updating chart 2
                         chart2.data.labels = newDates;
-                        chart1.data.datasets[0].data = newChartsData.numDonations;
+                        chart2.data.datasets[0].data = newChartsData.numDonations;
                         chart2.update();
                     },
                     error: function (xhr) {
                         console.log(xhr);
                     }
                 });
-            });// FINE UPDATE ON START_DATE CHANGE
+            });// FINE UPDATE ON END_DATE CHANGE
 
             // EVENTI PER NASCONDERE IL MESSAGGIO DI ERRORE
             $('#start-date').on('click', function () {
@@ -328,7 +331,6 @@
 
             $('#end-date').on('click', function () {
                 $('#err-date-selection').hide();
-                
             });
 
             // CHIAMATA AJAX PER POPOLARE IL GRAFICO DELLE TRE CATEGORIE
@@ -344,11 +346,11 @@
                 },
                 success: function(chartData, status) {
                     // Only for debugging purposes
-                    console.log(status);
-                    console.log(chartData);
+                    /* console.log(status);
+                    console.log(chartData); */
 
                     // Aggiornamento valori select boxes
-                    $('#first-category-id').val(chartData.secondCategory.id).change();
+                    $('#first-category-id').val(chartData.firstCategory.id).change();
                     $('#second-category-id').val(chartData.secondCategory.id).change();
                     $('#third-category-id').val(chartData.thirdCategory.id).change();
 
@@ -389,7 +391,8 @@
                                     chartData.firstCategory.fundNumber, 
                                     chartData.secondCategory.fundNumber, 
                                     chartData.thirdCategory.fundNumber,
-                                    chartData.remaingCatFund.fundNumber]
+                                    chartData.remaingCatFund.fundNumber
+                                ]
                             }]
                         },
                         // chart options
@@ -402,8 +405,6 @@
                                     fontColor: '#222222'
                                 }
                             },
-                            // Responsive
-                            responsive: true,
                             // Titolo
                             title: {
                                 display: true,
@@ -470,7 +471,7 @@
                         chart3.data.labels[2] = newChartData.thirdCategory.name.name;
                         chart3.data.labels[3] = newChartData.remaingCatFund.name;
 
-                        // Aggiornamento asseY
+                        // Aggiornamento dataset
                         chart3.data.datasets[0].data[0] = newChartData.firstCategory.fundNumber;
                         chart3.data.datasets[0].data[1] = newChartData.secondCategory.fundNumber;
                         chart3.data.datasets[0].data[2] = newChartData.thirdCategory.fundNumber;
@@ -479,6 +480,7 @@
                         chart3.update();
                     },
                     error: function (xhr) {
+                        alert("Errore aggiornamento grafico!");
                         console.log(xhr);
                     }
                 });

@@ -23,14 +23,14 @@
                     <div class="row">
                         <div class="col">
                             <div class="from-group">
-                                <label for="new-category-name">Modifica nome categoria:</label>
+                                <label for="new-category-name">Modifica nome categoria</label>
                                 <input type="text" class="form-control" name="new-category-name" id="new-category-name" value="{{ $category->name }}">
                                 <small id="help-mess" class="form-text text-muted">Modifica il nome della categoria: {{ $category->name }}</small>
                             </div>
                         </div>
                         <div class="col">
-                            <a class="btn btn-primary" type="submit" id="submit-btn" name="submit-btn" style="margin-top: 32px;">SALVA</a>
-                            <a href="{{ URL::action('Admin\CategoryController@index') }}" class="btn btn-secondary" type="submit" style="margin-top: 32px;">INDIETRO</a>
+                            <a class="btn btn-success" type="submit" id="submit-btn" name="submit-btn" style="margin-top: 32px;">Salva</a>
+                            <a href="{{ URL::action('Admin\CategoryController@index') }}" class="btn btn-secondary" type="submit" style="margin-top: 32px;">Indietro</a>
                         </div>
                     </div>
                     
@@ -67,8 +67,8 @@
                         '_token': _token
                     },
                     success: function (data, status) {
-                        console.log(status);
-                        console.log(data);
+                        /* console.log(status);
+                        console.log(data); */
                         $('#success-mess-container').text('Categoria aggiornata con successo').show();
                     }, 
                     error: function name(xhr) {

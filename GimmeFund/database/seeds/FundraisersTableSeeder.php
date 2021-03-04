@@ -128,7 +128,7 @@ class FundraisersTableSeeder extends Seeder
             'description' => 'Questa volta ci dirigeremo a est anziché a sud… verso il grande gelo anziché verso il caldo del continente africano.
             Perché la nostra solidarietà non conosce confini e frontiere.
             L’obbiettivo è trasportare e consegnare nei Balcani capi d’abbigliamento, coperte e sacchi a pelo, calzature ma anche viveri alle vittime del terremoto a Glina e Petrjnia  in  Croazia e ai profughi a Lipa in Bosnia-Erzegovina.',
-            'starting_date' => '2021-03-04',
+            'starting_date' => '2020-03-04',
             'ending_date' => '2022-01-22',
             'filename' => 'BalkaanFR.png',
             'goal' => 1500.00,

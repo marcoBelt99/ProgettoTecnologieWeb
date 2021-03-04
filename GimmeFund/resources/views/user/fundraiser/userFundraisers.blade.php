@@ -35,7 +35,7 @@
                         <form action="{{ URL::action('FundraiserController@destroy', $uf) }}" method="POST">
                             @csrf
                             {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger align-content-xl-center botton-center m-1" onclick="alert('Sei sicura/o di voler chiudere la tua campagna? Attenzione questa azione irreversibile')">Elimina</button>
+                            <button type="submit" class="btn btn-danger align-content-xl-center botton-center m-1">Elimina</button>
                         </form>
 
                     </div>
@@ -46,8 +46,4 @@
     </div>
 </div>
 
-@endsection
-
-@section('script')
-    
 @endsection

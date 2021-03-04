@@ -151,6 +151,13 @@ li:last-child {
     overflow-y : scroll; 
 }
 
+.scrollTabellaCommenti { /* Serve per rendere "scrollable" la tabella delle donazioni */
+    display:block;
+    height: 50px;
+    /* min-height : 10px ; */
+    overflow-y : scroll; 
+}
+
 
 /* Gestione dropdown menu: */
 .dropdown:hover>.dropdown-menu { /* dropdown menu hover */

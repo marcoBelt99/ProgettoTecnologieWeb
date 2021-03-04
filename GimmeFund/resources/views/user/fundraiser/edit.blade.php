@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    
+
+@can('update', $fundraiser)
+
 <div class="container-fluid col-10 py-4">
     <div class="card card-home">
         <div class="card-header">
-            <p class="card-title"><h2>Modfica la tua campagna: {{ $fundraiser->name }}</h2></p>
+            <p class="card-title"><h2>Modifica la tua campagna: {{ $fundraiser->name }}</h2></p>
         </div>
         <div class="card-body">
             <form style="margin-top: 20px" action="{{ URL::action('FundraiserController@update', $fundraiser) }}" method="POST" 
@@ -97,6 +99,8 @@
         </div>
     </div>
 </div>
+@endcan
+
 @endsection
 
 @section('script')

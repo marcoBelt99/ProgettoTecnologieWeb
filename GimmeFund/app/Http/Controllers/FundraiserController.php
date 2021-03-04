@@ -7,6 +7,7 @@ use App\Donation;
 use App\Category;
 use App\User;
 use App\Comment;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class FundraiserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $input = $request->all();
         // Uso sempre il metodo di Piva per la validazione
         $validator =$request->validate([
@@ -111,7 +112,7 @@ class FundraiserController extends Controller
         //dd($fundraiser);
         $author = User::where('id', $fundraiser->user_id)->first();
         $donations = array();
-        $donations = [ $fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')];
+        $donations = [$fundraiser->id => Donation::select('amount')->where('fundraiser_id', $fundraiser->id)->sum('amount')];
         
         $comments = Comment::where('fundraiser_id', $fundraiser->id)->get();
 
@@ -136,6 +137,8 @@ class FundraiserController extends Controller
      */
     public function edit(Fundraiser $fundraiser)
     {   
+        $this->authorize('update', $fundraiser);
+
         $categories = Category::all();
 
         return view('user.fundraiser.edit')->with(['fundraiser'  => $fundraiser, 'categories' => $categories]);
@@ -150,6 +153,8 @@ class FundraiserController extends Controller
      */
     public function update(Request $request, Fundraiser $fundraiser)
     {
+        $this->authorize('update', $fundraiser);
+
         // modifica dei campi
         $fundraiser->name = $request->name;
         $fundraiser->description = $request->description;
@@ -180,6 +185,8 @@ class FundraiserController extends Controller
      */
     public function destroy(Fundraiser $fundraiser)
     {
+        $this->authorize('delete', $fundraiser);
+        
         $fundraiserToDelete = Fundraiser::find($fundraiser->id);
         Storage::delete($fundraiser->filename); // Cancellazione foto caricata 
 
@@ -188,6 +195,10 @@ class FundraiserController extends Controller
         return redirect()->route('user.fundraisers', Auth::user()->id);        
     }
 
+    /**
+     * @param userId
+     * @return Campagne fondi utente
+     */
     public function getUserFundraisers($userId) 
     {
         $userFundraisers = Fundraiser::where('user_id', $userId)->get();

@@ -33,11 +33,13 @@ class AnalyticController extends Controller
         $dates = Donation::select('date')->distinct()->orderBy('date', 'asc')->get();
         
         // Ricavo somme importi donazioni ordinate per data
+        // Dati per il primo grafico
         $totAmountPerDate = array();
         foreach($dates as $d) {
             array_push($totAmountPerDate, Donation::where('date', $d['date'])->sum('amount'));
         }
-        
+
+        // Dati per il secondo grafico
         $totDonNumber = [];
         foreach($dates as $d) {
             $count = Donation::where('date', $d->date)->count();
@@ -63,19 +65,17 @@ class AnalyticController extends Controller
         $startDate = $request->start_date;
         $endDate = $request->end_date;
 
-        // DATE DI PROVA
-        /* $startDate = date('2021-02-10');
-        $endDate = date('2021-02-26'); */
-
         // Ricavo le date delle donazioni
         $dates = Donation::select('date')->distinct()->whereBetween('date', [$startDate, $endDate])->orderBy('date', 'asc')->get();
 
         // Ricavo somme importi donazioni ordinate per data
+        // Dati per il primo grafico
         $totAmountPerDate = array();
         foreach($dates as $d) {
             array_push($totAmountPerDate, Donation::where('date', $d['date'])->sum('amount'));
         }
         
+        // Dati per il secondo grafico
         $totDonNumber = [];
         foreach($dates as $d) {
             $count = Donation::where('date', $d->date)->count();

@@ -89,11 +89,9 @@
                 $('#err-mess-small').hide();
             });
 
-            $('#submit-btn').on('click', function(e) {
-                e.preventDefault();
+            $('#submit-btn').on('click', function() {
 
                 var newCategoryName = $('#category-name').val();
-                var _token = $('#_new_category_token').val();
                 
                 if (newCategoryName.length == 0) {
                     $('#err-mess-small').text('Inserire un nome valido').show();
